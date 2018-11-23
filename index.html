@@ -31,7 +31,8 @@
             <div class="collapsible-body">
               <ul>
                 <template v-for="Motorola in MotorolaDevices">
-                <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Motorola.codename" class="white-text">{{Motorola.codename}}</a></li>
+                <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Motorola.codename" class="white-text">
+               {{Motorola.device}} ({{Motorola.codename}})</a></li>
                 </template>
               </ul>
             </div>
@@ -43,7 +44,8 @@
               <div class="collapsible-body">
                 <ul>
                   <template v-for="Xiaomi in XiaomiDevices">
-                  <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Xiaomi.codename" class="white-text">{{Xiaomi.codename}}</a></li>
+                  <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Xiaomi.codename" class="white-text">
+                  {{Xiaomi.device}} ({{Xiaomi.codename}})</a></li>
                   </template>
                 </ul>
               </div>
