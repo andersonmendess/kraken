@@ -43,7 +43,7 @@
               <div class="collapsible-body">
                 <ul>
                   <template v-for="Xiaomi in XiaomiDevices">
-                  <li class="grey darken-3 ">v-bind:href="'device.html?device=' + Xiaomi.codename" class="white-text">{{Xiaomi.codename}}</a></li>
+                        <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Xiaomi.codename" class="white-text">{{Xiaomi.codename}}</a></li>
                   </template>
                 </ul>
               </div>
