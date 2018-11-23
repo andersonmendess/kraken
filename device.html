@@ -49,6 +49,18 @@
               </div>
             </li>
           </ul>
+          <ul class="collapsible collapsible-accordion">
+                <li>
+                <a class="collapsible-header white-text grey darken-4">Zuk<i class="material-icons white-text right">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <template v-for="Zuk in ZukDevices">
+                      <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Motorola.codename" class="white-text">{{Motorola.codename}}</a></li>
+                      </template>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
     </div>
   <div style="padding-left: 80px;">
     
