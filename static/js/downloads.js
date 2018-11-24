@@ -1,6 +1,5 @@
 //materialize stuff
 $(document).ready(function () {
-
     app.suported();
 
     var url = new URL(window.location.href);
@@ -13,6 +12,12 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
   
     $('.collapsible').collapsible();
+
+
+    $("#settings").click(function(){
+        $(".menu").toggle();
+    });
+
 
   });
   
@@ -31,7 +36,7 @@ $(document).ready(function () {
     },
     methods: {
       suported: function() {
-        axios.get(`https://cors-anywhere.herokuapp.com/http://andersondev.ooo/?api=suported`)
+        axios.get(`https://cors.io/?http://andersondev.ooo/?api=suported`)
         .then(response => {
           // JSON responses are automatically parsed.
           console.log("suported devices loaded")
@@ -51,7 +56,7 @@ $(document).ready(function () {
         })
       },
       LoadBuilds: function(codename) {
-        axios.get('https://cors-anywhere.herokuapp.com/http://andersondev.ooo/?api=builds&device=' + codename)
+        axios.get('https://cors.io/?http://andersondev.ooo/?api=builds&device=' + codename)
         .then(response => {
 
            $('.sidenav').sidenav();
