@@ -36,7 +36,7 @@ $(document).ready(function () {
           response.data.forEach(element => {
           //console.log("entrei no loop")
           console.log(element.brand)
-          if(this.brands.indexOf(element.brand)){
+          if(this.brands.indexOf(element.brand) == -1){
             this.brands.push(element.brand)
           }
             this.devices.push(element)
