@@ -124,3 +124,6 @@ i.icon-white {
 ::-webkit-scrollbar-thumb {
     background: #1565C0; 
 }
+.product-sans {
+  font-family: "Product Sans";
+}
