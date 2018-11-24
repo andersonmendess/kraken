@@ -124,13 +124,28 @@ i.icon-white {
 ::-webkit-scrollbar-thumb {
     background: #1565C0; 
 }
+
 .product-sans {
   font-family: "Product Sans";
 }
+.pointer {
+  cursor: pointer;
+}
+
+.sidenav li>a>i, .sidenav li>a>i.material-icons {
+    margin:0 0 0 0;
+
+}
+
 @media only screen and (min-width: 1000px) {
     #slide-out {
         transform: translateX(0%);
     }
+    .center {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
     body{
       padding-left: 300px;
     }
@@ -140,4 +155,8 @@ i.icon-white {
     nav {
       background-color: #1565C0;
     }
+    .navbar-fixed {
+      display: none;
+    }
+
 }

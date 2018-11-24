@@ -1,16 +1,18 @@
 //materialize stuff
 $(document).ready(function () {
+
+    app.suported();
+
+    var url = new URL(window.location.href);
+    var device = url.searchParams.get("device");
+
+    if(device){
+      app.LoadBuilds(device);
+    }
+
     $('.sidenav').sidenav();
   
     $('.collapsible').collapsible();
-  
-    var url = new URL(window.location.href);
-    var device = url.searchParams.get("device");
-    console.log(device);
-    app.codename = device;
-
-    app.suported();
-    app.LoadBuilds();
 
   });
   
@@ -48,16 +50,25 @@ $(document).ready(function () {
           this.errors.push(e)
         })
       },
-      LoadBuilds: function() {
-        axios.get('https://cors-anywhere.herokuapp.com/http://andersondev.ooo/?api=builds&device=' + this.codename)
+      LoadBuilds: function(codename) {
+        axios.get('https://cors-anywhere.herokuapp.com/http://andersondev.ooo/?api=builds&device=' + codename)
         .then(response => {
+
+           $('.sidenav').sidenav();
+
           console.log("device builds loaded")
           console.log(response.data)
+          this.codename = codename
           this.Device = response.data.device
           this.brand = response.data.brand
           this.maintainer = response.data.maintainer
           this.version = response.data.version
-          this.DeviceBuilds.push(...response.data.builds)
+          this.DeviceBuilds = response.data.builds
+          history.pushState(null, '', '?device='+codename);
+;
+
+
+
         })
         .catch(e => {
           console.log("device builds falhou")
