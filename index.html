@@ -24,15 +24,15 @@
 <div id="app">
 <ul id="slide-out" class="sidenav grey darken-4">
     <div class="grey darken-3">
-        <img class="center" src="static/images/ChidoriWordLogoIL.png" height="85%" width="85%"/>
+      <a href="/"><img class="center" src="static/images/ChidoriWordLogoIL.png" height="90%" width="90%"/></a>
         <ul class="collapsible collapsible-accordion">
           <template v-for="brand in brands">
           <li>
-          <a class="collapsible-header white-text grey darken-4">{{ brand }}<i class="material-icons white-text right">arrow_drop_down</i></a>
+          <a class="collapsible-header white-text grey darken-4 product-sans">{{ brand }}<i class="material-icons white-text right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
                 <template v-for="dev in devices" v-if="brand == dev.brand">
-                <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + dev.codename" class="white-text">
+                <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + dev.codename" class="white-text product-sans">
                     {{dev.device}} ({{dev.codename}})</a></li>
                 </template>
               </ul>
