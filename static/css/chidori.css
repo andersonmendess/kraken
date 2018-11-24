@@ -154,6 +154,7 @@ li a {
   bottom: 0;
   right: 0;
   padding: 3px;
+
 }
 .nav-wrapper{
   background-color: var(--accent);
@@ -171,17 +172,18 @@ li a {
   padding: 4px;
   text-align: center;
   z-index: 10;
+  border-radius: 2px;
 
 }
 
 .menu ul li{
   float: left;
-  margin: 2px;
+  margin: 2.5px;
 }
 .ball {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 2px;
 }
 
 i {
