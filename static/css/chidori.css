@@ -20,7 +20,7 @@ i.icon-white {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    max-width: 800px;
   }
   
   header, main, footer {
@@ -126,4 +126,18 @@ i.icon-white {
 }
 .product-sans {
   font-family: "Product Sans";
+}
+@media only screen and (min-width: 1000px) {
+    #slide-out {
+        transform: translateX(0%);
+    }
+    body{
+      padding-left: 300px;
+    }
+    .nav-wrapper {
+      display: none;
+    }
+    nav {
+      background-color: #1565C0;
+    }
 }
