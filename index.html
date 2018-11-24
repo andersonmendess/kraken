@@ -31,7 +31,7 @@
           <a class="collapsible-header white-text grey darken-4">{{ brand }}<i class="material-icons white-text right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <template v-for="dev in devices">
+                <template v-for="dev in devices" v-if="brand == dev.brand">
                 <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + dev.codename" class="white-text">
                {{dev.codename}}</a></li>
                 </template>

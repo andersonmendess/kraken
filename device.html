@@ -19,51 +19,41 @@
         </nav>
       </div>
 
-<div id="app">
-<ul id="slide-out" class="sidenav grey darken-4">
-    <div class="grey darken-3">
-        <li class="center white-text">
-            ChidoriOS
-        </li>
-        <ul class="collapsible collapsible-accordion">
-          <li>
-          <a class="collapsible-header white-text grey darken-4">Motorola<i class="material-icons white-text right">arrow_drop_down</i></a>
-            <div class="collapsible-body">
-              <ul>
-                <template v-for="Motorola in MotorolaDevices">
-                <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Motorola.codename" class="white-text">{{Motorola.codename}}</a></li>
-                </template>
-              </ul>
-            </div>
-          </li>
-        </ul>
-        <ul class="collapsible collapsible-accordion">
-            <li>
-            <a class="collapsible-header white-text grey darken-4">Xiaomi<i class="material-icons white-text right">arrow_drop_down</i></a>
-              <div class="collapsible-body">
-                <ul>
-                  <template v-for="Xiaomi in XiaomiDevices">
-                        <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + Xiaomi.codename" class="white-text">{{Xiaomi.codename}}</a></li>
-                  </template>
-                </ul>
+      <div id="app">
+          <ul id="slide-out" class="sidenav grey darken-4">
+              <div class="grey darken-3">
+                  <li class="center white-text">
+                      ChidoriOS
+                  </li>
+                  <ul class="collapsible collapsible-accordion">
+                    <template v-for="brand in brands">
+                    <li>
+                    <a class="collapsible-header white-text grey darken-4">{{ brand }}<i class="material-icons white-text right">arrow_drop_down</i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <template v-for="dev in devices" v-if="brand == dev.brand">
+                          <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + dev.codename" class="white-text">
+                         {{dev.codename}}</a></li>
+                          </template>
+                        </ul>
+                      </div>
+                    </li>
+                    </template>
+                  </ul>
               </div>
-            </li>
+            <div style="padding-left: 80px;">
+              
+          
+          
+            </div>
           </ul>
-    </div>
-  <div style="padding-left: 80px;">
-    
-
-
-  </div>
-</ul>
-
-
-<!-- Dropdown Structure -->
-<ul id='motorola-stuff' class='dropdown-content'>
-    
-  </ul>
-
-<main>
+          
+          
+          <!-- Dropdown Structure -->
+          <ul id='motorola-stuff' class='dropdown-content'>
+              
+            </ul>
+          
 <div class="">
 <div class="container">
 <h5 class="white-text center">Builds for {{codename}}</h3>

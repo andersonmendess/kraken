@@ -18,15 +18,14 @@ $(document).ready(function () {
   var app = new Vue({
     el: '#app',
     data: {
-      MotorolaDevices: [],
-      XiaomiDevices:[],
-      ZukDevices:[],
+      brands: [],
+      devices: [],
       DeviceBuilds:[],
       Device: '',
+      maintainer: '',
+      brand: '',
+      version: '',
       codename: '',
-      brand:'',
-      maintainer:'',
-      version:'',
     },
     methods: {
       suported: function() {
@@ -35,15 +34,13 @@ $(document).ready(function () {
           // JSON responses are automatically parsed.
           console.log("suported devices loaded")
           response.data.forEach(element => {
-            console.log("entrei no loop")
-            console.log(element)
-            if(element.brand=="Motorola"){
-              this.MotorolaDevices.push(element)
-            }else if(element.brand=="Xiaomi"){
-              this.XiaomiDevices.push(element)
-            }else if(element.brand=="Zuk"){
-              this.ZukDevices.push(element)
-            }
+          //console.log("entrei no loop")
+          console.log(element.brand)
+          if(this.brands.indexOf(element.brand)){
+            this.brands.push(element.brand)
+          }
+            this.devices.push(element)
+    
           });
         })
         .catch(e => {
