@@ -33,7 +33,7 @@
                         <ul>
                           <template v-for="dev in devices" v-if="brand == dev.brand">
                           <li class="grey darken-3 "><a v-bind:href="'device.html?device=' + dev.codename" class="white-text">
-                         {{dev.codename}}</a></li>
+                              {{dev.device}} ({{dev.codename}})</a></li>
                           </template>
                         </ul>
                       </div>
