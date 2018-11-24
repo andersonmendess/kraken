@@ -195,5 +195,13 @@ i {
   color: var(--accent);
   text-transform: uppercase;
   font-weight: bold;
-
+}
+#home-desc{
+  margin-top: 30px;
+}
+#home-desc .card{
+  width: 100%;
+  min-height: 80px;
+  padding:15px;
+  font-size: 20px;
 }
