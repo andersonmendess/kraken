@@ -1,20 +1,21 @@
+:root {
+  --background: #F5F5F5;
+  --card: white;
+  --accent: #1565C0;
+  --text: black ;
+}
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color:rgb(30,30,30);
+    background-color: var(--background);
+    margin-bottom: 20px;
   }
   
   main {
     flex: 1 0 auto;
   }
-  
-
-
-i.icon-white {
-  color: white;
-}
-  
   
   .center {
     display: block;
@@ -32,84 +33,6 @@ i.icon-white {
     max-height: 100%;
   }
   
-  .checkbox-white[type="checkbox"] + label:before{
-      border: 2px solid white;
-      background: transparent;
-  }
-  .checkbox-white[type="checkbox"]:checked + label:before{
-      border: 2px solid transparent;
-      border-bottom: 2px solid white;
-      border-right: 2px solid white;
-      background: transparent;
-  }
-  .checkbox-white.filled-in[type="checkbox"] + label:after{
-      border: 2px solid white;
-      background: transparent;
-  }
-  .checkbox-white.filled-in[type="checkbox"]:checked + label:after{
-      background: white;
-  }
-  .checkbox-white.filled-in[type="checkbox"]:checked + label:before{
-      border-top: 2px solid transparent;
-      border-left: 2px solid transparent;
-      border-right: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-  }
-  
-  .white:checked + label:before {
-    top: -4px;
-    left: -3px;
-    width: 12px;
-    height: 22px;
-    border-top: 2px solid transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid white; /* You need to change the colour here */
-    border-bottom: 2px solid white; /* And here */
-    -webkit-transform: rotate(40deg);
-    -moz-transform: rotate(40deg);
-    -ms-transform: rotate(40deg);
-    -o-transform: rotate(40deg);
-    transform: rotate(40deg);
-    -webkit-backface-visibility: hidden;
-    -webkit-transform-origin: 100% 100%;
-    -moz-transform-origin: 100% 100%;
-    -ms-transform-origin: 100% 100%;
-    -o-transform-origin: 100% 100%;
-    transform-origin: 100% 100%; }
-  
-    [type="checkbox"] + span:not(.lever):before,
-  [type="checkbox"]:not(.filled-in) + span:not(.lever):after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 18px;
-    height: 18px;
-    z-index: 0;
-    border: 2px solid #ffffff;
-    border-radius: 1px;
-    margin-top: 3px;
-    -webkit-transition: .2s;
-    transition: .2s;
-  }
-  
-    [type="checkbox"]:checked + span:not(.lever):before {
-    top: -4px;
-    left: -5px;
-    width: 12px;
-    height: 22px;
-    border-top: 2px solid transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
-    -webkit-transform: rotate(40deg);
-            transform: rotate(40deg);
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-  }
-
 /* width */
 ::-webkit-scrollbar {
     width: 7px;
@@ -117,12 +40,12 @@ i.icon-white {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #1E1E1E; 
+    background: var(--background); 
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #1565C0; 
+    background: var(--accent); 
 }
 
 .product-sans {
@@ -153,7 +76,7 @@ i.icon-white {
       display: none;
     }
     nav {
-      background-color: #1565C0;
+      background-color: var(--accent);
     }
     .navbar-fixed {
       display: none;
@@ -161,16 +84,116 @@ i.icon-white {
 
 }
 
-.card-action a, a {
-  color: #2979FF !important;
+#app {
+  padding-bottom: 10px !important;
+}
+
+.card-action a {
+  color: var(--accent) !important;
+  background-color: var(--card) !important;
+
 }
 .card {
   margin: 0px;
+  background-color: var(--card) !important;
 }
 .accent {
-  color:#2979FF;
+  color: var(--accent);
 }
 
-.home-welcome {
-  padding-bottom: 30px;
+.welcome {
+  padding-bottom: 20px;
+}
+
+.line {
+  border-top: 1px solid var(--accent);
+
+}
+.welcome {
+  font-weight: bold;
+}
+
+#slide-out, a {
+  background-color: var(--card) !important;
+  color: var(--text) !important;
+}
+
+.black-text {
+  color: var(--text) !important;
+}
+
+
+.sidenav-trigger,.sidenav-trigger:hover  {
+  background-color: var(--accent) !important;
+}
+a:hover{
+  background-color: var(--background) !important;
+  color: var(--accent) !important;
+}
+.card a:hover{
+  background: var(--card) !important;
+}
+table a {
+  color: var(--accent) !important;
+  background-color: var(--card) !important;
+}
+#homelogo {
+  fill: var(--accent);
+}
+li a {
+  background-color: var(--card) !important;
+}
+#sublogo {
+  fill: var(--accent);
+}
+#sublogo-svg {
+  margin: 12.5%;
+}
+#settings {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 3px;
+}
+.nav-wrapper{
+  background-color: var(--accent);
+}
+
+.menu {
+  height: 280px;
+  width: 220px;
+  background-color: var(--card);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 15px;
+  margin-bottom: 35px;
+  padding: 4px;
+  text-align: center;
+  z-index: 10;
+
+}
+
+.menu ul li{
+  float: left;
+  margin: 2px;
+}
+.ball {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+i {
+  color: var(--accent) !important;
+  margin-right: 10px !important;
+}
+.bar-logo:hover {
+  background-color: transparent !important;
+}
+.device-name {
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: bold;
+
 }

@@ -5,7 +5,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="static/css/chidori-dark.css">
+  <link rel="stylesheet" href="static/css/chidori.css">
   <meta name="msapplication-TileColor" content="#212121">
   <meta name="theme-color" content="#212121">
   <link rel="shortcut icon" href="ChidoriLogoNoSpaces.ico"/>
@@ -26,7 +26,7 @@
       <div id="app" class="black-text">
           <ul id="slide-out" class="sidenav">
               <div>
-                  <a href="/">
+                  <a class="bar-logo" href="/">
                     <svg id="sublogo-svg" version="1.0" xmlns="http://www.w3.org/2000/svg"
                      width="160.000000pt" viewBox="0 0 1679.000000 307.000000"
                      preserveAspectRatio="xMidYMid meet">
@@ -105,14 +105,16 @@
           <div >
             <span class="product-sans accent">BACKGROUND</span>
             <ul>
-            <li data-hex="#212121" style="background-color: #212121" class='ball'></li>
-            <li data-hex="#FFF" style="background-color: white" class='ball'></li>
+            <li data-hex="#000" style="background-color: black" onclick="setBg(this)"class='ball'></li>
+            <li data-hex="#212121" style="background-color: #212121" onclick="setBg(this)"class='ball'></li>
+            <li data-hex="#F5F5F5" style="background-color: #F5F5F5" onclick="setBg(this)"class='ball'></li>
             </ul>
             <div style="clear: both"></div>
           </div>
           <div>
           <span class="product-sans accent">COLOR</span>
           <ul>
+            <li data-hex="#1565C0" style="background-color: #1565C0" onclick="setColor(this)"class='ball'></li>
             <li data-hex="#F34235" style="background-color: #F34235" onclick="setColor(this)" class='ball'></li>
             <li data-hex="#E81E62" style="background-color: #E81E62" onclick="setColor(this)" class='ball'></li>
             <li data-hex="#9B26AF" style="background-color: #9B26AF" onclick="setColor(this)" class='ball'></li>
@@ -125,7 +127,14 @@
             <li data-hex="#FEC007" style="background-color: #FEC007" onclick="setColor(this)"class='ball'></li>
             <li data-hex="#FE9700" style="background-color: #FE9700" onclick="setColor(this)"class='ball'></li>
             <li data-hex="#FE5621" style="background-color: #FE5621" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#9D9D9D" style="background-color: #9D9D9D" onclick="setColor(this)"class='ball'></li>
+
+            <li data-hex="#76FF03" style="background-color: #76FF03" onclick="setColor(this)"class='ball'></li>
+            <li data-hex="#6200EA" style="background-color: #6200EA" onclick="setColor(this)"class='ball'></li>
+            <li data-hex="#0091EA" style="background-color: #0091EA" onclick="setColor(this)"class='ball'></li>
+            <li data-hex="#D50000" style="background-color: #D50000" onclick="setColor(this)"class='ball'></li>
+            <li data-hex="#212121" style="background-color: #212121" onclick="setColor(this)"class='ball'></li>
+            <li data-hex="#EF4581" style="background-color: #EF4581" onclick="setColor(this)"class='ball'></li>
+
           </ul>
           </div>            
          </div>
@@ -152,7 +161,7 @@
 
 <!-- DEVICE INFO CARD -->
 <div class="product-sans" v-if="codename">
-  <h5 class="center">{{brand}} {{Device}} ({{codename}})</h3>
+  <h5 class="center device-name">{{brand}} {{Device}} ({{codename}})</h3>
     <div class="row center">
       <div class="col s12 m12 center">
         <div class="card">
