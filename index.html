@@ -15,6 +15,7 @@
   <title>ChidoriOS</title>
 </head>
 
+<!-- NAVBAR -->
 <div class="navbar-fixed">
         <nav>
           <div class="nav-wrapper">
@@ -73,11 +74,10 @@
                     0 1435 -270 0 c-207 0 -272 -3 -275 -12z"/>
                     </g>
                     </svg>
-
                   </a>
+
                   <div class="line"></div>
                   <ul class="collapsible collapsible-accordion">
-                   <h6 class="product-sans accent">- DEVICES</h6>
                     <template v-for="brand in brands">
                     <li>
                     <a class="collapsible-header product-sans black-text">{{ brand }}<i class="material-icons right">arrow_drop_down</i></a>
@@ -94,13 +94,10 @@
                   </ul>
                   <div class="line"></div>
               </div>
-            <div style="padding-left: 80px;">
-            </div>
           </ul>
-          <!-- Dropdown Structure -->
-          <ul id='motorola-stuff' class='dropdown-content'>
-            </ul>
+          <!-- END NAVBAR -->
 
+          <!-- SETTINGS BUTTON -->
           <a class="accent"><i id="settings" class="material-icons">settings</i></a>
           <div class="menu" style="display: none">
           <h6 class="product-sans accent">SETTINGS</h6>
@@ -130,58 +127,55 @@
             <li data-hex="#FE5621" style="background-color: #FE5621" onclick="setColor(this)"class='ball'></li>
             <li data-hex="#9D9D9D" style="background-color: #9D9D9D" onclick="setColor(this)"class='ball'></li>
           </ul>
-          </div>
+          </div>            
+         </div>
+         <!-- END SETTINGS BUTTON -->
 
-            
-          </div>
-  <div v-if="!codename" class='home center'>
 
-    <h3 class="accent product-sans welcome">WELCOME TO CHIDORI</h3>
- 
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-   height="380.000000pt" viewBox="0 0 366.000000 734.000000"
-   preserveAspectRatio="xMidYMid meet">
-
-  <g transform="translate(0.000000,734.000000) scale(0.100000,-0.100000)"
-  id="homelogo" stroke="none">
-  <path d="M100 7308 c-33 -17 -51 -35 -67 -68 l-23 -44 0 -2011 0 -2011 22 -44
-  c43 -85 42 -85 450 -88 l358 -3 2 -1499 c2 -1113 6 -1502 14 -1510 7 -7 21 -9
-  31 -6 19 6 2744 4080 2763 4132 13 34 -6 71 -43 84 -20 6 -286 10 -793 10
-  -420 0 -764 2 -764 5 0 3 333 671 740 1485 407 814 740 1491 740 1505 0 13
-  -11 37 -24 52 l-24 28 -1669 3 -1668 2 -45 -22z"/>
-  </g>
-  </svg>   
-
+    <!-- WELCOME -->
+    <div v-if="!codename" class='home center'>
+      <h3 class="accent product-sans welcome">WELCOME TO CHIDORI</h3>
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" height="380.000000pt" viewBox="0 0 366.000000 734.000000" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(0.000000,734.000000) scale(0.100000,-0.100000)"
+          id="homelogo" stroke="none">
+          <path d="M100 7308 c-33 -17 -51 -35 -67 -68 l-23 -44 0 -2011 0 -2011 22 -44
+          c43 -85 42 -85 450 -88 l358 -3 2 -1499 c2 -1113 6 -1502 14 -1510 7 -7 21 -9
+          31 -6 19 6 2744 4080 2763 4132 13 34 -6 71 -43 84 -20 6 -286 10 -793 10
+          -420 0 -764 2 -764 5 0 3 333 671 740 1485 407 814 740 1491 740 1505 0 13
+          -11 37 -24 52 l-24 28 -1669 3 -1668 2 -45 -22z"/>
+          </g>
+      </svg>   
   </div>
+  <!-- END WELCOME -->
           
 
+
+<!-- DEVICE INFO CARD -->
 <div class="product-sans" v-if="codename">
-<h5 class="center">{{brand}} {{Device}} ({{codename}})</h3>
+  <h5 class="center">{{brand}} {{Device}} ({{codename}})</h3>
     <div class="row center">
-            <div class="col s12 m12 center">
-              <div class="card">
-                <div class="card-content">
-                  <span class="card-title">{{Device}}</span>
-                  <p>Maintainer: {{maintainer}}</p>
-                  <p> Brand: {{brand}}</p>
-                  <p> Android Version: {{version}}</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">XDA Profile</a>
-                  <a v-bind:href="'https://github.com/' + maintainer">Github</a>
-                </div>
-              </div>
-            </div>
+      <div class="col s12 m12 center">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">{{Device}}</span>
+            <p>Maintainer: {{maintainer}}</p>
+            <p> Brand: {{brand}}</p>
+            <p> Android Version: {{version}}</p>
           </div>
-    <br>
+          <div class="card-action">
+            <a href="#">XDA Profile</a>
+            <a v-bind:href="'https://github.com/' + maintainer">Github</a>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- END DEVICE INFO CARD -->
 
-
-
+  <!-- TABLE OF BUILDS -->
   <div class="row center">
       <div class="col s12 m12 center">
         <div class="card ">
           <div class="card-content">
-
           <table>
             <thead>
               <tr>
@@ -191,32 +185,25 @@
               </tr>
             </thead>
             <tbody>
-
-
-
-    <template v-for="Build in DeviceBuilds">
-          <tr>
-            <td><a href="">{{Build.name}}</a></td>
-            <td>{{Build.date}}</td>
-            <td>{{Build.size}}MB</td>
-          </tr>
-    </template>
-        </tbody>
-      </table> 
-
+              <template v-for="Build in DeviceBuilds">
+                <tr>
+                  <td><a href="">{{Build.name}}</a></td>
+                  <td>{{Build.date}}</td>
+                  <td>{{Build.size}}MB</td>
+                </tr>
+              </template>
+            </tbody>
+           </table> 
             </div>
           </div>
         </div>
     </div>
+    <!-- END TABLE OF BUILDS -->
 
-</div>
+  </div>
 </main>
-
 </div>
 <footer>
-  <div id="scroll">
-  <a></a>
-  </div>
   
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
