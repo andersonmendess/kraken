@@ -109,3 +109,18 @@ i.icon-white {
     -webkit-transform-origin: 100% 100%;
             transform-origin: 100% 100%;
   }
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #1E1E1E; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2979FF; 
+}
