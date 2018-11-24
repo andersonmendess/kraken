@@ -160,3 +160,17 @@ i.icon-white {
     }
 
 }
+
+.card-action a, a {
+  color: #2979FF !important;
+}
+.card {
+  margin: 0px;
+}
+.accent {
+  color:#2979FF;
+}
+
+.home-welcome {
+  padding-bottom: 30px;
+}

@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="static/css/chidori.css">
+  <meta name="msapplication-TileColor" content="#1565C0">
+  <meta name="theme-color" content="#1565C0">
   <link rel="shortcut icon" href="ChidoriLogoNoSpaces.ico"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -16,7 +18,7 @@
 <div class="navbar-fixed">
         <nav>
           <div class="nav-wrapper blue darken-3">
-            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large left"><i class="material-icons left white-text">menu</i>Devices</a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large left"><i class="material-icons left white-text">menu</i></a>
           </div>
         </nav>
       </div>
@@ -52,8 +54,28 @@
           <ul id='motorola-stuff' class='dropdown-content'>
               
             </ul>
+
+
+  <div v-if="!codename" class='center'>
+ 
+   <h4 class="white-text product-sans center home-welcome">Welcome to ChidoriOS</h4>
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+   height="380.000000pt" viewBox="0 0 366.000000 734.000000"
+   preserveAspectRatio="xMidYMid meet">
+
+  <g transform="translate(0.000000,734.000000) scale(0.100000,-0.100000)"
+  fill="#1565C0" stroke="none">
+  <path d="M100 7308 c-33 -17 -51 -35 -67 -68 l-23 -44 0 -2011 0 -2011 22 -44
+  c43 -85 42 -85 450 -88 l358 -3 2 -1499 c2 -1113 6 -1502 14 -1510 7 -7 21 -9
+  31 -6 19 6 2744 4080 2763 4132 13 34 -6 71 -43 84 -20 6 -286 10 -793 10
+  -420 0 -764 2 -764 5 0 3 333 671 740 1485 407 814 740 1491 740 1505 0 13
+  -11 37 -24 52 l-24 28 -1669 3 -1668 2 -45 -22z"/>
+  </g>
+  </svg>   
+
+  </div>
           
-  <h4 v-if="!codename" class="white-text product-sans center">Welcome to ChidoriOS Downloads</h4>
+
 <div class="product-sans" v-if="codename">
 <h5 class="white-text center">Builds for {{Device}} ({{codename}})</h3>
     <div class="row center">
