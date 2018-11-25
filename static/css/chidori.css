@@ -60,30 +60,6 @@ body {
 
 }
 
-@media only screen and (min-width: 1000px) {
-    #slide-out {
-        transform: translateX(0%);
-    }
-    .center {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-
-    body{
-      padding-left: 300px;
-    }
-    .nav-wrapper {
-      display: none;
-    }
-    nav {
-      background-color: var(--accent);
-    }
-    .navbar-fixed {
-      display: none;
-    }
-
-}
-
 #app {
   padding-bottom: 10px !important;
 }
@@ -151,10 +127,9 @@ li a {
 }
 #settings {
   position: fixed;
-  bottom: 0;
   right: 0;
+  top:10px;
   padding: 3px;
-
 }
 .nav-wrapper{
   background-color: var(--accent);
@@ -164,22 +139,22 @@ li a {
   height: 280px;
   width: 220px;
   background-color: var(--card);
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  position: fixed;
+  right: 0px;
+  top: 45px;
   margin: 15px;
   margin-bottom: 35px;
   padding: 4px;
   text-align: center;
   z-index: 10;
   border-radius: 2px;
-
 }
 
 .menu ul li{
   float: left;
   margin: 2.5px;
 }
+
 .ball {
   width: 30px;
   height: 30px;
@@ -188,7 +163,7 @@ li a {
 
 i {
   color: var(--accent) !important;
-  margin-right: 10px !important;
+  margin-right: 7px !important;
 }
 .bar-logo:hover {
   background-color: transparent !important;
@@ -206,4 +181,34 @@ i {
   min-height: 80px;
   padding:15px;
   font-size: 20px;
+}
+
+@media only screen and (min-width: 1000px) {
+    #slide-out {
+        transform: translateX(0%);
+    }
+    .center {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    body{
+      padding-left: 300px;
+    }
+    .nav-wrapper {
+      display: none;
+    }
+    nav {
+      background-color: var(--accent);
+    }
+    .navbar-fixed {
+      display: none;
+    }
+    .bar-settings {
+      display: block;
+    }
+    .menu {
+      top: 30px;
+    }
+
 }

@@ -14,7 +14,7 @@ $(document).ready(function () {
     $('.collapsible').collapsible();
 
 
-    $("#settings").click(function(){
+    $(".settings").click(function(){
         $(".menu").toggle();
     });
 
