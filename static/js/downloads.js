@@ -1,5 +1,6 @@
 //materialize stuff
 $(document).ready(function () {
+  
     app.suported();
 
     var url = new URL(window.location.href);
@@ -10,7 +11,6 @@ $(document).ready(function () {
     }
 
     $('.sidenav').sidenav();
-  
     $('.collapsible').collapsible();
 
 
@@ -39,10 +39,8 @@ $(document).ready(function () {
         axios.get(`https://cors.io/?http://andersondev.ooo/?api=suported`)
         .then(response => {
           // JSON responses are automatically parsed.
-          console.log("suported devices loaded")
           response.data.forEach(element => {
-          //console.log("entrei no loop")
-          console.log(element.brand)
+
           if(this.brands.indexOf(element.brand) == -1){
             this.brands.push(element.brand)
           }
@@ -59,20 +57,16 @@ $(document).ready(function () {
         axios.get('https://cors.io/?http://andersondev.ooo/?api=builds&device=' + codename)
         .then(response => {
 
-           $('.sidenav').sidenav();
+          $('.sidenav').sidenav();
 
-          console.log("device builds loaded")
-          console.log(response.data)
           this.codename = codename
           this.Device = response.data.device
           this.brand = response.data.brand
           this.maintainer = response.data.maintainer
           this.version = response.data.version
           this.DeviceBuilds = response.data.builds
+
           history.pushState(null, '', '?device='+codename);
-;
-
-
 
         })
         .catch(e => {
