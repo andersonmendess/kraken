@@ -1,46 +1,39 @@
 //materialize stuff
 $(document).ready(function () {
-  
     app.suported();
-
+    
     var url = new URL(window.location.href);
     var device = url.searchParams.get("device");
 
     if(device){
       app.LoadBuilds(device);
+
     }
 
     $('.sidenav').sidenav();
     $('.collapsible').collapsible();
-
-
     $(".settings").click(function(){
-        $(".menu").toggle();
+    $(".menu").toggle();
     });
 
-
   });
-  
+
 
   var app = new Vue({
     el: '#app',
     data: {
       brands: [],
       devices: [],
-      DeviceBuilds:[],
-      Device: '',
-      maintainer: '',
-      brand: '',
-      version: '',
+      deviceBuilds:[],
+      device: [],
       codename: '',
     },
     methods: {
       suported: function() {
-        axios.get(`https://cors.io/?http://andersondev.ooo/?api=suported`)
+        axios.get(`https://raw.githubusercontent.com/ChidoriOS/official_devices/master/devices.json`)
         .then(response => {
-          // JSON responses are automatically parsed.
-          response.data.forEach(element => {
 
+          response.data.forEach(element => {
           if(this.brands.indexOf(element.brand) == -1){
             this.brands.push(element.brand)
           }
@@ -48,31 +41,28 @@ $(document).ready(function () {
     
           });
         })
-        .catch(e => {
-          console.log("Suported devices falhou")
-          this.errors.push(e)
+      },
+      LoadDevice: function(codename){
+        axios.get(`https://raw.githubusercontent.com/ChidoriOS/official_devices/master/devices.json`)
+        .then(response => {
+          response.data.forEach(device => {
+            if(device['codename'] == codename){
+                this.device = device;
+                this.codename = codename
+            }
         })
+      })
       },
       LoadBuilds: function(codename) {
-        axios.get('https://cors.io/?http://andersondev.ooo/?api=builds&device=' + codename)
+        this.LoadDevice(codename)
+        axios.get('https://raw.githubusercontent.com/ChidoriOS/official_devices/master/builds/'+codename+'.json')
         .then(response => {
-
           $('.sidenav').sidenav();
-
-          this.codename = codename
-          this.Device = response.data.device
-          this.brand = response.data.brand
-          this.maintainer = response.data.maintainer
-          this.version = response.data.version
-          this.DeviceBuilds = response.data.builds
-
+          this.deviceBuilds = response.data
           history.pushState(null, '', '?device='+codename);
 
         })
-        .catch(e => {
-          console.log("device builds falhou")
-          this.errors.push(e)
-        })
+
       },
     }
   })

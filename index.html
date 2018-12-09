@@ -86,7 +86,7 @@
                         <ul>
                           <template v-for="dev in devices" v-if="brand == dev.brand">
                           <li class=""><a v-on:click="LoadBuilds(dev.codename)" class="pointer product-sans black-text"><i class="material-icons">phone_android</i>
-                              {{dev.device}} ({{dev.codename}})</a></li>
+                              {{dev.name}} ({{dev.codename}})</a></li>
                           </template>
                         </ul>
                       </div>
@@ -167,19 +167,17 @@
 
 <!-- DEVICE INFO CARD -->
 <div class="product-sans" v-if="codename">
-  <h5 class="center device-name">{{brand}} {{Device}} ({{codename}})</h3>
+  <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h3>
     <div class="row center">
       <div class="col s12 m12 center">
         <div class="card">
           <div class="card-content">
-            <span class="card-title">{{Device}}</span>
-            <p>Maintainer: {{maintainer}}</p>
-            <p> Brand: {{brand}}</p>
-            <p> Android Version: {{version}}</p>
+            <span class="card-title">{{device.name}}</span>
+            <p>Maintainer: {{device.maintainer}}</p>
+            <p> Brand: {{device.brand}}</p>
           </div>
           <div class="card-action">
             <a href="#">XDA Profile</a>
-            <a v-bind:href="'https://github.com/' + maintainer">Github</a>
           </div>
         </div>
       </div>
@@ -195,16 +193,12 @@
             <thead>
               <tr>
                   <th>Build</th>
-                  <th>Date</th>
-                  <th>Size</th>
               </tr>
             </thead>
             <tbody>
-              <template v-for="Build in DeviceBuilds">
+              <template v-for="Build in deviceBuilds">
                 <tr>
-                  <td><a href="">{{Build.name}}</a></td>
-                  <td>{{Build.date}}</td>
-                  <td>{{Build.size}}MB</td>
+                  <td><a href="">{{Build.filename}}</a></td>
                 </tr>
               </template>
             </tbody>
