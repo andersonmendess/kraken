@@ -1,5 +1,6 @@
 //materialize stuff
 $(document).ready(function () {
+      
     app.suported();
     
     var url = new URL(window.location.href);
@@ -18,7 +19,6 @@ $(document).ready(function () {
 
   });
 
-
   var app = new Vue({
     el: '#app',
     data: {
@@ -32,13 +32,11 @@ $(document).ready(function () {
       suported: function() {
         axios.get(`https://raw.githubusercontent.com/ChidoriOS/official_devices/master/devices.json`)
         .then(response => {
-
           response.data.forEach(element => {
           if(this.brands.indexOf(element.brand) == -1){
             this.brands.push(element.brand)
           }
             this.devices.push(element)
-    
           });
         })
       },
@@ -62,7 +60,18 @@ $(document).ready(function () {
           history.pushState(null, '', '?device='+codename);
 
         })
-
+      },
+      LoadModal: function(build,codename, url) {
+        axios.get('https://raw.githubusercontent.com/ChidoriOS/official_devices/master/changelog/'+codename+'/'+build.replace("zip","txt"))
+        .then(response => {
+          $('#modal-container').text(response.data);
+        }).catch(e => {
+          $('#modal-container').text("Nothing here :)");
+        })
+          $('#modal-title').text("Changelog for "+build);
+          $('.download').attr("href",url)
+          $('.modal').modal();
+          $('.modal').modal('open');
       },
     }
   })

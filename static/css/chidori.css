@@ -98,7 +98,16 @@ body {
   color: var(--text) !important;
 }
 
-
+a{
+  cursor: pointer;
+}
+pre{
+  word-break:break-all;
+  overflow:hidden;
+  white-space:pre-line;
+  font-size: 14px;
+  font-family: "Product Sans";
+}
 .sidenav-trigger,.sidenav-trigger:hover  {
   background-color: var(--accent) !important;
 }
@@ -211,4 +220,18 @@ i {
       top: 30px;
     }
 
+}
+.btn-flat {
+  color: var(--accent) !important;
+  background-color: transparent !important;
+}
+#modal-title {
+  padding-bottom: 10px;
+  color: var(--accent);
+}
+.modal, .modal-footer{
+  background-color: var(--background) !important;
+}
+.modal-content {
+  padding-bottom: 0px !important;
 }

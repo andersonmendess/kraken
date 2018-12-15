@@ -198,7 +198,7 @@
             <tbody>
               <template v-for="Build in deviceBuilds">
                 <tr>
-                  <td><a href="">{{Build.filename}}</a></td>
+                  <td><a v-on:click="LoadModal(Build.filename, device.codename, Build.url)">{{Build.filename}}</a></td>
                 </tr>
               </template>
             </tbody>
@@ -208,6 +208,21 @@
         </div>
     </div>
     <!-- END TABLE OF BUILDS -->
+
+  <!-- Modal Structure -->
+  <div class="modal">
+    <div class="modal-content">
+      <h5 id="modal-title"></h5>
+      <div class="line"></div>
+      <pre id="modal-container"></pre>
+      <div class="line"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      <a class="modal-close waves-effect waves-green btn-flat download">Download</a>
+    </div>
+  </div>
+
 
   </div>
 </main>
