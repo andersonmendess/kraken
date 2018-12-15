@@ -176,8 +176,9 @@
             <p>Maintainer: {{device.maintainer}}</p>
             <p> Brand: {{device.brand}}</p>
           </div>
-          <div class="card-action">
-            <a href="#">XDA Profile</a>
+          <div v-if="device.xda_thread" class="card-action">
+            <a v-bind:href="device.maintainer_url">XDA Profile</a>
+            <a v-bind:href="device.xda_thread">XDA Thread</a>
           </div>
         </div>
       </div>
