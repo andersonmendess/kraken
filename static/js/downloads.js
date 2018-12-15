@@ -56,7 +56,12 @@ $(document).ready(function () {
         axios.get('https://raw.githubusercontent.com/ChidoriOS/official_devices/master/builds/'+codename+'.json')
         .then(response => {
           $('.sidenav').sidenav();
-          this.deviceBuilds = response.data
+          this.deviceBuilds = [];
+
+          for (var i = response.data.length - 1; i >= 0; i--) {
+            this.deviceBuilds.push(response.data[i])
+          }
+
           history.pushState(null, '', '?device='+codename);
 
         })
