@@ -78,6 +78,14 @@
                   </a>
 
                   <div class="line"></div>
+                      <div class="search-wrapper">
+                        <i class="material-icons is-s">search</i>
+                     <input style="width: 80%" type="text" v-model="search" placeholder="Search... "/>
+                    </div>
+                    <div v-if="search != ''" class="wrapper">
+                        <a v-for="devi in filteredList" class="search-link" v-bind:href='"?device="+devi.codename'>{{ devi.name }} ({{devi.codename}})</a>
+                    </div>
+                  <div class="line" style="padding-bottom: 10px;"></div>
                   <ul class="collapsible collapsible-accordion">
                     <template v-for="brand in brands">
                     <li>
@@ -93,7 +101,6 @@
                     </li>
                     </template>
                   </ul>
-                  <div class="line"></div>
               </div>
           </ul>
           <!-- END NAVBAR -->
@@ -144,6 +151,7 @@
 
     <!-- WELCOME -->
     <div v-if="!codename" class='home center'>
+
       <h3 class="accent product-sans welcome">WELCOME TO CHIDORI</h3>
           <svg version="1.0" xmlns="http://www.w3.org/2000/svg" height="250.000000pt" viewBox="0 0 366.000000 734.000000" preserveAspectRatio="xMidYMid meet">
           <g transform="translate(0.000000,734.000000) scale(0.100000,-0.100000)"

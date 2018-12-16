@@ -192,6 +192,21 @@ i {
   font-size: 20px;
 }
 
+.btn-flat {
+  color: var(--accent) !important;
+  background-color: transparent !important;
+}
+#modal-title {
+  padding-bottom: 10px;
+  color: var(--accent);
+}
+.modal, .modal-footer{
+  background-color: var(--background) !important;
+}
+.modal-content {
+  padding-bottom: 0px !important;
+}
+
 @media only screen and (min-width: 1000px) {
     #slide-out {
         transform: translateX(0%);
@@ -219,19 +234,37 @@ i {
     .menu {
       top: 30px;
     }
+}
+
+.search-link {
+  font-family: "Product Sans";
+  background-color: transparent !important;
+  color: var(--accent) !important;
+  padding: 10px !important;
+  margin-left: 5px !important;
+  display: block !important;
+  text-align: left !important;
+  padding-left: 5px !important;
 
 }
-.btn-flat {
+input {
+  padding: 0px !important;
+  margin: 0px !important;
+  padding-left: 5px !important;
+  border-bottom: none !important;
   color: var(--accent) !important;
-  background-color: transparent !important;
+
 }
-#modal-title {
-  padding-bottom: 10px;
-  color: var(--accent);
+input::placeholder {
+  color: var(--accent) !important;
 }
-.modal, .modal-footer{
-  background-color: var(--background) !important;
+input:focus {
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
-.modal-content {
-  padding-bottom: 0px !important;
+.is-s {
+  font-size: 24px !important;
+  margin-left: 10px !important;
+  margin-right: 0px !important;
+  vertical-align: middle;
 }
