@@ -83,7 +83,7 @@
                      <input style="width: 80%" type="text" v-model="search" placeholder="Search... "/>
                     </div>
                     <div v-if="search != ''" class="wrapper">
-                        <a v-for="devi in filteredList" class="search-link" v-bind:href='"?device="+devi.codename'>{{ devi.name }} ({{devi.codename}})</a>
+                        <a v-for="devi in filteredList" class="search-link" v-on:click='LoadBuilds(devi.codename)' v-bind:data-device='devi.codename'>{{ devi.name }} ({{devi.codename}})</a>
                     </div>
                   <div class="line" style="padding-bottom: 10px;"></div>
                   <ul class="collapsible collapsible-accordion">

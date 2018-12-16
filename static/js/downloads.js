@@ -61,7 +61,7 @@ $(document).ready(function () {
          $(document).keypress(function(e) {
               if(e.which == 13) {
                 if($(".search-link").select()[0] != undefined){
-                  window.open($(".search-link").select()[0].href,"_self")
+                  app.LoadBuilds($(".search-link").select().attr("data-device"));
                 }
               }
           });  
@@ -91,7 +91,8 @@ $(document).ready(function () {
           }
 
           history.pushState(null, '', '?device='+codename);
-
+          $(".wrapper").hide();
+          $("input").blur();
         })
       },
       LoadModal: function(build,codename, url) {
