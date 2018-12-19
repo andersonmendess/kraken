@@ -125,6 +125,9 @@ table a {
 #homelogo {
   fill: var(--accent);
 }
+.error {
+  fill: var(--accent);
+}
 li a {
   background-color: var(--background) !important;
 }
@@ -279,4 +282,7 @@ input:focus {
 }
 .builds {
   padding: 15px;
+}
+.fail {
+  padding: 20px;
 }
