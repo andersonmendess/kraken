@@ -115,7 +115,7 @@
             <ul>
             <li data-hex="#000" style="background-color: black" onclick="setBg(this)"class='ball'></li>
             <li data-hex="#212121" style="background-color: #212121" onclick="setBg(this)"class='ball'></li>
-            <li data-hex="#F5F5F5" style="background-color: #F5F5F5" onclick="setBg(this)"class='ball'></li>
+            <li data-hex="#FFF" style="border: 1px solid black; background-color: white" onclick="setBg(this)"class='ball'></li>
             </ul>
             <div style="clear: both"></div>
           </div>
@@ -140,7 +140,7 @@
             <li data-hex="#6200EA" style="background-color: #6200EA" onclick="setColor(this)"class='ball'></li>
             <li data-hex="#0091EA" style="background-color: #0091EA" onclick="setColor(this)"class='ball'></li>
             <li data-hex="#D50000" style="background-color: #D50000" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#212121" style="background-color: #212121" onclick="setColor(this)"class='ball'></li>
+            <li data-hex="#21EF8B" style="background-color: #21EF8B" onclick="setColor(this)"class='ball'></li>
             <li data-hex="#EF4581" style="background-color: #EF4581" onclick="setColor(this)"class='ball'></li>
 
           </ul>
@@ -164,7 +164,7 @@
           </g>
       </svg>
       <div id="home-desc">
-        <div class="card product-sans accent">
+        <div class="desc square product-sans accent">
           ChidoriOS is an AOSP based rom, meant to be as lightweight as possible. Our mission is to provide a stock-like experience even on low-end devices, allowing them to enjoy the latest version of Android.
         </div>
       </div>
@@ -178,12 +178,11 @@
   <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h3>
     <div class="row center">
       <div class="col s12 m12 center">
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">{{device.name}}</span>
-            <p>Maintainer: {{device.maintainer}}</p>
-            <p> Brand: {{device.brand}}</p>
-          </div>
+        <div class="square builds">
+            <h6>Device: {{device.name}}</h6>
+            <h6>Brand: {{device.brand}}</h6>
+            <h6>Maintainer: {{device.maintainer}}</h6>
+            <h6>Version: Pie</h6>
           <div v-if="device.xda_thread" class="card-action">
             <a v-bind:href="device.maintainer_url">XDA Profile</a>
             <a v-bind:href="device.xda_thread">XDA Thread</a>
@@ -196,8 +195,7 @@
   <!-- TABLE OF BUILDS -->
   <div class="row center">
       <div class="col s12 m12 center">
-        <div class="card ">
-          <div class="card-content">
+        <div class="square builds">
           <table>
             <thead>
               <tr>
@@ -212,14 +210,13 @@
               </template>
             </tbody>
            </table> 
-            </div>
           </div>
         </div>
     </div>
     <!-- END TABLE OF BUILDS -->
 
   <!-- Modal Structure -->
-  <div class="modal">
+  <div class="modal square">
     <div class="modal-content">
       <h5 id="modal-title"></h5>
       <div class="line"></div>

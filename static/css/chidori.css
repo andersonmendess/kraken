@@ -1,8 +1,8 @@
 :root {
-  --background: #F5F5F5;
-  --card: white;
+  --background: white;
+  --card: #ddd;
   --accent: #1565C0;
-  --text: black ;
+  --text: #4B4D4F ;
 }
 
 body {
@@ -66,12 +66,12 @@ body {
 
 .card-action a {
   color: var(--accent) !important;
-  background-color: var(--card) !important;
+  background-color: var(--background) !important;
 
 }
 .card {
   margin: 0px;
-  background-color: var(--card) !important;
+  background-color: var(--background) !important;
 }
 .accent {
   color: var(--accent);
@@ -90,7 +90,7 @@ body {
 }
 
 #slide-out, a {
-  background-color: var(--card) !important;
+  background-color: var(--background) !important;
   color: var(--text) !important;
 }
 
@@ -120,13 +120,13 @@ a:hover{
 }
 table a {
   color: var(--accent) !important;
-  background-color: var(--card) !important;
+  background-color: var(--background) !important;
 }
 #homelogo {
   fill: var(--accent);
 }
 li a {
-  background-color: var(--card) !important;
+  background-color: var(--background) !important;
 }
 #sublogo {
   fill: var(--accent);
@@ -147,7 +147,7 @@ li a {
 .menu {
   height: 280px;
   width: 220px;
-  background-color: var(--card);
+  background-color: var(--background);
   position: fixed;
   right: 0px;
   top: 45px;
@@ -267,4 +267,16 @@ input:focus {
   margin-left: 10px !important;
   margin-right: 0px !important;
   vertical-align: middle;
+}
+.square {
+  border: 1px solid var(--card);
+  border-radius: 5px;
+}
+.desc {
+  font-size: 19px;
+  padding: 10px;
+  margin: 5px;
+}
+.builds {
+  padding: 15px;
 }

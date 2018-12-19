@@ -25,17 +25,13 @@ function setBg(obj) {
 }
 
 function handlerBg(hex){
-	if(hex == "#212121"){
+	if(hex == "#FFF"){
 		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","#2d2d2d")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","white")
-	}else if (hex == "#000"){
-		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","#0f0f0f")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","#9D9D9D")
+		document.getElementsByTagName("body")[0].style.setProperty("--card","#ddd")
+		document.getElementsByTagName("body")[0].style.setProperty("--text","black")
 	}else{
 		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","white")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","black")
+		document.getElementsByTagName("body")[0].style.setProperty("--card","var(--accent)")
+		document.getElementsByTagName("body")[0].style.setProperty("--text","var(--accent)")
 	}
 }
