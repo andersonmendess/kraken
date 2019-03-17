@@ -37,7 +37,7 @@ function handlerBg(hex){
 		document.getElementsByTagName("body")[0].style.setProperty("--text","white")
 	}else{
 		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","#131313")
+		document.getElementsByTagName("body")[0].style.setProperty("--card","#1C1C1C")
 		document.getElementsByTagName("body")[0].style.setProperty("--text","#FFF")
 	}
 }
