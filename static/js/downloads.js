@@ -1,8 +1,8 @@
 //materialize stuff
 $(document).ready(function () {
-      
+
     app.suported();
-    
+
     var url = new URL(window.location.href);
     var device = url.searchParams.get("device");
 
@@ -68,7 +68,7 @@ $(document).ready(function () {
         .then(response => {
           response.data.forEach(element => {
           if(this.brands.indexOf(element.brand) == -1){
-            
+
             // temp hack
             if(element.name.includes(element.brand)){
               element.name = element.name.replace(element.brand+' ','');
@@ -77,7 +77,7 @@ $(document).ready(function () {
             this.brands.push(element.brand)
           }
             this.devices.push(element)
-            
+
 
         });
          $(document).keypress(function(e) {
@@ -87,7 +87,7 @@ $(document).ready(function () {
                   app.LoadBuilds($(".search-link").select().attr("data-device"));
                 }
               }
-          });  
+          });
 
         }).catch(e => {
           this.failed("Failed to load devices... try again in some minutes")
@@ -126,7 +126,7 @@ $(document).ready(function () {
       },
       LoadBuilds: function(codename) {
         this.LoadDevice(codename)
-        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/'+codename+'/build.json')
+        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/'+codename+'.json')
         .then(response => {
           const res = response.data.response;
 
@@ -148,7 +148,7 @@ $(document).ready(function () {
       })
       },
       LoadModal: function(build,codename, url) {
-        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/'+codename+'/changelog')
+        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/changelog/'+codename+'/'+build.replace("zip","txt"))
         .then(response => {
           $('#modal-container').text(response.data);
         }).catch(e => {
@@ -161,4 +161,3 @@ $(document).ready(function () {
       },
     }
   })
-  
