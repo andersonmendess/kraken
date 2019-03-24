@@ -216,8 +216,7 @@
             </div>
 
             <div v-if="device.xda_thread" class="card-action xda-buttons">
-              <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect waves-teal btn-flat">XDA
-                Profile</a>
+              <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect waves-teal btn-flat">GitHub Profile</a>
               <a v-bind:href="device.xda_thread" target="_blank" class="waves-effect waves-teal btn-flat">XDA Thread</a>
             </div>
           </div>
@@ -228,9 +227,9 @@
       <!-- TABLE OF BUILDS -->
       <div class="row center">
           <div class="col s12 m12 center builds">
-  
+
               <ul class="collapsible collapsible-builds">
-  
+
                   <template v-for="Build in deviceBuilds">
                       <li >
                         <div class="collapsible-header white-text product-sans cardColor">
@@ -238,7 +237,7 @@
                           <span style="width: 100%">{{ Build.filename }}</span>
                           <i class="material-icons">arrow_drop_down</i>
                         </div>
-            
+
                         <div class="collapsible-body">
 
                             <p class="label" >details</p>
@@ -249,7 +248,7 @@
                                 <div class="deviceprop"><p>MD5: {{Build.id}}</p></div>
                                 <div class="deviceprop"><p>Version: {{Build.version}}</p></div>
                             </div>
-                            
+
                             <div class='buildChangelog'>
                               <p class="label">Changelog</p>
                                 <pre>{{Build.changelog}}</pre>
@@ -260,12 +259,12 @@
                             </div>
 
                         </div>
-  
+
                       </li>
                     </template>
-  
+
                 </ul>
-  
+
           </div>
         </div>
         <!-- END TABLE OF BUILDS -->
