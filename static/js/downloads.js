@@ -18,6 +18,21 @@ $(document).ready(function () {
 
   });
 
+  function bytesToSize(bytes) {
+     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+     if (bytes == 0) return '0 Byte';
+     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+  };
+
+
+  function convertTimestamp(timestamp) {
+      let d = new Date(timestamp * 1000)
+      let mm = ('0' + (d.getUTCMonth() + 1)).slice(-2)
+      let dd = ('0' + d.getUTCDate()).slice(-2)
+      return `${d.getFullYear()}/${mm}/${dd}`;
+  };
+
   var app = new Vue({
     el: '#app',
     data: {
@@ -49,7 +64,7 @@ $(document).ready(function () {
   },
     methods: {
       suported: function() {
-        axios.get(`https://raw.githubusercontent.com/ChidoriOS/official_devices/master/devices.json`)
+        axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
         .then(response => {
           response.data.forEach(element => {
           if(this.brands.indexOf(element.brand) == -1){
@@ -88,7 +103,7 @@ $(document).ready(function () {
 
       },
       LoadDevice: function(codename){
-        axios.get(`https://raw.githubusercontent.com/ChidoriOS/official_devices/master/devices.json`)
+        axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
         .then(response => {
           response.data.forEach(device => {
             if(device['codename'] == codename){
@@ -103,13 +118,18 @@ $(document).ready(function () {
       },
       LoadBuilds: function(codename) {
         this.LoadDevice(codename)
-        axios.get('https://raw.githubusercontent.com/ChidoriOS/official_devices/master/builds/'+codename+'.json')
+        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/'+codename+'/build.json')
         .then(response => {
+          const res = response.data.response;
+
           $('.sidenav').sidenav();
           this.deviceBuilds = [];
 
-          for (var i = response.data.length - 1; i >= 0; i--) {
-            this.deviceBuilds.push(response.data[i])
+          for (var i = res.length - 1; i >= 0; i--) {
+            res[i].newSize = bytesToSize(res[i].size);
+            res[i].newTime = convertTimestamp(res[i].datetime);
+            this.deviceBuilds.push(res[i])
+            console.log(res[i])
           }
 
           history.pushState(null, '', '?device='+codename);
@@ -120,7 +140,7 @@ $(document).ready(function () {
       })
       },
       LoadModal: function(build,codename, url) {
-        axios.get('https://raw.githubusercontent.com/ChidoriOS/official_devices/master/changelog/'+codename+'/'+build.replace("zip","txt"))
+        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/'+codename+'/changelog')
         .then(response => {
           $('#modal-container').text(response.data);
         }).catch(e => {

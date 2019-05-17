@@ -1,8 +1,8 @@
 :root {
-  --background: white;
-  --card: #ddd;
-  --accent: #1565C0;
-  --text: #4B4D4F ;
+  --background: #121212;
+  --card: #272727;
+  --accent: #A97CF0;
+  --text: white ;
 }
 
 body {
@@ -84,9 +84,6 @@ body {
 .line {
   border-top: 1px solid var(--accent);
 
-}
-.welcome {
-  font-weight: bold;
 }
 
 #slide-out, a {
@@ -272,7 +269,7 @@ input:focus {
   vertical-align: middle;
 }
 .square {
-  border: 1px solid var(--card);
+  border: 1px solid var(--accent);
   border-radius: 5px;
 }
 .desc {
@@ -285,4 +282,8 @@ input:focus {
 }
 .fail {
   padding: 20px;
+}
+
+tr th {
+  font-weight: 100
 }
