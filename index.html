@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="static/css/styles.css">
   <meta name="msapplication-TileColor" content="#A97CF0">
   <meta name="theme-color" content="#A97CF0">
-  <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/49829986?s=20&v=4"/>
+  <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/49829986?s=20&v=4" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
@@ -17,212 +17,233 @@
 
 <!-- NAVBAR -->
 <div class="navbar-fixed">
-        <nav>
-          <div class="nav-wrapper">
-            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large left"><i class="material-icons left white-text">menu</i></a>
-            <a class="sidenav-trigger show-on-large right"><i class="settings material-icons white-text">color_lens</i></a>
-          </div>
-        </nav>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large left"><i
+          class="material-icons left white-text">menu</i></a>
+      <a class="sidenav-trigger show-on-large right"><i class="settings material-icons white-text">color_lens</i></a>
+    </div>
+  </nav>
+</div>
+<div id="app" class="black-text">
+  <ul id="slide-out" class="sidenav">
+    <div>
+      <a class="bar-logo center" href="/">
+        <img src="https://avatars0.githubusercontent.com/u/49829986?s=100&v=4">
+        <h4 class="accent product-sans">KrakenProject</h4>
+      </a>
+
+      <div class="square searchbar">
+        <div class="search-wrapper">
+          <i class="material-icons is-s">search</i>
+          <input style="width: 80%" class="product-sans" type="text" v-model="search"
+            placeholder="Type your device... " />
+        </div>
       </div>
-      <div id="app" class="black-text">
-          <ul id="slide-out" class="sidenav">
-              <div>
-                  <a class="bar-logo center" href="/">
-                    <img src="https://avatars0.githubusercontent.com/u/49829986?s=100&v=4">
-                    <h4 class="accent product-sans">KrakenProject</h4>
-                  </a>
+      <div v-if="search != ''" class="wrapper">
+        <a v-for="devi in filteredList" class="search-link" v-on:click='LoadBuilds(devi.codename)'
+          v-bind:data-device='devi.codename'>{{ devi.name }} ({{devi.codename}})</a>
+      </div>
+      <ul class="collapsible collapsible-accordion">
+        <template v-for="brand in brands">
+          <li>
+            <div class="collapsible-header white-text product-sans">
+              <i class="material-icons">phone_android</i>
+              <span style="width: 90%" class="white-text">{{ brand }}</span>
+              <i class="material-icons">arrow_drop_down</i>
+            </div>
 
-                  <div class="square searchbar">
-                      <div class="search-wrapper">
-                        <i class="material-icons is-s">search</i>
-                     <input style="width: 80%" class="product-sans" type="text" v-model="search" placeholder="Type your device... "/>
-                    </div>
-                  </div>
-                    <div v-if="search != ''" class="wrapper">
-                        <a v-for="devi in filteredList" class="search-link" v-on:click='LoadBuilds(devi.codename)' v-bind:data-device='devi.codename'>{{ devi.name }} ({{devi.codename}})</a>
-                    </div>
-                  <ul class="collapsible collapsible-accordion">
-                    <template v-for="brand in brands">
-                    <li>
-                    <a class="collapsible-header product-sans black-text cardColor"><i class="material-icons">phone_android</i>{{ brand }}<i class="material-icons right">arrow_drop_down</i></a>
-                      <div class="collapsible-body">
-                        <ul>
-                          <template v-for="dev in devices" v-if="brand == dev.brand">
-                          <li class=""><a v-on:click="LoadBuilds(dev.codename)" class="pointer product-sans black-text devilist">
-                              {{dev.name}} ({{dev.codename}})</a></li>
-                          </template>
-                        </ul>
-                      </div>
-                    </li>
-                    </template>
-                  </ul>
-              </div>
-          </ul>
-          <!-- END NAVBAR -->
+            <div class="collapsible-body">
+              <ul>
+                <template v-for="dev in devices" v-if="brand == dev.brand">
+                  <li class=""><a v-on:click="LoadBuilds(dev.codename)"
+                      class="pointer product-sans black-text devilist">
+                      {{dev.name}} ({{dev.codename}})</a></li>
+                </template>
+              </ul>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </ul>
+  <!-- END NAVBAR -->
 
-          <!-- SETTINGS BUTTON -->
-          <a class="accent"><i id="settings" class="settings material-icons pointer">color_lens</i></a>
-          <div class="menu" style="display: none">
-          <h6 class="product-sans accent">COLOR ENGINE</h6>
-          <div class="line" style="margin-bottom: 12px;"></div>
-          <div >
-            <span class="product-sans accent">BACKGROUND</span>
-            <ul>
-            <li data-hex="#000" style="background-color: black" onclick="setBg(this)"class='ball'></li>
-            <li data-hex="#212121" style="background-color: #212121" onclick="setBg(this)"class='ball'></li>
-            <li data-hex="#FFF" style="border: 1px solid black; background-color: white" onclick="setBg(this)"class='ball'></li>
-            </ul>
-            <div style="clear: both"></div>
-          </div>
-          <div>
-          <span class="product-sans accent">COLOR</span>
-          <ul>
-            <li data-hex="#8F54EA" style="background-color: #8F54EA" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#F34235" style="background-color: #F34235" onclick="setColor(this)" class='ball'></li>
-            <li data-hex="#E81E62" style="background-color: #E81E62" onclick="setColor(this)" class='ball'></li>
-            <li data-hex="#9B26AF" style="background-color: #9B26AF" onclick="setColor(this)" class='ball'></li>
-            <li data-hex="#3E50B4" style="background-color: #3E50B4" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#02A8F3" style="background-color: #02A8F3" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#009587" style="background-color: #009587" onclick="setColor(this)"class='ball'></li>
+  <!-- SETTINGS BUTTON -->
+  <a class="accent"><i id="settings" class="settings material-icons pointer">color_lens</i></a>
+  <div class="menu" style="display: none">
+    <h6 class="product-sans accent">COLOR ENGINE</h6>
+    <div class="line" style="margin-bottom: 12px;"></div>
+    <div>
+      <span class="product-sans accent">BACKGROUND</span>
+      <ul>
+        <li data-hex="#000" style="background-color: black" onclick="setBg(this)" class='ball'></li>
+        <li data-hex="#212121" style="background-color: #212121" onclick="setBg(this)" class='ball'></li>
+        <li data-hex="#FFF" style="border: 1px solid black; background-color: white" onclick="setBg(this)" class='ball'>
+        </li>
+      </ul>
+      <div style="clear: both"></div>
+    </div>
+    <div>
+      <span class="product-sans accent">COLOR</span>
+      <ul>
+        <li data-hex="#8F54EA" style="background-color: #8F54EA" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#F34235" style="background-color: #F34235" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#E81E62" style="background-color: #E81E62" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#9B26AF" style="background-color: #9B26AF" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#3E50B4" style="background-color: #3E50B4" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#02A8F3" style="background-color: #02A8F3" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#009587" style="background-color: #009587" onclick="setColor(this)" class='ball'></li>
 
-            <li data-hex="#4BAE4F" style="background-color: #4BAE4F" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#CCDB39" style="background-color: #CCDB39" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#FEC007" style="background-color: #FEC007" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#FE9700" style="background-color: #FE9700" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#FE5621" style="background-color: #FE5621" onclick="setColor(this)"class='ball'></li>
+        <li data-hex="#4BAE4F" style="background-color: #4BAE4F" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#CCDB39" style="background-color: #CCDB39" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#FEC007" style="background-color: #FEC007" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#FE9700" style="background-color: #FE9700" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#FE5621" style="background-color: #FE5621" onclick="setColor(this)" class='ball'></li>
 
-            <li data-hex="#76FF03" style="background-color: #76FF03" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#6200EA" style="background-color: #6200EA" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#0091EA" style="background-color: #0091EA" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#D50000" style="background-color: #D50000" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#21EF8B" style="background-color: #21EF8B" onclick="setColor(this)"class='ball'></li>
-            <li data-hex="#EF4581" style="background-color: #EF4581" onclick="setColor(this)"class='ball'></li>
+        <li data-hex="#76FF03" style="background-color: #76FF03" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#6200EA" style="background-color: #6200EA" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#0091EA" style="background-color: #0091EA" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#D50000" style="background-color: #D50000" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#21EF8B" style="background-color: #21EF8B" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#EF4581" style="background-color: #EF4581" onclick="setColor(this)" class='ball'></li>
 
-          </ul>
-          </div>            
-         </div>
-         <!-- END SETTINGS BUTTON -->
+      </ul>
+    </div>
+  </div>
+  <!-- END SETTINGS BUTTON -->
 
 
-    <!-- FAIL -->
+  <!-- FAIL -->
   <div v-if="fail" class="fail center" style="display: none;">
 
-  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="70%" viewBox="0 0 9810 9800" preserveAspectRatio="xMidYMid meet">
-  <g id="layer101" class="error" stroke="none">
-   <path d="M4630 9794 c-1239 -72 -2389 -595 -3243 -1474 -664 -683 -1106 -1514 -1292 -2429 -66 -324 -85 -512 -92 -886 -7 -417 9 -640 73 -995 338 -1876 1777 -3406 3634 -3864 413 -102 733 -140 1185 -140 326 -1 442 7 715 45 1234 174 2353 820 3148 1818 189 237 382 541 526 830 287 571 453 1170 506 1821 14 161 14 599 0 760 -51 630 -206 1203 -474 1755 -256 527 -576 971 -993 1376 -805 781 -1795 1243 -2923 1364 -139 15 -631 27 -770 19z m750 -668 c995 -119 1874 -550 2565 -1257 203 -208 348 -385 493 -601 634 -948 860 -2092 636 -3216 -210 -1053 -817 -1986 -1706 -2622 -323 -231 -727 -437 -1108 -565 -305 -103 -641 -173 -990 -206 -185 -18 -593 -15 -785 5 -354 38 -653 104 -978 215 -969 332 -1813 1039 -2324 1946 -578 1028 -697 2286 -323 3415 346 1042 1102 1926 2085 2436 465 241 1018 406 1525 453 63 6 133 13 155 15 99 10 628 -3 755 -18z"/>
-   <path d="M3157 7250 c-83 -21 -162 -83 -201 -157 -43 -84 -39 -204 10 -293 43 -80 176 -249 280 -359 362 -381 813 -616 1337 -697 156 -25 490 -25 644 -1 415 66 774 222 1100 479 174 137 450 446 522 583 83 160 15 355 -148 428 -65 29 -179 28 -246 -2 -64 -28 -81 -44 -180 -176 -258 -343 -620 -576 -1038 -667 -88 -19 -132 -22 -327 -22 -198 -1 -238 2 -330 22 -415 91 -777 324 -1035 667 -46 60 -94 120 -107 132 -58 54 -194 85 -281 63z"/>
-   <path d="M3381 4445 c-211 -48 -375 -202 -437 -411 -26 -85 -24 -229 4 -319 76 -247 291 -405 549 -405 176 0 291 47 413 170 87 86 122 147 150 256 92 357 -159 699 -527 719 -58 3 -110 0 -152 -10z"/>
-   <path d="M6453 4449 c-170 -28 -325 -142 -408 -300 -128 -243 -66 -541 150 -716 105 -85 216 -123 360 -123 169 0 296 51 410 165 116 116 170 250 168 420 -4 351 -325 613 -680 554z"/>
-   </g>
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="70%" viewBox="0 0 9810 9800"
+      preserveAspectRatio="xMidYMid meet">
+      <g id="layer101" class="error" stroke="none">
+        <path
+          d="M4630 9794 c-1239 -72 -2389 -595 -3243 -1474 -664 -683 -1106 -1514 -1292 -2429 -66 -324 -85 -512 -92 -886 -7 -417 9 -640 73 -995 338 -1876 1777 -3406 3634 -3864 413 -102 733 -140 1185 -140 326 -1 442 7 715 45 1234 174 2353 820 3148 1818 189 237 382 541 526 830 287 571 453 1170 506 1821 14 161 14 599 0 760 -51 630 -206 1203 -474 1755 -256 527 -576 971 -993 1376 -805 781 -1795 1243 -2923 1364 -139 15 -631 27 -770 19z m750 -668 c995 -119 1874 -550 2565 -1257 203 -208 348 -385 493 -601 634 -948 860 -2092 636 -3216 -210 -1053 -817 -1986 -1706 -2622 -323 -231 -727 -437 -1108 -565 -305 -103 -641 -173 -990 -206 -185 -18 -593 -15 -785 5 -354 38 -653 104 -978 215 -969 332 -1813 1039 -2324 1946 -578 1028 -697 2286 -323 3415 346 1042 1102 1926 2085 2436 465 241 1018 406 1525 453 63 6 133 13 155 15 99 10 628 -3 755 -18z" />
+        <path
+          d="M3157 7250 c-83 -21 -162 -83 -201 -157 -43 -84 -39 -204 10 -293 43 -80 176 -249 280 -359 362 -381 813 -616 1337 -697 156 -25 490 -25 644 -1 415 66 774 222 1100 479 174 137 450 446 522 583 83 160 15 355 -148 428 -65 29 -179 28 -246 -2 -64 -28 -81 -44 -180 -176 -258 -343 -620 -576 -1038 -667 -88 -19 -132 -22 -327 -22 -198 -1 -238 2 -330 22 -415 91 -777 324 -1035 667 -46 60 -94 120 -107 132 -58 54 -194 85 -281 63z" />
+        <path
+          d="M3381 4445 c-211 -48 -375 -202 -437 -411 -26 -85 -24 -229 4 -319 76 -247 291 -405 549 -405 176 0 291 47 413 170 87 86 122 147 150 256 92 357 -159 699 -527 719 -58 3 -110 0 -152 -10z" />
+        <path
+          d="M6453 4449 c-170 -28 -325 -142 -408 -300 -128 -243 -66 -541 150 -716 105 -85 216 -123 360 -123 169 0 296 51 410 165 116 116 170 250 168 420 -4 351 -325 613 -680 554z" />
+      </g>
 
-  </svg>
-        <div class="warn desc square product-sans accent" style="margin-top: 20px !important">
-          error msg
-        </div>
+    </svg>
+    <div class="warn desc square product-sans accent" style="margin-top: 20px !important">
+      error msg
+    </div>
   </div>
 
 
-    <!-- WELCOME -->
-    <div v-if="!codename && !fail" class='home center'>
+  <!-- WELCOME -->
+  <div v-if="!codename && !fail" class='home center'>
 
-      <h3 class="accent product-sans welcome">Kraken Open Tentacles Project</h3>
+    <h3 class="accent product-sans welcome">Kraken Open Tentacles Project</h3>
 
-      <img src="https://avatars0.githubusercontent.com/u/49829986?s=500&v=4">
+    <img src="https://avatars0.githubusercontent.com/u/49829986?s=500&v=4">
 
-      <div id="home-desc">
-        <div class="desc square product-sans accent">AOSP/CAF based ROM</div>
-      </div>
+    <div id="home-desc">
+      <div class="desc square product-sans accent">AOSP/CAF based ROM</div>
+    </div>
   </div>
   <!-- END WELCOME -->
-          
 
 
-<!-- DEVICE INFO CARD -->
-<div class="product-sans" v-if="codename && !fail">
-  <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h3>
-    <div class="row limiter">
-      <div class="col s12 m12">
-        <div class="square builds cardColor">
 
-          <div class="deviceprop">
-            <i class="material-icons">phone_android</i><h6> {{device.name}}</h6>
-          </div>
-
-           <div class="deviceprop">
-              <i class="material-icons">domain</i><h6>{{device.brand}}</h6>
-           </div>
+  <!-- DEVICE INFO CARD -->
+  <div class="product-sans" v-if="codename && !fail">
+    <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h3>
+      <div class="row limiter">
+        <div class="col s12 m12">
+          <div class="square builds cardColor">
 
             <div class="deviceprop">
-                <i class="material-icons">person_outline</i><h6> {{device.maintainer_name}}</h6>
+                <i class="material-icons">domain</i>
+                <h6>{{device.brand}}</h6>
             </div>
 
             <div class="deviceprop">
-                <i class="material-icons">device_unknown</i><h6> {{device.codename}}</h6>
+              <i class="material-icons">phone_android</i>
+              <h6> {{device.name}}</h6>
             </div>
 
-          <div v-if="device.xda_thread" class="card-action">
-            <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect waves-teal btn-flat">XDA Profile</a>
-            <a v-bind:href="device.xda_thread" target="_blank" class="waves-effect waves-teal btn-flat">XDA Thread</a>
+            <div class="deviceprop">
+              <i class="material-icons">device_unknown</i>
+              <h6> {{device.codename}}</h6>
+            </div>
+
+            <div class="deviceprop">
+              <i class="material-icons">person_outline</i>
+              <h6> {{device.maintainer_name}}</h6>
+            </div>
+
+            <div v-if="device.xda_thread" class="card-action">
+              <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect waves-teal btn-flat">XDA
+                Profile</a>
+              <a v-bind:href="device.xda_thread" target="_blank" class="waves-effect waves-teal btn-flat">XDA Thread</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-<!-- END DEVICE INFO CARD -->
+      <!-- END DEVICE INFO CARD -->
 
-  <!-- TABLE OF BUILDS -->
-  <div class="row center">
-      <div class="col s12 m12 center">
-        <div class="square builds cardColor">
-          <table>
-            <thead>
-              <tr>
+      <!-- TABLE OF BUILDS -->
+      <div class="row center">
+        <div class="col s12 m12 center">
+          <div class="square builds cardColor">
+            <table>
+              <thead>
+                <tr>
                   <th>Build</th>
                   <th>Date</th>
                   <th>Size</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template v-for="Build in deviceBuilds">
-                <tr>
-                  <td><a v-on:click="LoadModal(Build.filename, device.codename, Build.url)">{{Build.filename}}</a></td>
-                  <td><span>{{Build.newTime}}</span></td>
-                  <td><span>{{Build.newSize}}</span></td>
                 </tr>
-              </template>
-            </tbody>
-           </table> 
+              </thead>
+              <tbody>
+                <template v-for="Build in deviceBuilds">
+                  <tr>
+                    <td><a v-on:click="LoadModal(Build.filename, device.codename, Build.url)">{{Build.filename}}</a>
+                    </td>
+                    <td><span>{{Build.newTime}}</span></td>
+                    <td><span>{{Build.newSize}}</span></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
           </div>
         </div>
-    </div>
-    <!-- END TABLE OF BUILDS -->
-
-  <!-- Modal Structure -->
-  <div class="modal square">
-    <div class="modal-content">
-      <h6 id="modal-title"></h6>
-      <div class="line"></div>
-      <div class="changelog">
-          <pre id="modal-container"></pre>
       </div>
-      <div class="line"></div>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-      <a onclick="M.toast({html: 'Download Started'})" class="modal-close waves-effect waves-green btn-flat download">Download</a>
-    </div>
-  </div>
+      <!-- END TABLE OF BUILDS -->
+
+      <!-- Modal Structure -->
+      <div class="modal square">
+        <div class="modal-content">
+          <h6 id="modal-title"></h6>
+          <div class="line"></div>
+          <div class="changelog">
+            <pre id="modal-container"></pre>
+          </div>
+          <div class="line"></div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+          <a onclick="M.toast({html: 'Download Started'})"
+            class="modal-close waves-effect waves-green btn-flat download">Download</a>
+        </div>
+      </div>
 
 
   </div>
-</main>
+  </main>
 </div>
 <footer>
-  
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <!-- development version, includes helpful console warnings -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="static/js/downloads.js"></script>
 

@@ -1,132 +1,123 @@
 //materialize stuff
 $(document).ready(function () {
 
-    app.suported();
+  app.suported();
 
-    var url = new URL(window.location.href);
-    var device = url.searchParams.get("device");
+  var url = new URL(window.location.href);
+  var device = url.searchParams.get("device");
 
-    if(device){
-      app.LoadBuilds(device);
-    }
+  if (device) {
+    app.LoadBuilds(device);
+  }
 
-    $('.sidenav').sidenav();
-    $('.collapsible').collapsible();
-    $(".settings").click(function(){
+  $('.sidenav').sidenav();
+  $('.collapsible').collapsible();
+  $(".settings").click(function () {
     $(".menu").toggle();
-    });
-
   });
 
-  function bytesToSize(bytes) {
-     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-     if (bytes == 0) return '0 Byte';
-     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-  };
+});
+
+function bytesToSize(bytes) {
+  var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  if (bytes == 0) return '0 Byte';
+  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+  return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
 
 
-  function convertTimestamp(timestamp) {
-      let d = new Date(timestamp * 1000)
-      let mm = ('0' + (d.getUTCMonth() + 1)).slice(-2)
-      let dd = ('0' + d.getUTCDate()).slice(-2)
-      return `${d.getFullYear()}/${mm}/${dd}`;
-  };
+function convertTimestamp(timestamp) {
+  let d = new Date(timestamp * 1000)
+  let mm = ('0' + (d.getUTCMonth() + 1)).slice(-2)
+  let dd = ('0' + d.getUTCDate()).slice(-2)
+  return `${d.getFullYear()}/${mm}/${dd}`;
+};
 
-  var app = new Vue({
-    el: '#app',
-    data: {
-      brands: [],
-      devices: [],
-      deviceBuilds:[],
-      device: [],
-      codename: '',
-      search: '',
-      fail: false,
-    },
-      computed: {
+var app = new Vue({
+  el: '#app',
+  data: {
+    brands: [],
+    devices: [],
+    deviceBuilds: [],
+    device: [],
+    codename: '',
+    search: '',
+    fail: false,
+  },
+  computed: {
     filteredList() {
       return this.devices.filter(devi => {
         var s_code = devi.codename.toLowerCase().includes(this.search.toLowerCase())
         var s_brand = devi.brand.toLowerCase().includes(this.search.toLowerCase())
         var s_name = devi.name.toLowerCase().includes(this.search.toLowerCase())
 
-        if(s_code){
+        if (s_code) {
           return s_code
-        }else if (s_name){
+        } else if (s_name) {
           return s_name
-        }else if(s_brand){
+        } else if (s_brand) {
           return s_brand
         }
 
       })
     }
   },
-    methods: {
-      suported: function() {
-        axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
+  methods: {
+    suported: function () {
+      axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
         .then(response => {
           response.data.forEach(element => {
-          if(this.brands.indexOf(element.brand) == -1){
-
-            // temp hack
-            if(element.name.includes(element.brand)){
-              element.name = element.name.replace(element.brand+' ','');
+            if (this.brands.indexOf(element.brand) == -1) {
+              this.brands.push(element.brand)
             }
-
-            this.brands.push(element.brand)
-          }
             this.devices.push(element)
 
-
-        });
-         $(document).keypress(function(e) {
-              if(e.which == 13) {
-                if($(".search-link").select()[0] != undefined){
-                  this.fail = false
-                  app.LoadBuilds($(".search-link").select().attr("data-device"));
-                }
+          });
+          $(document).keypress(function (e) {
+            if (e.which == 13) {
+              if ($(".search-link").select()[0] != undefined) {
+                this.fail = false
+                app.LoadBuilds($(".search-link").select().attr("data-device"));
               }
+            }
           });
 
         }).catch(e => {
           this.failed("Failed to load devices... try again in some minutes")
         })
-      },
-      failed: function(msg=""){
+    },
+    failed: function (msg = "") {
 
 
-        this.fail = true;
-        $(document).ready(function() {
-          if(msg!=""){
-            if(msg == "Error: Request failed with status code 404"){
-              msg = "Error: This device isn't supported :(";
-            }else if(msg == "Error: Network Error"){
-              msg = "Error: Failed to load devices... check your connection...";
-            }
-            $(".warn").text(msg)
+      this.fail = true;
+      $(document).ready(function () {
+        if (msg != "") {
+          if (msg == "Error: Request failed with status code 404") {
+            msg = "Error: This device isn't supported :(";
           }
+          $(".warn").text(msg)
+        }
         $(".fail").show()
-        });
+      });
 
-      },
-      LoadDevice: function(codename){
-        axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
+    },
+    LoadDevice: function (codename) {
+      axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
         .then(response => {
           response.data.forEach(device => {
-            if(device['codename'] == codename){
-                this.fail = false
-                this.device = device;
-                this.codename = codename
+            if (device['codename'] == codename) {
+              this.fail = false
+              this.device = device;
+              this.codename = codename
             }
-        })
-      }).catch(e => {
+          })
+        }).catch(e => {
           this.failed(e)
         })
-      },
-      LoadBuilds: function(codename) {
-        this.LoadDevice(codename)
-        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/'+codename+'.json')
+    },
+    LoadBuilds: function (codename) {
+      this.LoadDevice(codename)
+      axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/' + codename + '.json')
         .then(response => {
           const res = response.data.response;
 
@@ -140,24 +131,24 @@ $(document).ready(function () {
             console.log(res[i])
           }
 
-          history.pushState(null, '', '?device='+codename);
+          history.pushState(null, '', '?device=' + codename);
           $(".wrapper").hide();
           $("input").blur();
         }).catch(e => {
           this.failed(e);
-      })
-      },
-      LoadModal: function(build,codename, url) {
-        axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/changelog/'+codename+'/'+build.replace("zip","txt"))
+        })
+    },
+    LoadModal: function (build, codename, url) {
+      axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/changelog/' + codename + '/' + build.replace("zip", "txt"))
         .then(response => {
           $('#modal-container').text(response.data);
         }).catch(e => {
           $('#modal-container').text("Nothing here :)");
         })
-          $('#modal-title').text("Changelog for "+build);
-          $('.download').attr("href",url)
-          $('.modal').modal();
-          $('.modal').modal('open');
-      },
-    }
-  })
+      $('#modal-title').text("Changelog for " + build);
+      $('.download').attr("href", url)
+      $('.modal').modal();
+      $('.modal').modal('open');
+    },
+  }
+})

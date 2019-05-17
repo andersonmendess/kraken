@@ -118,6 +118,10 @@ a:hover{
   color: var(--accent) !important;
 }
 
+span:hover{
+  color: var(--accent) !important;
+}
+
 table a {
   color: var(--accent) !important;
 }
