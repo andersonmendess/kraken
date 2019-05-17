@@ -1,6 +1,6 @@
 :root {
-  --background: #121212;
-  --card: #272727;
+  --background: #111111;
+  --card: #131313;
   --accent: #A97CF0;
   --text: white ;
 }
@@ -21,6 +21,10 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    max-width: 800px;
+  }
+
+  .limiter {
     max-width: 800px;
   }
   
@@ -66,8 +70,6 @@ body {
 
 .card-action a {
   color: var(--accent) !important;
-  background-color: var(--background) !important;
-
 }
 .card {
   margin: 0px;
@@ -87,12 +89,16 @@ body {
 }
 
 #slide-out, a {
-  background-color: var(--background) !important;
+  background-color: var(--card) !important;
   color: var(--text) !important;
 }
 
 .black-text {
   color: var(--text) !important;
+}
+
+.cardColor {
+  background-color: var(--card) !important;
 }
 
 a{
@@ -102,22 +108,18 @@ pre{
   word-break:break-all;
   overflow:hidden;
   white-space:pre-line;
-  font-size: 14px;
-  font-family: "Product Sans";
+  font-size: 13px;
 }
 .sidenav-trigger,.sidenav-trigger:hover  {
   background-color: var(--accent) !important;
 }
+
 a:hover{
-  background-color: var(--background) !important;
   color: var(--accent) !important;
 }
-.card a:hover{
-  background: var(--card) !important;
-}
+
 table a {
   color: var(--accent) !important;
-  background-color: var(--background) !important;
 }
 #homelogo {
   fill: var(--accent);
@@ -125,9 +127,7 @@ table a {
 .error {
   fill: var(--accent);
 }
-li a {
-  background-color: var(--background) !important;
-}
+
 #sublogo {
   fill: var(--accent);
 }
@@ -174,6 +174,11 @@ i {
   color: var(--accent) !important;
   margin-right: 7px !important;
 }
+
+.bar-logo {
+  margin-top: 20px;
+}
+
 .bar-logo:hover {
   background-color: transparent !important;
 }
@@ -266,11 +271,12 @@ input:focus {
   font-size: 24px !important;
   margin-left: 10px !important;
   margin-right: 0px !important;
+  margin-bottom: 4px !important;
   vertical-align: middle;
 }
 .square {
   border: 1px solid var(--accent);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .desc {
   font-size: 19px;
@@ -286,4 +292,43 @@ input:focus {
 
 tr th {
   font-weight: 100
+}
+
+.searchbar {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  margin-bottom: 15px;
+  padding: 1px;
+}
+
+.builds h6 {
+  line-height: 10px;
+}
+
+.deviceprop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 7px;
+}
+
+.deviceprop h6 {
+  font-weight: 100;
+}
+
+.modal-content, .modal {
+  overflow: hidden;
+}
+
+.changelog {
+  height: 300px;
+  overflow: auto;
+  padding: 7px;
+  background-color: var(--card);
+
+}
+
+.collapsible-body {
+  background-color: var(--card) !important;
+  transition: none;
 }

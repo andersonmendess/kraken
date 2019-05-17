@@ -26,12 +26,18 @@ function setBg(obj) {
 
 function handlerBg(hex){
 	if(hex == "#FFF"){
+		// white
 		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","#ddd")
+		document.getElementsByTagName("body")[0].style.setProperty("--card","white")
 		document.getElementsByTagName("body")[0].style.setProperty("--text","black")
+	}else if(hex == '#000'){
+		// black
+		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
+		document.getElementsByTagName("body")[0].style.setProperty("--card","#060606")
+		document.getElementsByTagName("body")[0].style.setProperty("--text","white")
 	}else{
 		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","var(--accent)")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","var(--accent)")
+		document.getElementsByTagName("body")[0].style.setProperty("--card","#131313")
+		document.getElementsByTagName("body")[0].style.setProperty("--text","#FFF")
 	}
 }

@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="static/css/styles.css">
-  <meta name="msapplication-TileColor" content="#1565C0">
-  <meta name="theme-color" content="#1565C0">
+  <meta name="msapplication-TileColor" content="#A97CF0">
+  <meta name="theme-color" content="#A97CF0">
   <link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/49829986?s=20&v=4"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -29,26 +29,26 @@
               <div>
                   <a class="bar-logo center" href="/">
                     <img src="https://avatars0.githubusercontent.com/u/49829986?s=100&v=4">
-                    <h4 class="accent">KrakenProject</h4>
+                    <h4 class="accent product-sans">KrakenProject</h4>
                   </a>
 
-                  <div class="line"></div>
+                  <div class="square searchbar">
                       <div class="search-wrapper">
                         <i class="material-icons is-s">search</i>
-                     <input style="width: 80%" type="text" v-model="search" placeholder="Search... "/>
+                     <input style="width: 80%" class="product-sans" type="text" v-model="search" placeholder="Type your device... "/>
                     </div>
+                  </div>
                     <div v-if="search != ''" class="wrapper">
                         <a v-for="devi in filteredList" class="search-link" v-on:click='LoadBuilds(devi.codename)' v-bind:data-device='devi.codename'>{{ devi.name }} ({{devi.codename}})</a>
                     </div>
-                  <div class="line" style="padding-bottom: 10px;"></div>
                   <ul class="collapsible collapsible-accordion">
                     <template v-for="brand in brands">
                     <li>
-                    <a class="collapsible-header product-sans black-text">{{ brand }}<i class="material-icons right">arrow_drop_down</i></a>
+                    <a class="collapsible-header product-sans black-text cardColor"><i class="material-icons">phone_android</i>{{ brand }}<i class="material-icons right">arrow_drop_down</i></a>
                       <div class="collapsible-body">
                         <ul>
                           <template v-for="dev in devices" v-if="brand == dev.brand">
-                          <li class=""><a v-on:click="LoadBuilds(dev.codename)" class="pointer product-sans black-text"><i class="material-icons">phone_android</i>
+                          <li class=""><a v-on:click="LoadBuilds(dev.codename)" class="pointer product-sans black-text devilist">
                               {{dev.name}} ({{dev.codename}})</a></li>
                           </template>
                         </ul>
@@ -69,7 +69,7 @@
             <span class="product-sans accent">BACKGROUND</span>
             <ul>
             <li data-hex="#000" style="background-color: black" onclick="setBg(this)"class='ball'></li>
-            <li data-hex="#121212" style="background-color: #121212" onclick="setBg(this)"class='ball'></li>
+            <li data-hex="#111111" style="background-color: #111111" onclick="setBg(this)"class='ball'></li>
             <li data-hex="#FFF" style="border: 1px solid black; background-color: white" onclick="setBg(this)"class='ball'></li>
             </ul>
             <div style="clear: both"></div>
@@ -140,16 +140,29 @@
 <!-- DEVICE INFO CARD -->
 <div class="product-sans" v-if="codename && !fail">
   <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h3>
-    <div class="row center">
-      <div class="col s12 m12 center">
-        <div class="square builds">
-            <h6>Device: {{device.name}}</h6>
-            <h6>Brand: {{device.brand}}</h6>
-            <h6>Maintainer: {{device.maintainer_name}}</h6>
-            <h6>Version: Pie</h6>
+    <div class="row limiter">
+      <div class="col s12 m12">
+        <div class="square builds cardColor">
+
+          <div class="deviceprop">
+            <i class="material-icons">phone_android</i><h6> {{device.name}}</h6>
+          </div>
+
+           <div class="deviceprop">
+              <i class="material-icons">domain</i><h6>{{device.brand}}</h6>
+           </div>
+
+            <div class="deviceprop">
+                <i class="material-icons">person_outline</i><h6> {{device.maintainer_name}}</h6>
+            </div>
+
+            <div class="deviceprop">
+                <i class="material-icons">device_unknown</i><h6> {{device.codename}}</h6>
+            </div>
+
           <div v-if="device.xda_thread" class="card-action">
-            <a v-bind:href="device.maintainer_url">XDA Profile</a>
-            <a v-bind:href="device.xda_thread">XDA Thread</a>
+            <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect waves-teal btn-flat">XDA Profile</a>
+            <a v-bind:href="device.xda_thread" target="_blank" class="waves-effect waves-teal btn-flat">XDA Thread</a>
           </div>
         </div>
       </div>
@@ -159,7 +172,7 @@
   <!-- TABLE OF BUILDS -->
   <div class="row center">
       <div class="col s12 m12 center">
-        <div class="square builds">
+        <div class="square builds cardColor">
           <table>
             <thead>
               <tr>
@@ -186,14 +199,16 @@
   <!-- Modal Structure -->
   <div class="modal square">
     <div class="modal-content">
-      <h5 id="modal-title"></h5>
+      <h6 id="modal-title"></h6>
       <div class="line"></div>
-      <pre id="modal-container"></pre>
+      <div class="changelog">
+          <pre id="modal-container"></pre>
+      </div>
       <div class="line"></div>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-      <a class="modal-close waves-effect waves-green btn-flat download">Download</a>
+      <a onclick="M.toast({html: 'Download Started'})" class="modal-close waves-effect waves-green btn-flat download">Download</a>
     </div>
   </div>
 

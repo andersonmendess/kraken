@@ -68,9 +68,17 @@ $(document).ready(function () {
         .then(response => {
           response.data.forEach(element => {
           if(this.brands.indexOf(element.brand) == -1){
+            
+            // temp hack
+            if(element.name.includes(element.brand)){
+              element.name = element.name.replace(element.brand+' ','');
+            }
+
             this.brands.push(element.brand)
           }
             this.devices.push(element)
+            
+
         });
          $(document).keypress(function(e) {
               if(e.which == 13) {
