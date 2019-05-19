@@ -87,17 +87,12 @@ var app = new Vue({
         })
     },
     failed: function (msg = "") {
-
-
       this.fail = true;
       $(document).ready(function () {
         if (msg != "") {
-          if (msg == "Error: Request failed with status code 404") {
-            msg = "Error: This device isn't supported :(";
-          }
-          $(".warn").text(msg)
+          $("#warn").text(msg)
         }
-        $(".fail").show()
+        $("#warn-box").show()
       });
 
     },
@@ -111,31 +106,40 @@ var app = new Vue({
               this.codename = codename
             }
           })
+
+          if(this.codename != codename){
+            this.failed("This device is not supported!")
+          }
+
         }).catch(e => {
           this.failed(e)
         })
     },
     LoadBuilds: function (codename) {
+
       this.LoadDevice(codename)
+      this.deviceBuilds = [];
+      this.fail = false
+      $("#warn").text('')
+
+      history.pushState(null, '', '?device=' + codename);
+
+      $('.sidenav').sidenav();
+
       axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/' + codename + '.json')
         .then(response => {
           const res = response.data.response;
-
-          $('.sidenav').sidenav();
-          this.deviceBuilds = [];
 
           for (var i = res.length - 1; i >= 0; i--) {
             res[i].newSize = bytesToSize(res[i].size);
             res[i].newTime = convertTimestamp(res[i].datetime);
             this.deviceBuilds.push(res[i])
-            console.log(res[i])
           }
 
-          history.pushState(null, '', '?device=' + codename);
           $(".wrapper").hide();
           $("input").blur();
         }).catch(e => {
-          this.failed(e);
+          //this.failed(e);
         })
     },
     LoadModal: function (build, codename, url) {

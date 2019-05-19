@@ -115,9 +115,9 @@
 
 
   <!-- FAIL -->
-  <div v-if="fail" class="fail center" style="display: none;">
+  <div v-if="fail" class="fail center" id="warn-box" style="display: none;">
 
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="70%" viewBox="0 0 9810 9800"
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="50%" viewBox="0 0 9810 9800"
       preserveAspectRatio="xMidYMid meet">
       <g id="layer101" class="error" stroke="none">
         <path
@@ -131,9 +131,7 @@
       </g>
 
     </svg>
-    <div class="warn desc square product-sans accent" style="margin-top: 20px !important">
-      error msg
-    </div>
+    <div id="warn" v-if="fail" class="warn desc square product-sans accent" style="margin-top: 20px !important"></div>
   </div>
 
 
@@ -151,10 +149,9 @@
   <!-- END WELCOME -->
 
 
-
   <!-- DEVICE INFO CARD -->
   <div class="product-sans" v-if="codename && !fail">
-    <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h3>
+    <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h5>
       <div class="row limiter">
         <div class="col s12 m12">
           <div class="square builds cardColor">

@@ -325,7 +325,7 @@ tr th {
 }
 
 .changelog {
-  height: 300px;
+  min-height: 290px;
   overflow: auto;
   padding: 7px;
   background-color: var(--card);
