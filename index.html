@@ -56,7 +56,7 @@
             <div class="collapsible-body">
               <ul>
                 <template v-for="dev in devices" v-if="brand == dev.brand">
-                  <li class=""><a v-on:click="LoadBuilds(dev.codename)"
+                  <li><a v-on:click="LoadBuilds(dev.codename)"
                       class="pointer product-sans black-text devilist">
                       {{dev.name}} ({{dev.codename}})</a></li>
                 </template>

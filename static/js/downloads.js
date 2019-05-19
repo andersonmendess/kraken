@@ -125,7 +125,10 @@ var app = new Vue({
       history.pushState(null, '', '?device=' + codename);
 
       $('.sidenav').sidenav();
+      $(".wrapper").hide();
+      $("input").blur();
 
+      this.search = ''
       axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/' + codename + '.json')
         .then(response => {
           const res = response.data.response;
@@ -136,8 +139,6 @@ var app = new Vue({
             this.deviceBuilds.push(res[i])
           }
 
-          $(".wrapper").hide();
-          $("input").blur();
         }).catch(e => {
           //this.failed(e);
         })
