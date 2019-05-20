@@ -10,7 +10,6 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-color: var(--background);
-    margin-bottom: 20px;
   }
   
   main {
@@ -79,9 +78,6 @@ body {
   color: var(--accent);
 }
 
-.welcome {
-  padding-bottom: 20px;
-}
 
 .line {
   border-top: 1px solid var(--accent);
@@ -125,7 +121,7 @@ span:hover{
 table a {
   color: var(--accent) !important;
 }
-#homelogo {
+.homelogo {
   fill: var(--accent);
 }
 .error {
@@ -335,4 +331,39 @@ tr th {
 .collapsible-body {
   background-color: var(--card) !important;
   transition: none;
+}
+
+.home-bottom-info {
+  margin-top: 13%;
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.home-bottom-info div {
+  margin: auto;
+}
+
+.home-bottom-info-content {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.home-bottom-info-content a {
+  background-color: transparent !important;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.credits {
+  font-size: 13px;
+  font-family: "Product Sans";
+  color: var(--text);
+  margin-top: 2px;
+}
+.credits a {
+  background-color: transparent !important;
+  color: var(--accent) !important;
 }
