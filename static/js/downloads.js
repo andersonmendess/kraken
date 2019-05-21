@@ -1,4 +1,9 @@
-//materialize stuff
+// Global setup
+const baseURL = "https://raw.githubusercontent.com/KrakenProject/official_devices/master/";
+const devicesURL = baseURL + "devices.json";
+const deviceURL = codename => `${baseURL}builds/${codename}.json`;
+const changelogURL = (build, codename) => `${baseURL}changelog/${codename}/${build.replace('zip','txt')}`;
+
 $(document).ready(function () {
 
   app.suported();
@@ -68,7 +73,7 @@ var app = new Vue({
   },
   methods: {
     suported: function () {
-      request(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
+      request(devicesURL)
         .then(response => {
           response.forEach(element => {
             if (this.brands.indexOf(element.brand) == -1) {
@@ -101,7 +106,7 @@ var app = new Vue({
 
     },
     LoadDevice: function (codename) {
-      request(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
+      request(devicesURL)
         .then(response => {
           response.forEach(device => {
             if (device['codename'] == codename) {
@@ -133,7 +138,7 @@ var app = new Vue({
       $("input").blur();
 
       this.search = ''
-      request('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/' + codename + '.json')
+      request(deviceURL(codename))
         .then(response => {
           const res = response.response;
 
@@ -148,7 +153,7 @@ var app = new Vue({
         })
     },
     LoadModal: function (build, codename, url) {
-      request('https://raw.githubusercontent.com/KrakenProject/official_devices/master/changelog/' + codename + '/' + build.replace("zip", "txt"), false)
+      request(changelogURL(build, codename), false)
         .then(response => {
           $('#modal-container').text(response);
         }).catch(e => {
