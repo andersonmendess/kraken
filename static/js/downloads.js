@@ -27,7 +27,7 @@ const request = (url, isJson = true) => {
   return fetch(url).then( (res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
 }
 
-function bytesToSize(bytes) {
+const bytesToSize = (bytes) => {
   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
   if (bytes == 0) return '0 Byte';
   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
@@ -35,7 +35,7 @@ function bytesToSize(bytes) {
 };
 
 
-function convertTimestamp(timestamp) {
+const convertTimestamp = (timestamp) => {
   let d = new Date(timestamp * 1000)
   let mm = ('0' + (d.getUTCMonth() + 1)).slice(-2)
   let dd = ('0' + d.getUTCDate()).slice(-2)
@@ -55,19 +55,11 @@ var app = new Vue({
   },
   computed: {
     filteredList() {
-      return this.devices.filter(devi => {
-        var s_code = devi.codename.toLowerCase().includes(this.search.toLowerCase())
-        var s_brand = devi.brand.toLowerCase().includes(this.search.toLowerCase())
-        var s_name = devi.name.toLowerCase().includes(this.search.toLowerCase())
+      return this.devices.filter(d => {
+        var resByCodename = d.codename.toLowerCase().includes(this.search.toLowerCase())
+        var resByName = d.name.toLowerCase().includes(this.search.toLowerCase())
 
-        if (s_code) {
-          return s_code
-        } else if (s_name) {
-          return s_name
-        } else if (s_brand) {
-          return s_brand
-        }
-
+        return !!resByName ? resByName : resByCodename
       })
     }
   },
@@ -92,39 +84,35 @@ var app = new Vue({
           });
 
         }).catch(e => {
-          this.failed("Failed to load devices... try again in some minutes")
+          this.failed("Failed to load devices... try again later")
         })
     },
-    failed: function (msg = "") {
+    failed: function (msg) {
       this.fail = true;
       $(document).ready(function () {
-        if (msg != "") {
-          $("#warn").text(msg)
-        }
+
+        !!msg ? $("#warn").text(msg) : ''
+
         $("#warn-box").show()
       });
 
     },
     LoadDevice: function (codename) {
       request(devicesURL)
-        .then(response => {
-          response.forEach(device => {
-            if (device['codename'] == codename) {
-              this.fail = false
-              this.device = device;
-              this.codename = codename
-            }
-          })
+        .then(res => {
 
-          if(this.codename != codename){
-            this.failed("This device is not supported!")
-          }
+          device = res.filter((device) => device.codename == codename)[0]
+
+          if (!device) throw new Error("Device not found 404");
+
+          this.device = device
+          this.codename = device.codename
 
         }).catch(e => {
           this.failed(e)
         })
     },
-    LoadBuilds: function (codename) {
+    LoadBuilds: function(codename) {
 
       this.LoadDevice(codename)
       this.deviceBuilds = [];
@@ -138,27 +126,19 @@ var app = new Vue({
       $("input").blur();
 
       this.search = ''
-      request(deviceURL(codename))
-        .then(response => {
-          const res = response.response;
 
-          for (var i = res.length - 1; i >= 0; i--) {
-            res[i].newSize = bytesToSize(res[i].size);
-            res[i].newTime = convertTimestamp(res[i].datetime);
-            this.deviceBuilds.push(res[i])
-          }
-
-        }).catch(e => {
-          //this.failed(e);
-        })
+      request(deviceURL(codename)).then(res => this.deviceBuilds = res.response.reverse())
     },
-    LoadModal: function (build, codename, url) {
-      request(changelogURL(build, codename), false)
-        .then(response => {
-          $('#modal-container').text(response);
-        }).catch(e => {
-          $('#modal-container').text("Nothing here :)");
-        })
+    LoadModal: async function (build, codename, url){
+      
+      let changelog = ""
+
+      await request(changelogURL(build, codename), false).then(res => changelog = res)
+
+      changelog.includes("404") ? changelog = "Changelog Not Available D:" : null
+
+      $('#modal-container').text(changelog);
+
       $('#modal-title').text("Changelog for " + build);
       $('.download').attr("href", url)
       $('.modal').modal();
