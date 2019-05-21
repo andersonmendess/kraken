@@ -242,8 +242,8 @@
                   <tr>
                     <td><a v-on:click="LoadModal(Build.filename, device.codename, Build.url)">{{Build.filename}}</a>
                     </td>
-                    <td><span>{{Build.newTime}}</span></td>
-                    <td><span>{{Build.newSize}}</span></td>
+                    <td><span>{{Build.datetime}}</span></td>
+                    <td><span>{{Build.size}}</span></td>
                   </tr>
                 </template>
               </tbody>
@@ -264,8 +264,8 @@
           <div class="line"></div>
         </div>
         <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-          <a target="_blank" onclick="M.toast({html: 'Download Started'})"
+          <a class="modal-close waves-effect waves-green btn-flat">Close</a>
+          <a id="download" target="_blank" onclick="M.toast({html: 'Download Started'})"
             class="modal-close waves-effect waves-green btn-flat">Download</a>
         </div>
       </div>

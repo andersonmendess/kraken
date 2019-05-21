@@ -127,7 +127,12 @@ var app = new Vue({
 
       this.search = ''
 
-      request(deviceURL(codename)).then(res => this.deviceBuilds = res.response.reverse())
+      request(deviceURL(codename))
+      .then(res => this.deviceBuilds = res.response.map((build) => {
+        build.size = bytesToSize(build.size);
+        build.datetime = convertTimestamp(build.datetime);
+        return build
+      }).reverse())
     },
     LoadModal: async function (build, codename, url){
       
@@ -140,7 +145,7 @@ var app = new Vue({
       $('#modal-container').text(changelog);
 
       $('#modal-title').text("Changelog for " + build);
-      $('.download').attr("href", url)
+      $('#download').attr("href", url)
       $('.modal').modal();
       $('.modal').modal('open');
     },
