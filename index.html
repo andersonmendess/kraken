@@ -24,28 +24,29 @@
   </script>
 </head>
 
+<body>
 <!-- NAVBAR -->
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
       <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large left"><i
-          class="material-icons left white-text">menu</i></a>
-      <a class="sidenav-trigger show-on-large right"><i class="settings material-icons white-text">color_lens</i></a>
+          class="material-icons left">menu</i></a>
+      <a class="sidenav-trigger show-on-large right"><i class="settings material-icons">color_lens</i></a>
     </div>
   </nav>
 </div>
-<div id="app" class="black-text">
+<div id="app">
   <ul id="slide-out" class="sidenav">
     <div>
       <a class="bar-logo center" href="/">
         <img src="https://avatars0.githubusercontent.com/u/49829986?s=100&v=4">
-        <h4 class="accent product-sans">KrakenProject</h4>
+        <h4 class="accent">KrakenProject</h4>
       </a>
 
       <div class="square searchbar">
         <div class="search-wrapper">
           <i class="material-icons is-s">search</i>
-          <input style="width: 80%" class="product-sans" type="text" v-model="search"
+          <input style="width: 80%" type="text" v-model="search"
             placeholder="Type your device... " />
         </div>
       </div>
@@ -56,9 +57,9 @@
       <ul class="collapsible collapsible-accordion">
         <template v-for="brand in brands">
           <li>
-            <div class="collapsible-header white-text product-sans">
+            <div class="collapsible-header">
               <i class="material-icons">phone_android</i>
-              <span style="width: 90%" class="white-text">{{ brand }}</span>
+              <span style="width: 90%">{{ brand }}</span>
               <i class="material-icons">arrow_drop_down</i>
             </div>
 
@@ -66,7 +67,7 @@
               <ul>
                 <template v-for="dev in devices" v-if="brand == dev.brand">
                   <li><a v-on:click="LoadBuilds(dev.codename)"
-                      class="pointer product-sans black-text devilist">
+                      class="pointer devilist">
                       {{dev.name}} ({{dev.codename}})</a></li>
                 </template>
               </ul>
@@ -80,42 +81,42 @@
 
   <!-- SETTINGS BUTTON -->
   <a class="accent"><i id="settings" class="settings material-icons pointer">color_lens</i></a>
-  <div class="menu" style="display: none">
-    <h6 class="product-sans accent">COLOR ENGINE</h6>
+  <div class="menu " style="display: none">
+    <h6 class="accent">COLOR ENGINE</h6>
     <div class="line" style="margin-bottom: 12px;"></div>
     <div>
-      <span class="product-sans accent">BACKGROUND</span>
+      <span class="accent">BACKGROUND</span>
       <ul>
-        <li data-hex="#000" style="background-color: black" onclick="setBg(this)" class='ball'></li>
-        <li data-hex="#212121" style="background-color: #212121" onclick="setBg(this)" class='ball'></li>
-        <li data-hex="#FFF" style="border: 1px solid black; background-color: white" onclick="setBg(this)" class='ball'>
+        <li data-hex="#000" style="border: 1px solid #212121;background-color: black" onclick="setBg(this)" class='colorview'></li>
+        <li data-hex="#212121" style="background-color: #212121" onclick="setBg(this)" class='colorview'></li>
+        <li data-hex="#FFF" style="border: 1px solid black; background-color: white" onclick="setBg(this)" class='colorview'>
         </li>
       </ul>
       <div style="clear: both"></div>
     </div>
     <div>
-      <span class="product-sans accent">COLOR</span>
+      <span class="accent">COLOR</span>
       <ul>
-        <li data-hex="#8F54EA" style="background-color: #8F54EA" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#F34235" style="background-color: #F34235" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#E81E62" style="background-color: #E81E62" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#9B26AF" style="background-color: #9B26AF" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#3E50B4" style="background-color: #3E50B4" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#02A8F3" style="background-color: #02A8F3" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#009587" style="background-color: #009587" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#8F54EA" style="background-color: #8F54EA" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#F34235" style="background-color: #F34235" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#E81E62" style="background-color: #E81E62" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#9B26AF" style="background-color: #9B26AF" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#3E50B4" style="background-color: #3E50B4" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#02A8F3" style="background-color: #02A8F3" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#009587" style="background-color: #009587" onclick="setColor(this)" class='colorview'></li>
 
-        <li data-hex="#4BAE4F" style="background-color: #4BAE4F" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#CCDB39" style="background-color: #CCDB39" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#FEC007" style="background-color: #FEC007" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#FE9700" style="background-color: #FE9700" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#FE5621" style="background-color: #FE5621" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#4BAE4F" style="background-color: #4BAE4F" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#CCDB39" style="background-color: #CCDB39" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#FEC007" style="background-color: #FEC007" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#FE9700" style="background-color: #FE9700" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#FE5621" style="background-color: #FE5621" onclick="setColor(this)" class='colorview'></li>
 
-        <li data-hex="#76FF03" style="background-color: #76FF03" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#6200EA" style="background-color: #6200EA" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#0091EA" style="background-color: #0091EA" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#D50000" style="background-color: #D50000" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#21EF8B" style="background-color: #21EF8B" onclick="setColor(this)" class='ball'></li>
-        <li data-hex="#EF4581" style="background-color: #EF4581" onclick="setColor(this)" class='ball'></li>
+        <li data-hex="#76FF03" style="background-color: #76FF03" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#6200EA" style="background-color: #6200EA" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#0091EA" style="background-color: #0091EA" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#D50000" style="background-color: #D50000" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#21EF8B" style="background-color: #21EF8B" onclick="setColor(this)" class='colorview'></li>
+        <li data-hex="#EF4581" style="background-color: #EF4581" onclick="setColor(this)" class='colorview'></li>
 
       </ul>
     </div>
@@ -128,7 +129,7 @@
 
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="50%" viewBox="0 0 9810 9800"
       preserveAspectRatio="xMidYMid meet">
-      <g id="layer101" class="error" stroke="none">
+      <g class="svg" stroke="none">
         <path
           d="M4630 9794 c-1239 -72 -2389 -595 -3243 -1474 -664 -683 -1106 -1514 -1292 -2429 -66 -324 -85 -512 -92 -886 -7 -417 9 -640 73 -995 338 -1876 1777 -3406 3634 -3864 413 -102 733 -140 1185 -140 326 -1 442 7 715 45 1234 174 2353 820 3148 1818 189 237 382 541 526 830 287 571 453 1170 506 1821 14 161 14 599 0 760 -51 630 -206 1203 -474 1755 -256 527 -576 971 -993 1376 -805 781 -1795 1243 -2923 1364 -139 15 -631 27 -770 19z m750 -668 c995 -119 1874 -550 2565 -1257 203 -208 348 -385 493 -601 634 -948 860 -2092 636 -3216 -210 -1053 -817 -1986 -1706 -2622 -323 -231 -727 -437 -1108 -565 -305 -103 -641 -173 -990 -206 -185 -18 -593 -15 -785 5 -354 38 -653 104 -978 215 -969 332 -1813 1039 -2324 1946 -578 1028 -697 2286 -323 3415 346 1042 1102 1926 2085 2436 465 241 1018 406 1525 453 63 6 133 13 155 15 99 10 628 -3 755 -18z" />
         <path
@@ -138,46 +139,45 @@
         <path
           d="M6453 4449 c-170 -28 -325 -142 -408 -300 -128 -243 -66 -541 150 -716 105 -85 216 -123 360 -123 169 0 296 51 410 165 116 116 170 250 168 420 -4 351 -325 613 -680 554z" />
       </g>
-
     </svg>
-    <div id="warn" v-if="fail" class="warn desc square product-sans accent" style="margin-top: 20px !important"></div>
+    <div id="warn" v-if="fail" class="warn desc square accent" style="margin-top: 20px !important"></div>
   </div>
-
+  <!-- END FAIL -->
 
   <!-- WELCOME -->
   <div v-if="!codename && !fail" class='home center'>
 
-    <h3 class="accent product-sans welcome">Kraken Open Tentacles Project</h3>
+    <h3 class="accent welcome">Kraken Open Tentacles Project</h3>
 
     <img src="https://avatars0.githubusercontent.com/u/49829986?s=500&v=4">
 
-    <div id="home-desc">
-      <div class="desc square product-sans accent">AOSP/CAF based ROM</div>
+    <div class="home-desc">
+      <div class="desc square accent">LineageOS based ROM</div>
     </div>
 
     <div class="home-bottom-info">
       <div class="home-bottom-info-content">
         <a href="http://github.com/krakenproject" target="_blank">
-          <div title="Github Sources" class='icon'>
-            <svg width="32" height="32" ><path class="homelogo" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <div title="Github Sources">
+            <svg width="32" height="32" ><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           </div>
         </a>
 
         <a href="https://t.me/KrakenProject" target="_blank">
-          <div title="Telegram Group" class='icon'>
-              <svg width="32" height="32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;" ><path class="homelogo" d="M12,0c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12Zm0,2c5.514,0 10,4.486 10,10c0,5.514 -4.486,10 -10,10c-5.514,0 -10,-4.486 -10,-10c0,-5.514 4.486,-10 10,-10Zm2.692,14.889c0.161,0.115 0.368,0.143 0.553,0.073c0.185,-0.07 0.322,-0.228 0.362,-0.42c0.435,-2.042 1.489,-7.211 1.884,-9.068c0.03,-0.14 -0.019,-0.285 -0.129,-0.379c-0.11,-0.093 -0.263,-0.12 -0.399,-0.07c-2.096,0.776 -8.553,3.198 -11.192,4.175c-0.168,0.062 -0.277,0.223 -0.271,0.4c0.006,0.177 0.125,0.33 0.296,0.381c1.184,0.354 2.738,0.847 2.738,0.847c0,0 0.725,2.193 1.104,3.308c0.047,0.139 0.157,0.25 0.301,0.287c0.145,0.038 0.298,-0.001 0.406,-0.103c0.608,-0.574 1.548,-1.461 1.548,-1.461c0,0 1.786,1.309 2.799,2.03Zm-5.505,-4.338l0.84,2.769l0.186,-1.754c0,0 3.243,-2.925 5.092,-4.593c0.055,-0.048 0.062,-0.13 0.017,-0.188c-0.045,-0.057 -0.126,-0.071 -0.188,-0.032c-2.143,1.368 -5.947,3.798 -5.947,3.798Z"/></svg>
+          <div title="Telegram Group">
+              <svg width="32" height="32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;" ><path d="M12,0c-6.627,0 -12,5.373 -12,12c0,6.627 5.373,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.627 -5.373,-12 -12,-12Zm0,2c5.514,0 10,4.486 10,10c0,5.514 -4.486,10 -10,10c-5.514,0 -10,-4.486 -10,-10c0,-5.514 4.486,-10 10,-10Zm2.692,14.889c0.161,0.115 0.368,0.143 0.553,0.073c0.185,-0.07 0.322,-0.228 0.362,-0.42c0.435,-2.042 1.489,-7.211 1.884,-9.068c0.03,-0.14 -0.019,-0.285 -0.129,-0.379c-0.11,-0.093 -0.263,-0.12 -0.399,-0.07c-2.096,0.776 -8.553,3.198 -11.192,4.175c-0.168,0.062 -0.277,0.223 -0.271,0.4c0.006,0.177 0.125,0.33 0.296,0.381c1.184,0.354 2.738,0.847 2.738,0.847c0,0 0.725,2.193 1.104,3.308c0.047,0.139 0.157,0.25 0.301,0.287c0.145,0.038 0.298,-0.001 0.406,-0.103c0.608,-0.574 1.548,-1.461 1.548,-1.461c0,0 1.786,1.309 2.799,2.03Zm-5.505,-4.338l0.84,2.769l0.186,-1.754c0,0 3.243,-2.925 5.092,-4.593c0.055,-0.048 0.062,-0.13 0.017,-0.188c-0.045,-0.057 -0.126,-0.071 -0.188,-0.032c-2.143,1.368 -5.947,3.798 -5.947,3.798Z"/></svg>
           </div>
         </a>
 
         <a href="https://t.me/KrakenNews" target="_blank">
-          <div title="Telegram Channel" class='icon'>
-              <svg width="32" height="32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path class="homelogo" d="M12,0c-6.626,0 -12,5.372 -12,12c0,6.627 5.374,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.628 -5.373,-12 -12,-12Zm3.224,17.871c0.188,0.133 0.43,0.166 0.646,0.085c0.215,-0.082 0.374,-0.267 0.422,-0.491c0.507,-2.382 1.737,-8.412 2.198,-10.578c0.035,-0.164 -0.023,-0.334 -0.151,-0.443c-0.129,-0.109 -0.307,-0.14 -0.465,-0.082c-2.446,0.906 -9.979,3.732 -13.058,4.871c-0.195,0.073 -0.322,0.26 -0.316,0.467c0.007,0.206 0.146,0.385 0.346,0.445c1.381,0.413 3.193,0.988 3.193,0.988c0,0 0.847,2.558 1.288,3.858c0.056,0.164 0.184,0.292 0.352,0.336c0.169,0.044 0.348,-0.002 0.474,-0.121c0.709,-0.669 1.805,-1.704 1.805,-1.704c0,0 2.084,1.527 3.266,2.369Zm-6.423,-5.062l0.98,3.231l0.218,-2.046c0,0 3.783,-3.413 5.941,-5.358c0.063,-0.057 0.071,-0.153 0.019,-0.22c-0.052,-0.067 -0.148,-0.083 -0.219,-0.037c-2.5,1.596 -6.939,4.43 -6.939,4.43Z"/></svg>
+          <div title="Telegram Channel" >
+              <svg width="32" height="32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path d="M12,0c-6.626,0 -12,5.372 -12,12c0,6.627 5.374,12 12,12c6.627,0 12,-5.373 12,-12c0,-6.628 -5.373,-12 -12,-12Zm3.224,17.871c0.188,0.133 0.43,0.166 0.646,0.085c0.215,-0.082 0.374,-0.267 0.422,-0.491c0.507,-2.382 1.737,-8.412 2.198,-10.578c0.035,-0.164 -0.023,-0.334 -0.151,-0.443c-0.129,-0.109 -0.307,-0.14 -0.465,-0.082c-2.446,0.906 -9.979,3.732 -13.058,4.871c-0.195,0.073 -0.322,0.26 -0.316,0.467c0.007,0.206 0.146,0.385 0.346,0.445c1.381,0.413 3.193,0.988 3.193,0.988c0,0 0.847,2.558 1.288,3.858c0.056,0.164 0.184,0.292 0.352,0.336c0.169,0.044 0.348,-0.002 0.474,-0.121c0.709,-0.669 1.805,-1.704 1.805,-1.704c0,0 2.084,1.527 3.266,2.369Zm-6.423,-5.062l0.98,3.231l0.218,-2.046c0,0 3.783,-3.413 5.941,-5.358c0.063,-0.057 0.071,-0.153 0.019,-0.22c-0.052,-0.067 -0.148,-0.083 -0.219,-0.037c-2.5,1.596 -6.939,4.43 -6.939,4.43Z"/></svg>
           </div>
         </a>
 
         <a href="https://forms.gle/AKinLpdy8VELaefE6" target="_blank">
-          <div title="Be a maintainer!" class='icon'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path class="homelogo" d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 10.199l-3.64 1.801 3.64 1.796v2.204l-6-2.935v-2.131l6-2.934v2.199zm8 2.866l-6 2.935v-2.204l3.64-1.796-3.64-1.801v-2.199l6 2.935v2.13z"/></svg>
+          <div title="Be a maintainer!">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 10.199l-3.64 1.801 3.64 1.796v2.204l-6-2.935v-2.131l6-2.934v2.199zm8 2.866l-6 2.935v-2.204l3.64-1.796-3.64-1.801v-2.199l6 2.935v2.13z"/></svg>
           </div>
         </a>
       </div>
@@ -189,8 +189,8 @@
 
 
   <!-- DEVICE INFO CARD -->
-  <div class="product-sans" v-if="codename && !fail">
-    <h5 class="center device-name">{{device.brand}} {{device.name}} ({{device.codename}})</h5>
+  <div v-if="codename && !fail">
+    <h5 class="center upper-bold accent">{{device.brand}} {{device.name}} ({{device.codename}})</h5>
       <div class="row limiter">
         <div class="col s12 m12">
           <div class="square builds cardColor">
@@ -253,7 +253,7 @@
       </div>
       <!-- END TABLE OF BUILDS -->
 
-      <!-- Modal Structure -->
+      <!-- MODAL STRUCTURE -->
       <div class="modal square">
         <div class="modal-content">
           <h6 id="modal-title"></h6>
@@ -266,23 +266,18 @@
         <div class="modal-footer">
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
           <a target="_blank" onclick="M.toast({html: 'Download Started'})"
-            class="modal-close waves-effect waves-green btn-flat download">Download</a>
+            class="modal-close waves-effect waves-green btn-flat">Download</a>
         </div>
       </div>
-
-
+      <!-- END MODAL STRUCTURE -->
   </div>
-  </main>
 </div>
-<footer>
+
+</body>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="static/js/downloads.js"></script>
-
-</footer>
-
 </html>

@@ -5,15 +5,27 @@
   --text: white ;
 }
 
+h1, h2, h3, h4, h5, h6, span, th, pre {
+  color: var(--text);
+}
+
+*, input {
+  font-family: "Product Sans"
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.line {
+  border-top: 1px solid var(--accent);
+}
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     background-color: var(--background);
-  }
-  
-  main {
-    flex: 1 0 auto;
   }
   
   .center {
@@ -51,45 +63,25 @@ body {
     background: var(--accent); 
 }
 
-.product-sans {
-  font-family: "Product Sans";
-}
 .pointer {
   cursor: pointer;
 }
 
 .sidenav li>a>i, .sidenav li>a>i.material-icons {
     margin:0 0 0 0;
-
-}
-
-#app {
-  padding-bottom: 10px !important;
 }
 
 .card-action a {
   color: var(--accent) !important;
 }
+
 .card {
   margin: 0px;
   background-color: var(--background) !important;
 }
-.accent {
-  color: var(--accent);
-}
-
-
-.line {
-  border-top: 1px solid var(--accent);
-
-}
 
 #slide-out, a {
   background-color: var(--card) !important;
-  color: var(--text) !important;
-}
-
-.black-text {
   color: var(--text) !important;
 }
 
@@ -100,12 +92,14 @@ body {
 a{
   cursor: pointer;
 }
+
 pre{
   word-break:break-all;
   overflow:hidden;
   white-space:pre-line;
   font-size: 13px;
 }
+
 .sidenav-trigger,.sidenav-trigger:hover  {
   background-color: var(--accent) !important;
 }
@@ -121,25 +115,18 @@ span:hover{
 table a {
   color: var(--accent) !important;
 }
-.homelogo {
-  fill: var(--accent);
-}
-.error {
+
+.svg, svg path {
   fill: var(--accent);
 }
 
-#sublogo {
-  fill: var(--accent);
-}
-#sublogo-svg {
-  margin: 12.5%;
-}
 #settings {
   position: fixed;
   right: 0;
   top:10px;
   padding: 3px;
 }
+
 .nav-wrapper{
   background-color: var(--accent);
 }
@@ -147,12 +134,12 @@ table a {
 .menu {
   height: 280px;
   width: 220px;
-  background-color: var(--background);
+  background-color: var(--card);
   position: fixed;
   right: 0px;
   top: 45px;
   margin: 15px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   padding: 4px;
   text-align: center;
   z-index: 10;
@@ -164,7 +151,7 @@ table a {
   margin: 2.5px;
 }
 
-.ball {
+.colorview {
   width: 30px;
   height: 30px;
   border-radius: 2px;
@@ -182,15 +169,14 @@ i {
 .bar-logo:hover {
   background-color: transparent !important;
 }
-.device-name {
-  color: var(--accent);
+.upper-bold {
   text-transform: uppercase;
   font-weight: bold;
 }
-#home-desc{
+.home-desc{
   margin-top: 30px;
 }
-#home-desc .card{
+.home-desc .card{
   width: 100%;
   min-height: 80px;
   padding:15px;
@@ -241,6 +227,10 @@ i {
     }
 }
 
+nav .sidenav-trigger i {
+  color: var(--background) !important;
+}
+
 .search-link {
   font-family: "Product Sans";
   background-color: transparent !important;
@@ -258,15 +248,17 @@ input {
   padding-left: 5px !important;
   border-bottom: none !important;
   color: var(--accent) !important;
-
 }
+
 input::placeholder {
   color: var(--accent) !important;
 }
+
 input:focus {
   border-bottom: none !important;
   box-shadow: none !important;
 }
+
 .is-s {
   font-size: 24px !important;
   margin-left: 10px !important;
@@ -274,6 +266,7 @@ input:focus {
   margin-bottom: 4px !important;
   vertical-align: middle;
 }
+
 .square {
   border: 1px solid var(--accent);
   border-radius: 3px;
@@ -283,9 +276,11 @@ input:focus {
   padding: 10px;
   margin: 5px;
 }
+
 .builds {
   padding: 15px;
 }
+
 .fail {
   padding: 20px;
 }

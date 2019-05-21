@@ -18,6 +18,10 @@ $(document).ready(function () {
 
 });
 
+const request = (url, isJson = true) => {
+  return fetch(url).then( (res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
+}
+
 function bytesToSize(bytes) {
   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
   if (bytes == 0) return '0 Byte';
@@ -64,9 +68,9 @@ var app = new Vue({
   },
   methods: {
     suported: function () {
-      axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
+      request(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
         .then(response => {
-          response.data.forEach(element => {
+          response.forEach(element => {
             if (this.brands.indexOf(element.brand) == -1) {
               this.brands.push(element.brand)
             }
@@ -97,9 +101,9 @@ var app = new Vue({
 
     },
     LoadDevice: function (codename) {
-      axios.get(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
+      request(`https://raw.githubusercontent.com/KrakenProject/official_devices/master/devices.json`)
         .then(response => {
-          response.data.forEach(device => {
+          response.forEach(device => {
             if (device['codename'] == codename) {
               this.fail = false
               this.device = device;
@@ -129,9 +133,9 @@ var app = new Vue({
       $("input").blur();
 
       this.search = ''
-      axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/' + codename + '.json')
+      request('https://raw.githubusercontent.com/KrakenProject/official_devices/master/builds/' + codename + '.json')
         .then(response => {
-          const res = response.data.response;
+          const res = response.response;
 
           for (var i = res.length - 1; i >= 0; i--) {
             res[i].newSize = bytesToSize(res[i].size);
@@ -144,9 +148,9 @@ var app = new Vue({
         })
     },
     LoadModal: function (build, codename, url) {
-      axios.get('https://raw.githubusercontent.com/KrakenProject/official_devices/master/changelog/' + codename + '/' + build.replace("zip", "txt"))
+      request('https://raw.githubusercontent.com/KrakenProject/official_devices/master/changelog/' + codename + '/' + build.replace("zip", "txt"), false)
         .then(response => {
-          $('#modal-container').text(response.data);
+          $('#modal-container').text(response);
         }).catch(e => {
           $('#modal-container').text("Nothing here :)");
         })
