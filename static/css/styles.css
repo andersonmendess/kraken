@@ -228,7 +228,7 @@ i {
 }
 
 nav .sidenav-trigger i {
-  color: var(--background) !important;
+  color: white !important;
 }
 
 .search-link {
@@ -361,4 +361,12 @@ tr th {
 .credits a {
   background-color: transparent !important;
   color: var(--accent) !important;
+}
+
+a, span {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  user-select: none;
 }
