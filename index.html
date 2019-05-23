@@ -193,7 +193,7 @@
     <h5 class="center upper-bold accent">{{device.brand}} {{device.name}} ({{device.codename}})</h5>
       <div class="row limiter">
         <div class="col s12 m12">
-          <div class="square builds cardColor">
+          <div class="builds cardColor z-depth-1">
 
             <div class="deviceprop">
                 <i class="material-icons">domain</i>
@@ -215,7 +215,7 @@
               <h6> {{device.maintainer_name}}</h6>
             </div>
 
-            <div v-if="device.xda_thread" class="card-action">
+            <div v-if="device.xda_thread" class="card-action xda-buttons">
               <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect waves-teal btn-flat">XDA
                 Profile</a>
               <a v-bind:href="device.xda_thread" target="_blank" class="waves-effect waves-teal btn-flat">XDA Thread</a>
@@ -227,49 +227,49 @@
 
       <!-- TABLE OF BUILDS -->
       <div class="row center">
-        <div class="col s12 m12 center">
-          <div class="square builds cardColor">
-            <table>
-              <thead>
-                <tr>
-                  <th>Build</th>
-                  <th>Date</th>
-                  <th>Size</th>
-                </tr>
-              </thead>
-              <tbody>
-                <template v-for="Build in deviceBuilds">
-                  <tr>
-                    <td><a v-on:click="LoadModal(Build.filename, device.codename, Build.url)">{{Build.filename}}</a>
-                    </td>
-                    <td><span>{{Build.datetime}}</span></td>
-                    <td><span>{{Build.size}}</span></td>
-                  </tr>
-                </template>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!-- END TABLE OF BUILDS -->
+          <div class="col s12 m12 center builds">
+  
+              <ul class="collapsible collapsible-builds">
+  
+                  <template v-for="Build in deviceBuilds">
+                      <li >
+                        <div class="collapsible-header white-text product-sans cardColor">
+                          <i class="material-icons">system_update</i>
+                          <span style="width: 100%">{{ Build.filename }}</span>
+                          <i class="material-icons">arrow_drop_down</i>
+                        </div>
+            
+                        <div class="collapsible-body">
 
-      <!-- MODAL STRUCTURE -->
-      <div class="modal square">
-        <div class="modal-content">
-          <h6 id="modal-title"></h6>
-          <div class="line"></div>
-          <div class="changelog">
-            <pre id="modal-container"></pre>
+                            <p class="label" >details</p>
+                            <div class="buildinfo">
+                                <div class="deviceprop"> <p>Filename: {{Build.filename}}</p></div>
+                                <div class="deviceprop"><p>Date: {{Build.datetime}}</p></div>
+                                <div class="deviceprop"><p>Size: {{Build.size}}</p></div>
+                                <div class="deviceprop"><p>MD5: {{Build.id}}</p></div>
+                                <div class="deviceprop"><p>Version: {{Build.version}}</p></div>
+                            </div>
+                            
+                            <div class='buildChangelog'>
+                              <p class="label">Changelog</p>
+                                <pre>{{Build.changelog}}</pre>
+                            </div>
+
+                            <div class="buildbuttons">
+                                <a v-bind:href="Build.url" download target="_blank" class="waves-effect waves-teal btn-flat">Download</a>
+                            </div>
+
+                        </div>
+  
+                      </li>
+                    </template>
+  
+                </ul>
+  
           </div>
-          <div class="line"></div>
         </div>
-        <div class="modal-footer">
-          <a class="modal-close waves-effect waves-green btn-flat">Close</a>
-          <a id="download" target="_blank" onclick="M.toast({html: 'Download Started'})"
-            class="modal-close waves-effect waves-green btn-flat">Download</a>
-        </div>
-      </div>
-      <!-- END MODAL STRUCTURE -->
+        <!-- END TABLE OF BUILDS -->
+
   </div>
 </div>
 

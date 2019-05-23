@@ -34,10 +34,10 @@ function handlerBg(hex){
 		// black
 		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
 		document.getElementsByTagName("body")[0].style.setProperty("--card","#060606")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","white")
+		document.getElementsByTagName("body")[0].style.setProperty("--text","#f7f7f7")
 	}else{
 		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
 		document.getElementsByTagName("body")[0].style.setProperty("--card","#1C1C1C")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","#FFF")
+		document.getElementsByTagName("body")[0].style.setProperty("--text","#f7f7f7")
 	}
 }

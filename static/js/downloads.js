@@ -42,6 +42,7 @@ const convertTimestamp = (timestamp) => {
   return `${d.getFullYear()}/${mm}/${dd}`;
 };
 
+
 var app = new Vue({
   el: '#app',
   data: {
@@ -112,7 +113,7 @@ var app = new Vue({
           this.failed(e)
         })
     },
-    LoadBuilds: function(codename) {
+    LoadBuilds: async function(codename) {
 
       this.LoadDevice(codename)
       this.deviceBuilds = [];
@@ -127,27 +128,24 @@ var app = new Vue({
 
       this.search = ''
 
-      request(deviceURL(codename))
+      await request(deviceURL(codename))
       .then(res => this.deviceBuilds = res.response.map((build) => {
         build.size = bytesToSize(build.size);
         build.datetime = convertTimestamp(build.datetime);
+        build.changelog = ""
         return build
       }).reverse())
-    },
-    LoadModal: async function (build, codename, url){
-      
-      let changelog = ""
 
-      await request(changelogURL(build, codename), false).then(res => changelog = res)
+      this.deviceBuilds.map((build) => {
+        console.log(build)
+        request(changelogURL(build.filename, codename), false).then(
+          (res) => build.changelog = res.includes("404") ? "Changelog data not found" : res
+        )
+      })
 
-      changelog.includes("404") ? changelog = "Changelog Not Available D:" : null
+      $(".collapsible-builds li").addClass("active")[0]
+      $('.collapsible-builds').collapsible();
 
-      $('#modal-container').text(changelog);
-
-      $('#modal-title').text("Changelog for " + build);
-      $('#download').attr("href", url)
-      $('.modal').modal();
-      $('.modal').modal('open');
     },
   }
 })

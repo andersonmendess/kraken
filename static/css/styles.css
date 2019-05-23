@@ -2,7 +2,7 @@
   --background: #212121;
   --card: #1C1C1C;
   --accent: #A97CF0;
-  --text: white ;
+  --text: #f7f7f7 ;
 }
 
 h1, h2, h3, h4, h5, h6, span, th, pre {
@@ -187,16 +187,6 @@ i {
   color: var(--accent) !important;
   background-color: transparent !important;
 }
-#modal-title {
-  padding-bottom: 10px;
-  color: var(--accent);
-}
-.modal, .modal-footer{
-  background-color: var(--background) !important;
-}
-.modal-content {
-  padding-bottom: 0px !important;
-}
 
 @media only screen and (min-width: 1000px) {
     #slide-out {
@@ -311,18 +301,6 @@ tr th {
   font-weight: 100;
 }
 
-.modal-content, .modal {
-  overflow: hidden;
-}
-
-.changelog {
-  min-height: 290px;
-  overflow: auto;
-  padding: 7px;
-  background-color: var(--card);
-
-}
-
 .collapsible-body {
   background-color: var(--card) !important;
   transition: none;
@@ -369,4 +347,67 @@ a, span {
   -moz-user-select: -moz-none;
   -o-user-select: none;
   user-select: none;
+}
+
+.collapsible li div {
+  background-color: var(--card);
+  color: var(--text);
+}
+
+.collapsible-header, .collapsible, .collapsible-body {
+  border: none;
+}
+
+.collapsible-body {
+  border: 1px solid var(--background);
+  border-radius: 2px;
+  margin: 0px;
+  padding: 0px;
+  text-align: start;
+  padding-top: 8px;
+}
+
+.collapsible-body .deviceprop, .collapsible-body p {
+  margin: 1px;
+  margin-top: 3px;
+  display: block;
+}
+
+.collapsible-builds li {
+  margin-top: 5px;
+}
+
+.buildChangelog pre {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: var(--background);
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.buildChangelog {
+  padding: 5px;
+  padding-top: 0px;
+}
+
+.label {
+  padding: 0px;
+  color: var(--accent);
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.buildinfo {
+ padding: 10px;
+}
+
+.buildbuttons {
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.xda-buttons {
+  padding-top: 5px;
 }
