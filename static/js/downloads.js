@@ -13,28 +13,6 @@ const downloadsCountURL = (build, codename) =>
   `https://sourceforge.net/projects/krakenproject/files/${codename}/${build}/stats/json?start_date=2019-04-04&end_date=${getToday()}`;
 
 
-document.addEventListener('DOMContentLoaded', function () {
-
-
-  app.suported();
-
-  var url = new URL(window.location.href);
-  var device = url.searchParams.get("device");
-
-  if (device) {
-    app.LoadBuilds(device);
-  }
-
-  // init collapsible
-  let elems = document.querySelector('.collapsible');
-  M.Collapsible.init(elems);
-
-  // init sidenav
-  let sidenav = document.querySelectorAll('.sidenav');
-  M.Sidenav.init(sidenav);
-
-});
-
 const toogleMenu = () => {
   var menu = document.getElementsByClassName("menu")[0];
   menu.style.display = menu.style.display == 'none' ? 'block' : 'none'
@@ -69,6 +47,26 @@ var app = new Vue({
     codename: '',
     search: '',
   },
+  mounted(){
+
+    this.suported();
+
+    var url = new URL(window.location.href);
+    var device = url.searchParams.get("device");
+  
+    if (device) {
+      this.LoadBuilds(device);
+    }
+  
+    // init collapsible
+    let elems = document.querySelector('.collapsible');
+    M.Collapsible.init(elems);
+  
+    // init sidenav
+    let sidenav = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenav);
+
+  },
   computed: {
     filteredList() {
       return this.devices.filter(d => {
@@ -91,13 +89,13 @@ var app = new Vue({
 
           });
 
-          document.addEventListener ('keypress', (event) => {
-            if(event.keyCode == 13) {
-              if(document.querySelector('.search-link') != null){
+          document.addEventListener('keypress', (event) => {
+            if (event.keyCode == 13) {
+              if (document.querySelector('.search-link') != null) {
                 app.LoadBuilds(document.querySelector('.search-link').attributes['data-device'].value)
               }
             }
-            
+
           });
 
         })
@@ -108,7 +106,7 @@ var app = new Vue({
 
           device = res.filter((device) => device.codename == codename)[0]
 
-          if (device){
+          if (device) {
             this.device = device
             this.codename = device.codename
           }
@@ -122,12 +120,15 @@ var app = new Vue({
 
       history.pushState(null, '', '?device=' + codename);
 
-      if(this.search != ''){
+      if (this.search != '') {
         document.querySelectorAll('.wrapper')[0].style.display = 'none'
         document.querySelectorAll('input')[0].blur()
-  
         this.search = ''
       }
+
+      // init sidenav again
+      let sidenav = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(sidenav);
 
       await request(deviceURL(codename))
         .then(res => this.deviceBuilds = res.response.map((build) => {
@@ -137,11 +138,6 @@ var app = new Vue({
           build.downloads = 0
           return build
         }).reverse())
-
-      // init sidenav again
-      let sidenav = document.querySelectorAll('.sidenav');
-      M.Sidenav.init(sidenav);
-    
 
       this.deviceBuilds.map((build) => {
         request(changelogURL(build.filename, codename), false).then(
@@ -156,8 +152,8 @@ var app = new Vue({
     },
   },
   updated() {
-    if(this.codename) {
-      let elems = document.querySelector('.collapsible-builds');  
+    if (this.codename) {
+      let elems = document.querySelector('.collapsible-builds');
       let instances = M.Collapsible.init(elems);
       instances.open(0);
     }
