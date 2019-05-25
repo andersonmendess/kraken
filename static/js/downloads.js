@@ -13,7 +13,8 @@ const downloadsCountURL = (build, codename) =>
   `https://sourceforge.net/projects/krakenproject/files/${codename}/${build}/stats/json?start_date=2019-04-04&end_date=${getToday()}`;
 
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
+
 
   app.suported();
 
@@ -24,14 +25,20 @@ $(document).ready(function () {
     app.LoadBuilds(device);
   }
 
-  $('.sidenav').sidenav();
-  $('.collapsible').collapsible();
-  $(".settings").click(function () {
-    $(".menu").toggle();
-  });
+  // init collapsible
+  let elems = document.querySelector('.collapsible');
+  M.Collapsible.init(elems);
+
+  // init sidenav
+  let sidenav = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(sidenav);
 
 });
 
+const toogleMenu = () => {
+  var menu = document.getElementsByClassName("menu")[0];
+  menu.style.display = menu.style.display == 'none' ? 'block' : 'none'
+}
 
 const request = (url, isJson = true) => {
   return fetch(url).then((res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
@@ -61,7 +68,6 @@ var app = new Vue({
     device: [],
     codename: '',
     search: '',
-    fail: false,
   },
   computed: {
     filteredList() {
@@ -84,28 +90,17 @@ var app = new Vue({
             this.devices.push(element)
 
           });
-          $(document).keypress(function (e) {
-            if (e.which == 13) {
-              if ($(".search-link").select()[0] != undefined) {
-                this.fail = false
-                app.LoadBuilds($(".search-link").select().attr("data-device"));
+
+          document.addEventListener ('keypress', (event) => {
+            if(event.keyCode == 13) {
+              if(document.querySelector('.search-link') != null){
+                app.LoadBuilds(document.querySelector('.search-link').attributes['data-device'].value)
               }
             }
+            
           });
 
-        }).catch(e => {
-          this.failed("Failed to load devices... try again later")
         })
-    },
-    failed: function (msg) {
-      this.fail = true;
-      $(document).ready(function () {
-
-        !!msg ? $("#warn").text(msg) : ''
-
-        $("#warn-box").show()
-      });
-
     },
     LoadDevice: function (codename) {
       request(devicesURL)
@@ -113,29 +108,26 @@ var app = new Vue({
 
           device = res.filter((device) => device.codename == codename)[0]
 
-          if (!device) throw new Error("Device not found 404");
+          if (device){
+            this.device = device
+            this.codename = device.codename
+          }
 
-          this.device = device
-          this.codename = device.codename
-
-        }).catch(e => {
-          this.failed(e)
         })
     },
     LoadBuilds: async function (codename) {
 
       this.LoadDevice(codename)
       this.deviceBuilds = [];
-      this.fail = false
-      $("#warn").text('')
 
       history.pushState(null, '', '?device=' + codename);
 
-      $('.sidenav').sidenav();
-      $(".wrapper").hide();
-      $("input").blur();
-
-      this.search = ''
+      if(this.search != ''){
+        document.querySelectorAll('.wrapper')[0].style.display = 'none'
+        document.querySelectorAll('input')[0].blur()
+  
+        this.search = ''
+      }
 
       await request(deviceURL(codename))
         .then(res => this.deviceBuilds = res.response.map((build) => {
@@ -146,9 +138,10 @@ var app = new Vue({
           return build
         }).reverse())
 
-      let elems = document.querySelector('.collapsible-builds');
-      let instances = M.Collapsible.init(elems);
-      instances.open(0);
+      // init sidenav again
+      let sidenav = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(sidenav);
+    
 
       this.deviceBuilds.map((build) => {
         request(changelogURL(build.filename, codename), false).then(
@@ -156,9 +149,17 @@ var app = new Vue({
         )
 
         request(downloadsCountURL(build.filename, codename)).then(
-          d => build.downloads = d.total
+          (d) => build.downloads = d.total
         )
       })
+
     },
+  },
+  updated() {
+    if(this.codename) {
+      let elems = document.querySelector('.collapsible-builds');  
+      let instances = M.Collapsible.init(elems);
+      instances.open(0);
+    }
   }
 })
