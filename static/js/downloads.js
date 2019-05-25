@@ -137,15 +137,14 @@ var app = new Vue({
       }).reverse())
 
       this.deviceBuilds.map((build) => {
-        console.log(build)
         request(changelogURL(build.filename, codename), false).then(
           (res) => build.changelog = res.includes("404") ? "Changelog data not found" : res
         )
       })
 
-      $(".collapsible-builds li").addClass("active")[0]
-      $('.collapsible-builds').collapsible();
-
+      let elems = document.querySelector('.collapsible-builds');
+      let instances = M.Collapsible.init(elems);
+      instances.open(0);
     },
   }
 })
