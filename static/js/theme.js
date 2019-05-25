@@ -39,8 +39,9 @@ const handlerBg = hex => {
 }
 
 const setupMetaColor = color => {
-	$("meta[name='theme-color']").attr("content", color);
-	$("meta[name='msapplication-TileColor']").attr("content", color);
+	document.querySelector("meta[name='theme-color']").content = color;
+	document.querySelector("meta[name='msapplication-TileColor']").content = color;
+
 }
 
 const setCssVar = (name, value) => {
