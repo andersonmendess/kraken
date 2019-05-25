@@ -146,6 +146,10 @@ var app = new Vue({
           return build
         }).reverse())
 
+      let elems = document.querySelector('.collapsible-builds');
+      let instances = M.Collapsible.init(elems);
+      instances.open(0);
+
       this.deviceBuilds.map((build) => {
         request(changelogURL(build.filename, codename), false).then(
           (res) => build.changelog = res.includes("404") ? "Changelog data not found" : res
@@ -155,10 +159,6 @@ var app = new Vue({
           d => build.downloads = d.total
         )
       })
-
-      let elems = document.querySelector('.collapsible-builds');
-      let instances = M.Collapsible.init(elems);
-      instances.open(0);
     },
   }
 })
