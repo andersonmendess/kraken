@@ -2,7 +2,16 @@
 const baseURL = "https://raw.githubusercontent.com/KrakenProject/official_devices/master/";
 const devicesURL = baseURL + "devices.json";
 const deviceURL = codename => `${baseURL}builds/${codename}.json`;
-const changelogURL = (build, codename) => `${baseURL}changelog/${codename}/${build.replace('zip','txt')}`;
+const changelogURL = (build, codename) => `${baseURL}changelog/${codename}/${build.replace('zip', 'txt')}`;
+
+const getToday = () => {
+  let d = new Date();
+  return `${d.getFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`
+}
+
+const downloadsCountURL = (build, codename) =>
+  `https://sourceforge.net/projects/krakenproject/files/${codename}/${build}/stats/json?start_date=2019-04-04&end_date=${getToday()}`;
+
 
 $(document).ready(function () {
 
@@ -23,19 +32,19 @@ $(document).ready(function () {
 
 });
 
+
 const request = (url, isJson = true) => {
-  return fetch(url).then( (res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
+  return fetch(url).then((res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
 }
 
-const bytesToSize = (bytes) => {
+const humanSize = (bytes) => {
   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
   if (bytes == 0) return '0 Byte';
   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 };
 
-
-const convertTimestamp = (timestamp) => {
+const humanDate = (timestamp) => {
   let d = new Date(timestamp * 1000)
   let mm = ('0' + (d.getUTCMonth() + 1)).slice(-2)
   let dd = ('0' + d.getUTCDate()).slice(-2)
@@ -113,7 +122,7 @@ var app = new Vue({
           this.failed(e)
         })
     },
-    LoadBuilds: async function(codename) {
+    LoadBuilds: async function (codename) {
 
       this.LoadDevice(codename)
       this.deviceBuilds = [];
@@ -129,16 +138,21 @@ var app = new Vue({
       this.search = ''
 
       await request(deviceURL(codename))
-      .then(res => this.deviceBuilds = res.response.map((build) => {
-        build.size = bytesToSize(build.size);
-        build.datetime = convertTimestamp(build.datetime);
-        build.changelog = ""
-        return build
-      }).reverse())
+        .then(res => this.deviceBuilds = res.response.map((build) => {
+          build.size = humanSize(build.size);
+          build.datetime = humanDate(build.datetime);
+          build.changelog = ""
+          build.downloads = 0
+          return build
+        }).reverse())
 
       this.deviceBuilds.map((build) => {
         request(changelogURL(build.filename, codename), false).then(
           (res) => build.changelog = res.includes("404") ? "Changelog data not found" : res
+        )
+
+        request(downloadsCountURL(build.filename, codename)).then(
+          d => build.downloads = d.total
         )
       })
 
