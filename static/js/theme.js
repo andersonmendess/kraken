@@ -1,43 +1,57 @@
-window.onload = function() {
-	if(localStorage.getItem('accent') != null){
-		var color = localStorage.getItem('accent')
-		handlerBg(localStorage.getItem('bg'))
-		document.getElementsByTagName("body")[0].style.setProperty("--accent",color)
-		$("meta[name='theme-color']").attr("content", color);
-		$("meta[name='msapplication-TileColor']").attr("content", color);
-	}
+window.onload = function () {
+
+	!!localStorage.getItem('accent') ? setCssVar('--accent', localStorage.getItem('accent')) : null
+
+	!!localStorage.getItem('bg') ? handlerBg(localStorage.getItem('bg')) : null
+
 };
 
-function setColor(obj) {
-   var color = $(obj).attr("data-hex");
-   localStorage.setItem('accent',color)
-   document.getElementsByTagName("body")[0].style.setProperty("--accent",color)
-	$("meta[name='theme-color']").attr("content", color);
-	$("meta[name='msapplication-TileColor']").attr("content", color);
-
- }
-
-function setBg(obj) {
-	var color = $(obj).attr("data-hex");
-	localStorage.setItem('bg',color)
-	handlerBg(color);
-
+const colors = {
+	"#ffffff": ['white', 'black'], // card, text for white
+	"#000000": ['#090909', '#f7f7f7'], // card, text for black
+	"default": ['#1C1C1C', '#f7f7f7', '#a97cf0', '#212121'] // card, text, accent, bg for default
 }
 
-function handlerBg(hex){
-	if(hex == "#FFF"){
-		// white
-		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","white")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","black")
-	}else if(hex == '#000'){
-		// black
-		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","#060606")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","#f7f7f7")
-	}else{
-		document.getElementsByTagName("body")[0].style.setProperty("--background",hex)
-		document.getElementsByTagName("body")[0].style.setProperty("--card","#1C1C1C")
-		document.getElementsByTagName("body")[0].style.setProperty("--text","#f7f7f7")
-	}
+
+const setAccent = obj => {
+	var color = rbg2Hex(obj.style.backgroundColor);
+	color === colors['default'][2] ?
+		localStorage.removeItem('accent') :
+		localStorage.setItem('accent', color)
+	setCssVar("--accent", color)
+}
+
+const setBg = obj => {
+	var color = rbg2Hex(obj.style.backgroundColor);
+	color === colors['default'][3] ?
+		localStorage.removeItem('bg') :
+		localStorage.setItem('bg', color)
+	handlerBg(color);
+}
+
+const handlerBg = hex => {
+
+	color = !!colors[hex] ? colors[hex] : colors['default'];
+
+	setCssVar("--background", hex);
+	setCssVar("--card", color[0]);
+	setCssVar("--text", color[1]);
+}
+
+const setupMetaColor = color => {
+	$("meta[name='theme-color']").attr("content", color);
+	$("meta[name='msapplication-TileColor']").attr("content", color);
+}
+
+const setCssVar = (name, value) => {
+	name == '--accent' ? setupMetaColor(value) : null;
+	document.getElementsByTagName("body")[0].style.setProperty(name, value)
+}
+
+const rbg2Hex = rgb => {
+	rgb = rgb.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+	return (rgb && rgb.length === 4) ? "#" +
+		("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+		("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+		("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : rgb;
 }
