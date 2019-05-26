@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import Devices from '../../devices/search';
 import Supported from '../../devices/supportedList';
+import Logo from '../../others/logo'
+
 
 export default class NavBar extends Component{
     render(){
@@ -16,6 +18,10 @@ export default class NavBar extends Component{
                 </nav>
             </div>
             <ul id="slide-out" className="sidenav">
+                <a href="/" className="bar-logo center">
+                    <Logo /> 
+                    <h4 className="accent">KrakenProject</h4>
+                </a>
                 <Devices />
                 <Supported />
             </ul>
