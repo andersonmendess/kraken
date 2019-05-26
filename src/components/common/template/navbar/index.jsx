@@ -15,9 +15,9 @@ export default class NavBar extends Component{
                     </div>
                 </nav>
             </div>
-            <ul id="slide-out" class="sidenav">
+            <ul id="slide-out" className="sidenav">
                 <Devices />
-                <Supported/>
+                <Supported />
             </ul>
           </>
         )

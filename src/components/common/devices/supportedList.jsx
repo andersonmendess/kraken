@@ -35,6 +35,7 @@ export default class Supported extends Component {
                             header={<span style={{width: '90%'}}>{brand.name}</span>} 
                             icon="phone_android"
                             className="collapsible-header"
+                            style={{display: 'block'}}
                             >
                             {brand.devices.map(device => (
                                 <a key={device.codeName} href={`/devices/${device.codeName}`} className="pointer devilist">
