@@ -3,31 +3,37 @@ import Builds from '../../components/common/build/buildList'
 import DeviceCard from '../../components/common/devices/deviceCard'
 import DeviceProp from '../../components/common/devices/deviceProp'
 
+import {get as api} from '../../app/service/deviceService'
+
 export class Device extends Component{
     state = {
-        device: {
-            "name": "GM 5 Plus",
-            "brand": "General Mobile",
-            "codename": "shamrock",
-            "maintainer_name": "tunasahinn",
-            "maintainer_url": "https://github.com/tunasahinn",
-            xda_thread: "https://forum.xda-developers.com/",
-            builds: [
-                {
-                    "datetime": "1558884090",
-                    "filename": "Kraken_dumpling-Pie-20190526-1311-OFFICIAL.zip",
-                    "id": "f30b28690c1bc14d7120701fa67712ca",
-                    "romtype": "OFFICIAL",
-                    "size": "919023042",
-                    url: "https://master.dl.sourceforge.net/project/krakenproject/dumpling/Kraken_dumpling-Pie-20190526-1311-OFFICIAL.zip",
-                    "version": "Pie",
-                    "changelog": "Initial Build"
-                }
-            ]
+        device: {},
+        builds: []
+    }
+
+    componentDidMount(){
+        let {codename} = this.props.match.params
+        if(!codename){
+             this.props.history.push('/')
+        }
+        this.get(codename)
+        console.log(this)
+    }
+
+    
+
+    get = async (codename) => {
+        try{
+            let response = await api(codename)
+            let {device, builds} = response
+            this.setState({device, builds})
+        }catch(exception){
+            console.log(exception)
         }
     }
+
     render(){
-        let { device } = this.state
+        let { device, builds } = this.state
         return (
             <>
                 <DeviceCard brand={device.brand} name={device.name} codename={device.codename}>
@@ -45,7 +51,7 @@ export class Device extends Component{
                         </div>
                         )}
                 </DeviceCard>
-                <Builds builds={device.builds}  />
+                <Builds builds={builds}  />
             </>
         )
     }

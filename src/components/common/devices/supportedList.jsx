@@ -1,25 +1,26 @@
 import React, { Component } from 'react'
+import {Link } from 'react-router-dom'
 import {Collapsible, CollapsibleItem} from 'react-materialize/'
+import {get as api} from '../../../app/service/deviceService'
 
 export default class Supported extends Component {
     
     state = {
-        brands: [
-            { name: 'Xiaomi',
-              devices: [
-                { name: 'Redmi Note 4/4X',codeName: 'mido' },
-                { name: 'Redmi Note 5/Pro',codeName: 'whyded' }
-                ]
-            },
-            { name: 'Samsung',
-              devices: [{ name: 'Galaxy J5 2015 LTE', codeName: 'j5lte' }]
-            },
-            { name: 'General Mobile',
-              devices: [{ name: 'GM 5 Plus', codeName: 'shamrock' }]
-            }
-        ]
+        brands: []
     }
 
+    componentDidMount(){
+        this.get()
+    }
+
+    get = async ()  => {
+        try{
+            let brands = await api()
+            this.setState({brands})
+        }catch(exception){
+            console.log(exception)
+        }
+    }
 
     render() {
 
@@ -29,6 +30,7 @@ export default class Supported extends Component {
             <>
                 <Collapsible className="collapsible collapsible-accordion">
                     {brands.map(brand => {
+                        console.log(brand)
                         return (
                         <CollapsibleItem 
                             key={brand.name} 
@@ -38,9 +40,9 @@ export default class Supported extends Component {
                             style={{display: 'block'}}
                             >
                             {brand.devices.map(device => (
-                                <a key={device.codeName} href={`/devices/${device.codeName}`} className="pointer devilist">
-                                            {`${device.name} (${device.codeName})`}
-                                </a>)
+                                <Link key={device.codename} to={`/devices/${device.codename}`} className="pointer devilist">
+                                            {`${device.name} (${device.codename})`}
+                                </Link>)
                             )}
                         </CollapsibleItem>)
                     })}

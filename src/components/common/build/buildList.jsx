@@ -11,7 +11,6 @@ export default props => {
         <div className="row center">
           <div className="col s12 m12 center builds">
             {builds.map(build => {
-                console.log(build)
                 return (
                     <Collapsible key={build.id}>
                         <CollapsibleItem 
