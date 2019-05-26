@@ -46,6 +46,7 @@ var app = new Vue({
     device: [],
     codename: '',
     search: '',
+    title: 'KrakenProject'
   },
   mounted(){
 
