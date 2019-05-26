@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Devices from '../../devices/search';
+import Supported from '../../devices/supportedList';
 
 export default class NavBar extends Component{
     render(){
@@ -16,6 +17,7 @@ export default class NavBar extends Component{
             </div>
             <ul id="slide-out" class="sidenav">
                 <Devices />
+                <Supported/>
             </ul>
           </>
         )

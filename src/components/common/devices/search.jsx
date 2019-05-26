@@ -9,8 +9,8 @@ export default class Devices extends Component {
     }
     listDevicesSearch = (devices) => (
         devices.map(device => {
-            return  <Link to={`/devices/${device.codeName}`} >
-                        {`${device.codeName} - ${device.name} `}
+            return  <Link to={`/devices/${device.codename}`} >
+                        {`${device.codename} - ${device.name} `}
                     </Link>
         })
     )
@@ -29,33 +29,6 @@ export default class Devices extends Component {
             <div className="wrapper">
                 {(search) && this.listDevicesSearch(search)}
             </div>
-            <ul className="collapsible collapsible-accordion">
-                {brands.map(brand => {
-                    return <li>
-                                <div className="collapsible-header">
-                                    <i className="material-icons">phone_android</i>
-                                    <span style={{width: '90%'}}>{ brand }</span>
-                                    <i className="material-icons">arrow_drop_down</i>
-                                </div>
-
-                                <div className="collapsible-body">
-                                    <ul>
-                                        {devices
-                                            .filter(device => device.brand === brand)
-                                            .map(device => {
-                                            return (
-                                                <li>
-                                                    <Link className="pointer devilist">
-                                                        {`${device.name} ${device.codeName}`}
-                                                    </Link>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </div>
-                            </li>
-                })}
-            </ul >
         </>
         )
     }
