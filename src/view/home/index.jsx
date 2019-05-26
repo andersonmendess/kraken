@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { AppCtx }  from '../../app/context/AppContext';
 import ProjectLinks from '../../components/common/project-links/links'
 import ProjectCredit from '../../components/common/credits'
+import Logo from '../../components/common/others/logo'
+
 
 export class Home extends Component{
     
@@ -11,7 +13,7 @@ export class Home extends Component{
             <div className='home center'>
                 <h3 class="accent welcome">Kraken Open Tentacles Project</h3>
 
-                <img src="https://avatars0.githubusercontent.com/u/49829986?s=500&v=4" />
+                <Logo size='500'/>
 
                 <div class="home-desc">
                     <div class="desc square accent">LineageOS based ROM</div>

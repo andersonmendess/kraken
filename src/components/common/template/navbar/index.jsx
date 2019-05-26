@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Devices from '../../devices/search';
 import Supported from '../../devices/supportedList';
+import Logo from '../../others/logo'
+
 
 export default class NavBar extends Component{
     
@@ -22,7 +24,7 @@ export default class NavBar extends Component{
             </div>
             <ul id="slide-out" className="sidenav">
                 <Link class="bar-logo center" to="/">
-                    <img src="https://avatars0.githubusercontent.com/u/49829986?s=100&v=4" />
+                    <Logo /> 
                     <h4 class="accent">Kraken Project</h4>
                 </Link>
                 <Devices />
