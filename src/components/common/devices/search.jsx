@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 
 export default class Devices extends Component {
     state ={
@@ -7,11 +6,17 @@ export default class Devices extends Component {
         devices: [],
         search: []
     }
+
+    redirect = (event) => {
+        event.preventDefault()
+        console.log(event)
+    }
+
     listDevicesSearch = (devices) => (
         devices.map(device => {
-            return  <Link to={`/devices/${device.codename}`} >
+            return  <a key={device.codename} onClick={this.redirect}>
                         {`${device.codename} - ${device.name} `}
-                    </Link>
+                    </a>
         })
     )
 
