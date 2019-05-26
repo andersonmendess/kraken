@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppCtx }  from '../../app/context/AppContext';
 import ProjectLinks from '../../components/common/project-links/links'
+import ProjectCredit from '../../components/common/credits'
 
 export class Home extends Component{
     
@@ -21,8 +22,11 @@ export class Home extends Component{
                         <ProjectLinks />
                     </div>
                 </div>
-                <div class='credits' >Project maintained by <a href="https://github.com/mamutal91">mamutal91</a></div>
-                <div class='credits'>Website developed by <a href="https://github.com/andersonmendess">andersonmendess</a></div>
+                <React.Fragment>
+                    <ProjectCredit title='Project maintained by ' username='mamutal91'/>
+                    <ProjectCredit title='SPA developed by ' username='andersonmendess'/>
+                    <ProjectCredit title='SPA broken by ' username='dattebayorob'/>
+                </React.Fragment>
 
             </div>
         )
