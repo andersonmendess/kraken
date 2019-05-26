@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Devices from '../../devices/pesquisa';
+import Devices from '../../devices/search';
 
 export default class NavBar extends Component{
     render(){
