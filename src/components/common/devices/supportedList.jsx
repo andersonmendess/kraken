@@ -39,7 +39,7 @@ export default class Supported extends Component {
                             style={{display: 'block', lineHeight: '48px'}}
                             >
                             {brand.devices.map(device => (
-                                <Link key={device.codename} to={`/devices/${device.codename}`} className="pointer devilist link">
+                                <Link key={device.codename} to={`/${device.codename}`} className="pointer devilist link">
                                             {`${device.name} (${device.codename})`}
                                 </Link>)
                             )}
