@@ -14,10 +14,10 @@ export default props => {
                 return (
                     <Collapsible key={build.id}>
                         <CollapsibleItem 
-                            header={<span style={{width: '100%'}}>{ build.filename }</span>}
+                            header={<><span style={{width: '100%'}}>{ build.filename }</span> <i class="material-icons">arrow_drop_down</i></>}
                             icon="system_update"
                             className="collapsible-header white-text product-sans cardColor"
-                            style={{width: '100%', display: 'block'}}
+                            style={{width: '100%', display: 'block', padding: '0px'}}
                             expanded={expanded}
                             >
                             {expanded = false}

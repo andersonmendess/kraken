@@ -407,3 +407,12 @@ a, span {
 .xda-buttons {
   padding-top: 5px;
 }
+
+.link {
+  display: block;
+  padding: 0 23.5px 0 31px;
+}
+
+p, span {
+  font-size: 14px;
+}

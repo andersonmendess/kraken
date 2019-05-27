@@ -41,8 +41,6 @@ export class Device extends Component{
                         <DeviceProp icon="phone_android" brand={device.name}/>
                         <DeviceProp icon="device_unknown" brand={device.codename}/>
                         <DeviceProp icon="person_outline" brand={device.maintainer_name}/>
-                        <DeviceProp icon="domain" brand={device.brand}/>
-                        <DeviceProp icon="domain" brand={device.brand}/>
 
                         {device.xda_thread && (
                         <div className="card-action xda-buttons">
