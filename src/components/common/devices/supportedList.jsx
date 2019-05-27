@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {Collapsible, CollapsibleItem} from 'react-materialize/'
 import {get as api} from '../../../app/service/deviceService'
 
@@ -23,14 +23,12 @@ export default class Supported extends Component {
     }
 
     render() {
-
         let {brands} = this.state
 
         return (
             <>
                 <Collapsible className="collapsible collapsible-accordion">
                     {brands.map(brand => {
-                        console.log(brand)
                         return (
                         <CollapsibleItem 
                             key={brand.name} 
@@ -38,9 +36,10 @@ export default class Supported extends Component {
                             icon="phone_android"
                             className="collapsible-header"
                             style={{display: 'block'}}
+                            // expanded={}
                             >
                             {brand.devices.map(device => (
-                                <Link key={device.codename} to={`/devices/${device.codename}`} className="pointer devilist">
+                                <Link key={device.codename} to={`/${device.codename}`} className="pointer devilist">
                                             {`${device.name} (${device.codename})`}
                                 </Link>)
                             )}
