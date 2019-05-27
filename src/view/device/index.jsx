@@ -21,6 +21,12 @@ export class Device extends Component{
     }
 
     
+    //temp hack
+    componentDidUpdate() {
+        if(this.props.match.params.codename !== this.state.device.codename){
+            this.get(this.props.match.params.codename)
+        }
+    }
 
     get = async (codename) => {
         try{
