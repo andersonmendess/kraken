@@ -21,7 +21,7 @@ class App extends Component {
                 <Switch>
                   <Route exact  path="/" component={Home} />
                   <Route path="/devices/:codename" component={Device} />
-                  <Redirect to={Home} />
+                  <Redirect to="/" />
                 </Switch>
             </Body>
           </Router>

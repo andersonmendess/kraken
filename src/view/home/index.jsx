@@ -11,16 +11,16 @@ export class Home extends Component{
 
         return (
             <div className='home center'>
-                <h3 class="accent welcome">Kraken Open Tentacles Project</h3>
+                <h3 className="accent welcome">Kraken Open Tentacles Project</h3>
 
                 <Logo size='500'/>
 
-                <div class="home-desc">
-                    <div class="desc square accent">LineageOS based ROM</div>
+                <div className="home-desc">
+                    <div className="desc square accent">LineageOS based ROM</div>
                 </div>
 
-                <div class="home-bottom-info">
-                    <div class="home-bottom-info-content">
+                <div className="home-bottom-info">
+                    <div className="home-bottom-info-content">
                         <ProjectLinks />
                     </div>
                 </div>

@@ -44,8 +44,8 @@ export class Device extends Component{
 
                         {device.xda_thread && (
                         <div className="card-action xda-buttons">
-                            <a href={device.maintainer_url} target="_blank" className="waves-effect waves-teal btn-flat">GitHub Profile</a>
-                            <a href={device.xda_thread} target="_blank" className="waves-effect waves-teal btn-flat">XDA Thread</a>
+                            <a href={device.maintainer_url} target="_blank" rel="noopener noreferrer" className="waves-effect waves-teal btn-flat">GitHub Profile</a>
+                            <a href={device.xda_thread} target="_blank" rel="noopener noreferrer" className="waves-effect waves-teal btn-flat">XDA Thread</a>
                         </div>
                         )}
                 </DeviceCard>

@@ -30,11 +30,10 @@ export default class Supported extends Component {
             <>
                 <Collapsible className="collapsible collapsible-accordion">
                     {brands.map(brand => {
-                        console.log(brand)
                         return (
                         <CollapsibleItem 
                             key={brand.name} 
-                            header={<><span style={{width: '90%'}}>{brand.name}</span><i class="material-icons">arrow_drop_down</i></>} 
+                            header={<><span style={{width: '90%'}}>{brand.name}</span><i className="material-icons">arrow_drop_down</i></>} 
                             icon="phone_android"
                             className="collapsible-header"
                             style={{display: 'block', lineHeight: '48px'}}

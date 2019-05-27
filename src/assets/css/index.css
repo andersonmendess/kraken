@@ -416,3 +416,7 @@ a, span {
 p, span {
   font-size: 14px;
 }
+
+.hidden-button {
+  border: none;
+}
