@@ -46,6 +46,7 @@ var app = new Vue({
     device: [],
     codename: '',
     search: '',
+    showBuild: null,
   },
   mounted(){
 
@@ -53,9 +54,11 @@ var app = new Vue({
 
     var url = new URL(window.location.href);
     var device = url.searchParams.get("device");
-  
+    var build = url.searchParams.get("build");
+
     if (device) {
       this.LoadBuilds(device);
+      this.showBuild = build
     }
   
     // init collapsible
@@ -120,7 +123,7 @@ var app = new Vue({
       this.LoadDevice(codename)
       this.deviceBuilds = [];
 
-      history.pushState(null, '', '?device=' + codename);
+      history.pushState(null, '', `?device=${codename}`);
 
       if (this.search != '') {
         document.querySelectorAll('.wrapper')[0].style.display = 'none'
@@ -152,12 +155,35 @@ var app = new Vue({
       })
 
     },
+    getIndex: function(filename) {
+      return this.deviceBuilds.
+      map((e,i) => e.filename == filename ? i : null
+      ).filter((e) => e != null)
+    }
   },
   updated() {
     if (this.codename) {
       let elems = document.querySelector('.collapsible-builds');
       let instances = M.Collapsible.init(elems);
-      instances.open(0);
+
+      instances.options.onOpenEnd = () => {
+        let build = document.querySelector('.collapsible-builds .active span').textContent
+        history.pushState(null, '', `?device=${this.codename}&build=${build}`);
+      }
+
+      instances.options.onCloseEnd = () => {
+        history.pushState(null, '', `?device=${this.codename}`);
+      }
+
+      if(this.showBuild){
+        let indexToOpen = parseInt(this.getIndex(this.showBuild));
+
+        if(!isNaN(indexToOpen)){
+          instances.open(indexToOpen)
+          document.querySelector(".collapsible-builds .active").scrollIntoView()
+        }
+
+      }
     }
   }
 })
