@@ -14,14 +14,14 @@ export default class Devices extends Component {
 
     listDevicesSearch = (devices) => (
         devices.map(device => {
-            return  <a key={device.codename} onClick={this.redirect}>
+            return  <button key={device.codename} onClick={this.redirect}>
                         {`${device.codename} - ${device.name} `}
-                    </a>
+                    </button>
         })
     )
 
     render() {
-        let {brands, devices, search} = this.state
+        let {search} = this.state
         return (
         <>
             <div className="square searchbar">

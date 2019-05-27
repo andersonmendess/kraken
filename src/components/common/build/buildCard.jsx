@@ -11,7 +11,7 @@ export default props => {
                 <Row title="Device" data={build.filename} />
                 <Row title="Date" data={build.datetime} />
                 <Row title="Size" data={build.size} />
-                <Row title="MD5" data={build.id} />
+                <Row title="MD5" data={build.md5} />
                 <Row title="Version" data={build.version} />
                 <Row title="Downloads" data={build.downloads} />
             </Card>

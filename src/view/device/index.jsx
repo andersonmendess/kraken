@@ -21,6 +21,12 @@ export class Device extends Component{
     }
 
     
+    //temp hack
+    componentDidUpdate() {
+        if(this.props.match.params.codename !== this.state.device.codename){
+            this.get(this.props.match.params.codename)
+        }
+    }
 
     get = async (codename) => {
         try{
@@ -41,13 +47,11 @@ export class Device extends Component{
                         <DeviceProp icon="phone_android" brand={device.name}/>
                         <DeviceProp icon="device_unknown" brand={device.codename}/>
                         <DeviceProp icon="person_outline" brand={device.maintainer_name}/>
-                        <DeviceProp icon="domain" brand={device.brand}/>
-                        <DeviceProp icon="domain" brand={device.brand}/>
 
                         {device.xda_thread && (
                         <div className="card-action xda-buttons">
-                            <a href={device.maintainer_url} target="_blank" className="waves-effect waves-teal btn-flat">GitHub Profile</a>
-                            <a href={device.xda_thread} target="_blank" className="waves-effect waves-teal btn-flat">XDA Thread</a>
+                            <a href={device.maintainer_url} target="_blank" rel="noopener noreferrer" className="waves-effect waves-teal btn-flat">GitHub Profile</a>
+                            <a href={device.xda_thread} target="_blank" rel="noopener noreferrer" className="waves-effect waves-teal btn-flat">XDA Thread</a>
                         </div>
                         )}
                 </DeviceCard>

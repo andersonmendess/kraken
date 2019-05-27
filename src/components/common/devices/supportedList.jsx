@@ -32,14 +32,13 @@ export default class Supported extends Component {
                         return (
                         <CollapsibleItem 
                             key={brand.name} 
-                            header={<span style={{width: '90%'}}>{brand.name}</span>} 
+                            header={<><span style={{width: '90%'}}>{brand.name}</span><i className="material-icons">arrow_drop_down</i></>} 
                             icon="phone_android"
                             className="collapsible-header"
-                            style={{display: 'block'}}
-                            // expanded={}
+                            style={{display: 'block', lineHeight: '48px'}}
                             >
                             {brand.devices.map(device => (
-                                <Link key={device.codename} to={`/${device.codename}`} className="pointer devilist">
+                                <Link key={device.codename} to={`/${device.codename}`} className="pointer devilist link">
                                             {`${device.name} (${device.codename})`}
                                 </Link>)
                             )}
