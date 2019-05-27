@@ -109,6 +109,8 @@ var app = new Vue({
           if (device) {
             this.device = device
             this.codename = device.codename
+          }else{
+            M.toast({html: `device '${codename}' not found`})
           }
 
         })
