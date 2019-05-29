@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "zeit-test-deploy",
+    "name": "kraken-react",
     "builds": [ 
         { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" } }
     ],
