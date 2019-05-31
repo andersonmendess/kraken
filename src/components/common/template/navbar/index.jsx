@@ -28,7 +28,6 @@ export default class NavBar extends Component{
                     options={{closeOnclik: true}}
                     fixed = {true}
                     >
-                    <SideNavItem >
                         <Link className="bar-logo center" to="/">
                             <Logo /> 
                             <h4 className="accent">Kraken Project</h4>
@@ -36,7 +35,6 @@ export default class NavBar extends Component{
                         <Devices />
                         <Supported />
                     
-                    </SideNavItem>
                 </SideNav>
           </>
         )

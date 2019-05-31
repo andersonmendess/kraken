@@ -80,7 +80,7 @@ body {
   background-color: var(--background) !important;
 }
 
-#slide-out, a {
+#sidenav_2, a {
   background-color: var(--card) !important;
   color: var(--text) !important;
 }
@@ -100,7 +100,7 @@ pre{
   font-size: 13px;
 }
 
-.sidenav-trigger,.sidenav-trigger:hover  {
+nav, nav:hover  {
   background-color: var(--accent) !important;
 }
 
@@ -189,7 +189,7 @@ i {
 }
 
 @media only screen and (min-width: 1000px) {
-    #slide-out {
+    #sidenav_2 {
         transform: translateX(0%);
     }
     .center {
@@ -219,6 +219,14 @@ i {
 
 nav .sidenav-trigger i {
   color: white !important;
+}
+
+nav button {
+  background-color: transparent;
+}
+
+nav button:active {
+  background-color: var(--accent);
 }
 
 .search-link {
