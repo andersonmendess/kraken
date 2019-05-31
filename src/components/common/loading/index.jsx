@@ -3,4 +3,6 @@ import React from 'react'
 
 
 export default props => 
-    props.if && <div style={{textAlign: 'center'}}>Loading...</div>
+    props.if && <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
