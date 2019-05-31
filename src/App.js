@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
-import AppContext,{AppCtx} from './app/context/AppContext'
+import AppContext,{AppCtx, AppConsumer} from './app/context/AppContext'
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js'
 import './assets/css/index.css'
@@ -32,5 +32,9 @@ class App extends Component {
 
 App.contextType = AppCtx
 export default props => <AppContext >
-                          <App {...props} />
+                            <AppConsumer>
+                              {(AppContext) => 
+                                  <App {...props} {...AppContext}/>
+                              }
+                            </AppConsumer>
                         </AppContext>;

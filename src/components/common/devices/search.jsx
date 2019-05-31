@@ -1,15 +1,30 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { AppCtx } from '../../../app/context/AppContext';
 
-export default class Devices extends Component {
+export class Devices extends Component {
     state ={
-        brands: [],
         devices: [],
-        search: []
+        search: ''
+
     }
 
     redirect = (event) => {
         event.preventDefault()
         console.log(event)
+    }
+
+    onChange = (event) => {
+        let search = event.target.value
+        this.setState({search},
+        () => this.findDevice(search))
+    }
+
+    findDevice = (name) => {
+        let { devices } = this.context
+        devices.filter(device => 
+            device.name.startWith(name) ||
+            device.codename.startWith(name))
+        this.setState({devices})
     }
 
     listDevicesSearch = (devices) => (
@@ -21,20 +36,24 @@ export default class Devices extends Component {
     )
 
     render() {
-        let {search} = this.state
+        let { search,devices } = this.state
         return (
         <>
             <div className="square searchbar">
                 <div className="search-wrapper">
                     <i className="material-icons is-s">search</i>
-                    <input style={{width: '80%'}} type="text" v-model="search"
-                        placeholder="Type your device... " />
+                    <input value={search || ''} style={{width: '80%'}} 
+                        type="text" v-model="search"
+                        placeholder="Type your device... "
+                        onChange={this.onChange} />
                 </div>
             </div>
             <div className="wrapper">
-                {(search) && this.listDevicesSearch(search)}
+                {(search || search !== '') && this.listDevicesSearch(devices)}
             </div>
         </>
         )
     }
 }
+Devices.contextType = AppCtx
+export default Devices

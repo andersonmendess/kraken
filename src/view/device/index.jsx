@@ -17,7 +17,6 @@ export class Device extends Component{
              this.props.history.push('/')
         }
         this.get(codename)
-        console.log(this)
     }
 
     
