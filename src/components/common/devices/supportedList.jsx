@@ -5,23 +5,29 @@ import { AppCtx } from '../../../app/context/AppContext';
 import { get as api } from '../../../app/service/deviceService';
 import Loading from '../loading';
 
-export default props => {
+export default () => {
     const [brands, setBrands] = useState([])
     const [showLoading, setShowLoading] = useState(false)
     const context = useContext(AppCtx)
 
-    useEffect(async () => {
+    
+    useEffect(() => {
         setShowLoading(true)
-        const brands = await api()
-        setBrands(brands.data)
-        setShowLoading(false)
+        async function getBrands(){
+            const brands = await api()
+            if(!brands.errors){
+                setBrands(brands)
+            }
+            setShowLoading(false)
+        }
+        getBrands()
     }, [])
 
     useEffect(() => {
         let devices = brands.flatMap(brand => brand.devices)
+        console.log(brands)
         context.setDevices(devices)
     }, [brands])
-    
     return (
         <>
             <Collapsible className="collapsible collapsible-accordion">
