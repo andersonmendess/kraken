@@ -1,11 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState , useContext} from 'react';
 import { AppCtx } from '../../../app/context/AppContext';
 
+export default props => {
+    const [devices, setDevices] = useState([])
+    const [search, setSearch] = useState('')
+    const context = useContext(AppCtx)
+
+    useEffect(() => {
+        console.log(search)
+    }, search)
+    
+    function onChange(event) {
+        console.log(event.target.value)
+    }
+    return (
+        <>
+            <div className="square searchbar">
+                <div className="search-wrapper">
+                    <i className="material-icons is-s">search</i>
+                    <input value={ search } style={{width: '80%'}} 
+                        type="text" v-model="search"
+                        placeholder="Type your device... "
+                        onChange={ event => setSearch(event.target.value)} />
+                </div>
+            </div>
+            {/* <div className="wrapper">
+                {(search || search !== '') && this.listDevicesSearch(devices)}
+            </div> */}
+        </>
+    )
+
+}
 export class Devices extends Component {
     state ={
         devices: [],
         search: ''
 
+    }
+
+    componentDidMount(){
+        const {devices} = this.context
+        if(devices){
+            this.setState({devices})
+        }
     }
 
     redirect = (event) => {
@@ -20,11 +57,13 @@ export class Devices extends Component {
     }
 
     findDevice = (name) => {
-        let { devices } = this.context
-        devices.filter(device => 
-            device.name.startWith(name) ||
-            device.codename.startWith(name))
-        this.setState({devices})
+        const { devices } = this.state
+        devices.map(device => {
+            console.log(device)
+        })
+        // let search = devices.map(device => device.name)
+        // filter(device => device.name.toLowerCase() === name)
+        // this.setState({devices: search})
     }
 
     listDevicesSearch = (devices) => (
@@ -48,12 +87,10 @@ export class Devices extends Component {
                         onChange={this.onChange} />
                 </div>
             </div>
-            <div className="wrapper">
+            {/* <div className="wrapper">
                 {(search || search !== '') && this.listDevicesSearch(devices)}
-            </div>
+            </div> */}
         </>
         )
     }
 }
-Devices.contextType = AppCtx
-export default Devices

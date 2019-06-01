@@ -1,0 +1,11 @@
+.loading-wrapper{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-kraken {
+  border-color: #A97CF0;
+}

@@ -25,13 +25,14 @@ export default () => {
 
     useEffect(() => {
         let devices = brands.flatMap(brand => brand.devices)
-        console.log(brands)
         context.setDevices(devices)
     }, [brands])
     return (
         <>
             <Collapsible className="collapsible collapsible-accordion">
+                
                 <Loading if={showLoading}/>
+
                 {brands.map(brand => (
                     <CollapsibleItem 
                         key={brand.name} header={

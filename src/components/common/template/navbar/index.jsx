@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { SideNav } from 'react-materialize';
+import { Link } from 'react-router-dom';
 import Devices from '../../devices/search';
 import Supported from '../../devices/supportedList';
-import Logo from '../../others/logo'
-import { SideNav, SideNavItem, Navbar, NavItem } from 'react-materialize';
+import Logo from '../../others/logo';
 
 
 export default class NavBar extends Component{
