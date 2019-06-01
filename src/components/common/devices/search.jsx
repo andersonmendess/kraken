@@ -3,16 +3,31 @@ import { AppCtx } from '../../../app/context/AppContext';
 
 export default props => {
     const [devices, setDevices] = useState([])
-    const [search, setSearch] = useState('')
+    const [ resultDevices, setResultDevices] = useState([])
+    const [search, setSearch] = useState("")
+    const [disabled, setDisabled] = useState(true)
     const context = useContext(AppCtx)
 
     useEffect(() => {
-        console.log(search)
-    }, search)
-    
-    function onChange(event) {
-        console.log(event.target.value)
-    }
+        const { devices } = context
+        if(devices  && Object.prototype.toString.call(devices) === "[object Array]"){
+            setDevices(devices)
+        }
+    }, [context])
+
+    useEffect(() => {
+        if(devices){
+            setDisabled(false)
+        }
+        console.log(devices)
+    }, [devices])
+
+    useEffect(() => {
+        console.log(devices, resultDevices)
+        let result = devices.filter(device => device.name.startWith(search.toLowerCase()))
+        setResultDevices(result)
+    }, [search])
+    console.log(devices)
     return (
         <>
             <div className="square searchbar">
@@ -21,12 +36,16 @@ export default props => {
                     <input value={ search } style={{width: '80%'}} 
                         type="text" v-model="search"
                         placeholder="Type your device... "
-                        onChange={ event => setSearch(event.target.value)} />
+                        disabled={disabled}
+                        onChange={ e => setSearch(e.target.value)} />
                 </div>
             </div>
-            {/* <div className="wrapper">
-                {(search || search !== '') && this.listDevicesSearch(devices)}
-            </div> */}
+            <div className="wrapper">
+                {resultDevices.map(device => 
+                    <button key={device.codename} onClick={this.redirect}>
+                        {`${device.codename} - ${device.name} `}
+                    </button>)}
+            </div>
         </>
     )
 

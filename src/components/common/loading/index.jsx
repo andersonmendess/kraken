@@ -4,14 +4,14 @@ import './styles.css'
 
 export default props => 
     props.if && <div className="loading-wrapper">
-                    <div class={`preloader-wrapper ${props.size || 'big'} active`}>
-                        <div class="spinner-layer spinner-kraken">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div><div class="gap-patch">
-                            <div class="circle"></div>
-                        </div><div class="circle-clipper right">
-                            <div class="circle"></div>
+                    <div className={`preloader-wrapper ${props.size || 'big'} active`}>
+                        <div className="spinner-layer spinner-kraken">
+                        <div className="circle-clipper left">
+                            <div className="circle"></div>
+                        </div><div className="gap-patch">
+                            <div className="circle"></div>
+                        </div><div className="circle-clipper right">
+                            <div className="circle"></div>
                         </div>
                         </div>
                     </div>
