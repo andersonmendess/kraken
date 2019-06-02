@@ -13,7 +13,7 @@ export class AppContext extends Component{
 
     public = {
         setDevices : (devices) => {
-            this.setState({ devices: {...devices} })
+            this.setState({devices})
         },
     }
 
