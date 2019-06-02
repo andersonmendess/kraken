@@ -50,7 +50,7 @@ body {
   
 /* width */
 ::-webkit-scrollbar {
-    width: 7px;
+    width: 5px;
 }
 
 /* Track */
@@ -165,6 +165,7 @@ i {
 
 .bar-logo {
   margin-top: 20px;
+  max-width: 99%;
 }
 
 .bar-logo:hover {
@@ -365,7 +366,7 @@ li.collapsible-header span {
 }
 
 .collapsible-body {
-  border: 1px solid var(--background);
+  border: none;
   border-radius: 2px;
   margin: 0px;
   padding: 0px;
@@ -428,12 +429,11 @@ li.collapsible-header span {
   padding-top: 5px;
 }
 
-
-
-p, span {
-  font-size: 14px;
+.z-depth-1, .collapsible, .sidenav {
+  box-shadow: none !important;
 }
 
-.hidden-button {
-  border: none;
+.z-depth-1, .sidenav, .buildcoll {
+  border-radius: 4px;
+  box-shadow: 0 0.8px 4px rgba(0,0,0,0.07), 0 0.8px 2px rgba(0,0,0,0.15) !important;
 }

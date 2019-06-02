@@ -36,7 +36,7 @@ export default props => {
                         <CollapsibleItem 
                             header={<><span style={{width: '100%'}}>{ build.filename }</span> <i className="material-icons">arrow_drop_down</i></>}
                             icon="system_update"
-                            className="collapsible-header white-text product-sans cardColor"
+                            className="collapsible-header white-text buildcoll cardColor"
                             style={{width: '100%', display: 'block', padding: '0px'}}
                             expanded={isBuildOnPath(build.filename)}
                             onClick={() => onClick(build.filename)}
