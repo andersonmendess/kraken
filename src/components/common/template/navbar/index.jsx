@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SideNav } from 'react-materialize';
 import { Link } from 'react-router-dom';
-import Devices from '../../devices/search';
+import Devices from '../../devices/deviceSearch';
 import Supported from '../../devices/supportedList';
 import Logo from '../../others/logo';
 

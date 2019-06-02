@@ -1,63 +1,61 @@
-import React,{Component} from 'react'
-import Builds from '../../components/common/build/buildList'
-import DeviceCard from '../../components/common/devices/deviceCard'
-import DeviceProp from '../../components/common/devices/deviceProp'
+import React, { useContext, useEffect, useState } from 'react';
+import { AppCtx } from '../../app/context/AppContext';
+import { DeviceService } from '../../app/service/deviceService';
+import Builds from '../../components/common/build/buildList';
+import DeviceCard from '../../components/common/devices/deviceCard';
+import Loading from '../../components/common/loading';
 
-import {get as api} from '../../app/service/deviceService'
 
-export class Device extends Component{
-    state = {
-        device: {},
-        builds: []
-    }
 
-    componentDidMount(){
-        let {codename} = this.props.match.params
-        if(!codename){
-             this.props.history.push('/')
-        }
-        this.get(codename)
-    }
+export default props => {
+    const [device, setDevice] = useState({})
+    const [builds, setBuilds] = useState([])
+    const [devices, setDevices] = useState([])
+    const [loading, setLoading] = useState(false)
 
+    const context = useContext(AppCtx)
+
+
+    const api = new DeviceService()
     
-    //temp hack
-    componentDidUpdate() {
-        if(this.props.match.params.codename !== this.state.device.codename){
-            this.get(this.props.match.params.codename)
-        }
+    function get(codename){
+        getDeviceInfo(codename)
+        getBuilds(codename)
     }
 
-    get = async (codename) => {
-        try{
-            let response = await api(codename)
-            let {device, builds} = response
-            this.setState({device, builds})
-        }catch(exception){
-            console.log(exception)
+    function getDeviceInfo(codename){
+        let device = context.devices.filter(device => device.codename == codename)[0]
+        // console.log('devicecard')
+        // console.log(context)
+        device = {
+            name: '',
+            brand: ''
         }
+        setDevice({device})
     }
 
-    render(){
-        let { device, builds } = this.state
-        return (
-            <>
-                <DeviceCard brand={device.brand} name={device.name} codename={device.codename}>
-                        <DeviceProp icon="domain" brand={device.brand}/>
-                        <DeviceProp icon="phone_android" brand={device.name}/>
-                        <DeviceProp icon="device_unknown" brand={device.codename}/>
-                        <DeviceProp icon="person_outline" brand={device.maintainer_name}/>
+    function getBuilds(codename){
+        setLoading(true)
+        api.get(`/${codename}/builds`)
+        .then(data => {
+            setBuilds(data.builds)})
+        .catch(errors => console.log(errors))
+        .finally(()=> setLoading(false))
+    }
 
-                        {device.xda_thread && (
-                        <div className="card-action xda-buttons">
-                            <a href={device.maintainer_url} target="_blank" rel="noopener noreferrer" className="waves-effect waves-teal btn-flat">GitHub Profile</a>
-                            <a href={device.xda_thread} target="_blank" rel="noopener noreferrer" className="waves-effect waves-teal btn-flat">XDA Thread</a>
-                        </div>
-                        )}
-                </DeviceCard>
+    useEffect(() => {
+        const { codename } = props.match.params
+        if(!codename){
+            props.history.push('/')
+        }
+        get(codename)
+    }, [props.match.params])
+    return (
+        <>
+            <DeviceCard device={device} />
+            <Loading if={loading}>
                 <Builds builds={builds}  />
-            </>
-        )
-    }
+            </Loading>
+        </>
+    )
 }
-
-export default Device

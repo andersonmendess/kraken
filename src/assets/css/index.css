@@ -229,17 +229,6 @@ nav button:active {
   background-color: var(--accent);
 }
 
-.search-link {
-  font-family: "Product Sans";
-  background-color: transparent !important;
-  color: var(--accent) !important;
-  padding: 10px !important;
-  margin-left: 5px !important;
-  display: block !important;
-  text-align: left !important;
-  padding-left: 5px !important;
-
-}
 input {
   padding: 0px !important;
   margin: 0px !important;
@@ -362,6 +351,17 @@ a, span {
   border: none;
 }
 
+ul.collapsible > li.collapsible-header{
+  display: block;
+  line-height: 48px;
+}
+li.collapsible-header div.collapsible-header{
+  padding: 0 16p
+}
+li.collapsible-header span {
+  width: 90%;
+}
+
 .collapsible-body {
   border: 1px solid var(--background);
   border-radius: 2px;
@@ -369,6 +369,16 @@ a, span {
   padding: 0px;
   text-align: start;
   padding-top: 8px;
+}
+
+.link {
+  font-family: "Product Sans";
+  background-color: var(--background);
+  display: block;
+  width: 80%;
+  margin: auto;
+  padding: 0 16p;
+  line-height: 48px;
 }
 
 .collapsible-body .deviceprop, .collapsible-body p {
@@ -416,10 +426,7 @@ a, span {
   padding-top: 5px;
 }
 
-.link {
-  display: block;
-  padding: 0 23.5px 0 31px;
-}
+
 
 p, span {
   font-size: 14px;

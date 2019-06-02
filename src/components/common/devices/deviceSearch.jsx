@@ -1,33 +1,26 @@
 import React, { Component, useEffect, useState , useContext} from 'react';
+import { Link } from 'react-router-dom'
 import { AppCtx } from '../../../app/context/AppContext';
 
 export default props => {
-    const [devices, setDevices] = useState([])
     const [ resultDevices, setResultDevices] = useState([])
     const [search, setSearch] = useState("")
-    const [disabled, setDisabled] = useState(true)
     const context = useContext(AppCtx)
 
     useEffect(() => {
-        const { devices } = context
-        if(devices  && Object.prototype.toString.call(devices) === "[object Array]"){
-            setDevices(devices)
+        if(search.trim().length === 0){
+            setResultDevices([])
+            return
         }
-    }, [context])
-
-    useEffect(() => {
-        if(devices){
-            setDisabled(false)
-        }
-        console.log(devices)
-    }, [devices])
-
-    useEffect(() => {
-        console.log(devices, resultDevices)
-        let result = devices.filter(device => device.name.startWith(search.toLowerCase()))
+        let result = context.devices
+                .filter(device => 
+                    device.codename.toLowerCase()
+                        .includes(search.toLowerCase()) ||
+                    device.name.toLowerCase().
+                        includes(search.toLowerCase()))
         setResultDevices(result)
     }, [search])
-    console.log(devices)
+
     return (
         <>
             <div className="square searchbar">
@@ -36,15 +29,14 @@ export default props => {
                     <input value={ search } style={{width: '80%'}} 
                         type="text" v-model="search"
                         placeholder="Type your device... "
-                        disabled={disabled}
                         onChange={ e => setSearch(e.target.value)} />
                 </div>
             </div>
             <div className="wrapper">
                 {resultDevices.map(device => 
-                    <button key={device.codename} onClick={this.redirect}>
-                        {`${device.codename} - ${device.name} `}
-                    </button>)}
+                    <Link key={device.codename} to={`/${device.codename}`} className="pointer devilist link">
+                                {`${device.name} (${device.codename})`}
+                    </Link>)}
             </div>
         </>
     )
@@ -66,7 +58,6 @@ export class Devices extends Component {
 
     redirect = (event) => {
         event.preventDefault()
-        console.log(event)
     }
 
     onChange = (event) => {
