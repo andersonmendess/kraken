@@ -8,7 +8,7 @@ export default props => {
     return (
         <>
             <Card>
-                <Row title="Device" data={build.filename} />
+                <Row title="Filename" data={build.filename} />
                 <Row title="Date" data={build.datetime} />
                 <Row title="Size" data={build.size} />
                 <Row title="MD5" data={build.md5} />

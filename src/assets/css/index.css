@@ -98,6 +98,7 @@ pre{
   overflow:hidden;
   white-space:pre-line;
   font-size: 13px;
+  line-height: 2em;
 }
 
 nav, nav:hover  {
@@ -287,6 +288,7 @@ tr th {
   display: flex;
   flex-direction: row;
   align-items: center;
+  line-height: 1.5em;
   margin: 7px;
 }
 

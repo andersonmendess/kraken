@@ -8,14 +8,13 @@ import Loading from '../../components/common/loading';
 
 
 export default props => {
-    const [device, setDevice] = useState({})
+    const [device, setDevice] = useState({name:'', codename: ''})
     const [builds, setBuilds] = useState([])
-    const [devices, setDevices] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [deviceLoading, setDeviceLoading] = useState(false)
 
     const context = useContext(AppCtx)
-
-
+    
     const api = new DeviceService()
     
     function get(codename){
@@ -24,23 +23,24 @@ export default props => {
     }
 
     function getDeviceInfo(codename){
+        setDeviceLoading(true)
         let device = context.devices.filter(device => device.codename == codename)[0]
-        // console.log('devicecard')
-        // console.log(context)
-        device = {
-            name: '',
-            brand: ''
+        if(device){
+            setDeviceLoading(false)
+            setDevice(device)
         }
-        setDevice({device})
     }
 
-    function getBuilds(codename){
+    async function getBuilds(codename){
         setLoading(true)
-        api.get(`/${codename}/builds`)
-        .then(data => {
-            setBuilds(data.builds)})
-        .catch(errors => console.log(errors))
-        .finally(()=> setLoading(false))
+        try{
+            const data = await api.get(`/${codename}/builds`)
+            setBuilds(data.builds)
+            setLoading(false)
+        }catch(exception){
+            console.log(exception)
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -52,7 +52,9 @@ export default props => {
     }, [props.match.params])
     return (
         <>
-            <DeviceCard device={device} />
+            <Loading if={deviceLoading}>
+                <DeviceCard device={device} />
+            </Loading>
             <Loading if={loading}>
                 <Builds builds={builds}  />
             </Loading>
