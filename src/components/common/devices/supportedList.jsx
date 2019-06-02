@@ -16,7 +16,7 @@ export default () => {
         setShowLoading(true)
         async function getBrands(){
             try{
-                const brands = await api.get()
+                const brands = await api.getBrands()
                 setBrands(brands)
                 setShowLoading(false)
             }catch(exception){

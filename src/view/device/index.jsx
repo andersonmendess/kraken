@@ -24,17 +24,22 @@ export default props => {
 
     function getDeviceInfo(codename){
         setDeviceLoading(true)
-        let device = context.devices.filter(device => device.codename == codename)[0]
-        if(device){
-            setDeviceLoading(false)
-            setDevice(device)
+        if(context.devices.length > 0){
+            let device = context.devices.filter(device => device.codename == codename)[0]
+            if(device){
+                setDeviceLoading(false)
+                setDevice(device)
+            }else{
+                alert('not found')
+                props.history.push('/')
+            }
         }
     }
 
     async function getBuilds(codename){
         setLoading(true)
         try{
-            const data = await api.get(`/${codename}/builds`)
+            const data = await api.getBuilds(codename)
             setBuilds(data.builds)
             setLoading(false)
         }catch(exception){
@@ -44,19 +49,21 @@ export default props => {
     }
 
     useEffect(() => {
+        getDeviceInfo(props.match.params.codename)
+    }, [context])
+
+    useEffect(() => {
         const { codename } = props.match.params
-        if(!codename){
-            props.history.push('/')
-        }
         get(codename)
-    }, [props.match.params])
+    }, [props.match.params.codename])
+
     return (
         <>
             <Loading if={deviceLoading}>
                 <DeviceCard device={device} />
             </Loading>
             <Loading if={loading}>
-                <Builds builds={builds}  />
+                <Builds builds={builds} {...props} />
             </Loading>
         </>
     )

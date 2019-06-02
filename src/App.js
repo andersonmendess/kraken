@@ -20,7 +20,7 @@ class App extends Component {
             <Body>
                 <Switch>
                   <Route exact  path="/" component={Home} />
-                  <Route path="/:codename" component={Device} />
+                  <Route path="/:codename/:build?" component={Device} />
                   <Redirect to="/" />
                 </Switch>
             </Body>

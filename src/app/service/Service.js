@@ -28,8 +28,8 @@ export class Service{
      * @param {String} pathVariable 
      * @param {Object} params consumes a api 
      */
-    get = (pathVariable = '', params = {}) =>{
-        const promise = api.get(this.uri+pathVariable, {params:{...params}})
+    get = (additionalUri = '', params = {}) =>{
+        const promise = api.get(`${this.uri}${additionalUri}`, {params:{...params}})
         return this.handlePromise(promise)
     }
 }
