@@ -1,11 +1,12 @@
-import React, { Component, useEffect, useState , useContext} from 'react';
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AppCtx } from '../../../app/context/AppContext';
 
 export default props => {
     const [ resultDevices, setResultDevices] = useState([])
     const [search, setSearch] = useState("")
     const context = useContext(AppCtx)
+
 
     useEffect(() => {
         if(search.trim().length === 0){
@@ -16,10 +17,10 @@ export default props => {
                 .filter(device => 
                     device.codename.toLowerCase()
                         .includes(search.toLowerCase()) ||
-                    device.name.toLowerCase().
-                        includes(search.toLowerCase()))
+                    device.name.toLowerCase()
+                        .includes(search.toLowerCase()))
         setResultDevices(result)
-    }, [search])
+    }, [search, context.devices])
 
     return (
         <>

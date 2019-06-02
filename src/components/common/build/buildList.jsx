@@ -1,15 +1,15 @@
-import React,{useRef, useEffect} from 'react'
+import React, { useEffect } from 'react';
 import { Collapsible, CollapsibleItem } from 'react-materialize/';
-import BuildCard from './buildCard'
-import BuildChangelog from './buildChangelog'
-import BuildLink from './buildLink'
+import BuildCard from './buildCard';
+import BuildChangelog from './buildChangelog';
+import BuildLink from './buildLink';
 
 export default props => {
 
     
 
     const {builds, match: {params}} = props
-    const buildRef = useRef(null)
+    // const buildRef = useRef(null)
 
     function isBuildOnPath(build){
         return params.build && params.build === build

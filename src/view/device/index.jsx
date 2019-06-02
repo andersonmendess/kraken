@@ -6,6 +6,7 @@ import DeviceCard from '../../components/common/devices/deviceCard';
 import Loading from '../../components/common/loading';
 
 
+const api = new DeviceService()
 
 export default props => {
     const [device, setDevice] = useState({name:'', codename: ''})
@@ -15,46 +16,37 @@ export default props => {
 
     const context = useContext(AppCtx)
     
-    const api = new DeviceService()
-    
-    function get(codename){
-        getDeviceInfo(codename)
-        getBuilds(codename)
-    }
-
-    function getDeviceInfo(codename){
-        setDeviceLoading(true)
-        if(context.devices.length > 0){
-            let device = context.devices.filter(device => device.codename == codename)[0]
-            if(device){
-                setDeviceLoading(false)
-                setDevice(device)
-            }else{
-                alert('not found')
-                props.history.push('/')
+    useEffect(() => {
+        function getDeviceInfo(codename){
+            setDeviceLoading(true)
+            if(context.devices.length > 0){
+                let device = context.devices.filter(device => device.codename === codename)[0]
+                if(device){
+                    setDeviceLoading(false)
+                    setDevice(device)
+                }else{
+                    alert('not found')
+                    props.history.push('/')
+                }
             }
         }
-    }
-
-    async function getBuilds(codename){
-        setLoading(true)
-        try{
-            const data = await api.getBuilds(codename)
-            setBuilds(data.builds)
-            setLoading(false)
-        }catch(exception){
-            console.log(exception)
-            setLoading(false)
-        }
-    }
-
-    useEffect(() => {
         getDeviceInfo(props.match.params.codename)
-    }, [context])
+    }, [context, props.match.params.codename, props.history])
 
     useEffect(() => {
-        const { codename } = props.match.params
-        get(codename)
+        async function getBuilds(codename){
+            setLoading(true)
+            try{
+                const data = await api.getBuilds(codename)
+                setBuilds(data.builds)
+                setLoading(false)
+            }catch(exception){
+                console.log(exception)
+                setLoading(false)
+            }
+        }
+        const codename = props.match.params.codename
+        getBuilds(codename)
     }, [props.match.params.codename])
 
     return (

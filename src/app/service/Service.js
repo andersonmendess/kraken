@@ -16,11 +16,12 @@ export class Service{
                     return response.data
                 })
                 .catch(exception => {
+                    let errors = [{}]
                     let { response } = exception
-                    if(!response.data){
-                        throw {}
+                    if(response && response.data){
+                        errors.push(response.data)
                     }
-                    throw response.data
+                    return Promise.reject(errors)
                 })
     }
 

@@ -5,12 +5,13 @@ import { AppCtx } from '../../../app/context/AppContext';
 import Loading from '../loading';
 import { DeviceService } from '../../../app/service/deviceService';
 
+const api = new DeviceService()
+
 export default () => {
     const [brands, setBrands] = useState([])
     const [showLoading, setShowLoading] = useState(false)
     const context = useContext(AppCtx)
 
-    const api = new DeviceService()
     
     useEffect(() => {
         setShowLoading(true)
@@ -30,7 +31,7 @@ export default () => {
     useEffect(() => {
         let devices = brands.flatMap(brand => brand.devices)
         context.setDevices(devices)
-    }, [brands])
+    }, [brands, context])
     return (
         <Loading if={showLoading}>
             <Collapsible className="collapsible collapsible-accordion">
