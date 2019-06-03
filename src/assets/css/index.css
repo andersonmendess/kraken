@@ -208,6 +208,7 @@ i {
     nav {
       background-color: var(--accent);
     }
+    
     .navbar-fixed {
       display: none;
     }
@@ -225,6 +226,7 @@ nav .sidenav-trigger i {
 
 nav button {
   background-color: transparent;
+  border: none
 }
 
 nav button:active {

@@ -4,6 +4,7 @@ import { DeviceService } from '../../app/service/deviceService';
 import Builds from '../../components/common/build/buildList';
 import DeviceCard from '../../components/common/devices/deviceCard';
 import Loading from '../../components/common/loading';
+import M from 'materialize-css/dist/js/materialize'
 
 
 const api = new DeviceService()
@@ -25,7 +26,7 @@ export default props => {
                     setDeviceLoading(false)
                     setDevice(device)
                 }else{
-                    alert('not found')
+                    M.toast({html: 'Device not found'})
                     props.history.push('/')
                 }
             }
@@ -38,6 +39,9 @@ export default props => {
             setLoading(true)
             try{
                 const data = await api.getBuilds(codename)
+                if(data.builds.length === 0){
+                    M.toast({html: 'No Builds found for this device'})
+                }
                 setBuilds(data.builds)
                 setLoading(false)
             }catch(exception){

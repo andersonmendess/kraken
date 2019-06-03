@@ -30,14 +30,15 @@ export default props => {
     return (
         <div className="row center">
           <div className="col s12 m12 center builds">
+          <Collapsible accordion={true}>
             {builds.map(build => {
                 return (
-                    <Collapsible key={build.md5}>
                         <CollapsibleItem 
-                            header={<><span style={{width: '100%'}}>{ build.filename }</span> <i className="material-icons">arrow_drop_down</i></>}
+                            key={build.md5} 
+                            header={<><span style={{width: '100%', color: 'var(--accent)'}}>{ build.filename }</span> <i className="material-icons">arrow_drop_down</i></>}
                             icon="system_update"
-                            className="collapsible-header white-text buildcoll cardColor"
-                            style={{width: '100%', display: 'block', padding: '0px'}}
+                            className="collapsible-header buildcoll cardColor"
+                            style={{width: '100%', display: 'block', padding: '0px', marginBottom: '10px'}}
                             expanded={isBuildOnPath(build.filename)}
                             onClick={() => onClick(build.filename)}
                             // ref={buildRef}
@@ -47,9 +48,9 @@ export default props => {
                                     <BuildLink link={build.url}/>
                                 </BuildCard>
                         </CollapsibleItem>
-                    </Collapsible>
                 )
             })}
+            </Collapsible>
             </div>
         </div>
 
