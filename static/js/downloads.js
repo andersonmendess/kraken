@@ -37,6 +37,16 @@ const humanDate = (timestamp) => {
 };
 
 
+const SEO = {
+  setTitle: (title) => {
+    document.title = title
+    document.head.querySelector("meta[name=title]").content = title
+  },
+  setDescription: (description) => {
+    document.head.querySelector("meta[name=description]").content = description
+  }
+}
+
 var app = new Vue({
   el: '#app',
   data: {
@@ -48,7 +58,13 @@ var app = new Vue({
     search: '',
     showBuild: null,
   },
-  mounted(){
+  mounted() {
+
+    history.pushState({device: null}, '', '')
+
+    window.onpopstate = (e) => {
+      e.state.device ? this.LoadBuilds(e.state.device) : this.codename = null
+    };
 
     this.suported();
 
@@ -60,11 +76,11 @@ var app = new Vue({
       this.LoadBuilds(device);
       this.showBuild = build
     }
-  
+
     // init collapsible
     let elems = document.querySelector('.collapsible');
     M.Collapsible.init(elems);
-  
+
     // init sidenav
     let sidenav = document.querySelectorAll('.sidenav');
     M.Sidenav.init(sidenav);
@@ -112,8 +128,10 @@ var app = new Vue({
           if (device) {
             this.device = device
             this.codename = device.codename
-          }else{
-            M.toast({html: `device '${codename}' not found`})
+            SEO.setTitle(`${this.device.name} (${this.codename}) | Kraken Download Center`)
+            SEO.setDescription(`Download Kraken for ${this.device.name} (${this.codename}) | Kraken Project`)
+          } else {
+            M.toast({ html: `device '${codename}' not found` })
           }
 
         })
@@ -123,7 +141,9 @@ var app = new Vue({
       this.LoadDevice(codename)
       this.deviceBuilds = [];
 
-      history.pushState(null, '', `?device=${codename}`);
+      if(history.state.device !== codename){
+        history.pushState({device: codename}, codename, `?device=${codename}`);
+      }
 
       if (this.search != '') {
         document.querySelectorAll('.wrapper')[0].style.display = 'none'
@@ -155,10 +175,10 @@ var app = new Vue({
       })
 
     },
-    getIndex: function(filename) {
+    getIndex: function (filename) {
       return this.deviceBuilds.
-      map((e,i) => e.filename == filename ? i : null
-      ).filter((e) => e != null)
+        map((e, i) => e.filename == filename ? i : null
+        ).filter((e) => e != null)
     }
   },
   updated() {
@@ -168,17 +188,17 @@ var app = new Vue({
 
       instances.options.onOpenEnd = () => {
         let build = document.querySelector('.collapsible-builds .active span').textContent
-        history.pushState(null, '', `?device=${this.codename}&build=${build}`);
+        history.replaceState({}, '', `?device=${this.codename}&build=${build}`);
       }
 
       instances.options.onCloseEnd = () => {
-        history.pushState(null, '', `?device=${this.codename}`);
+        history.replaceState({}, '', `?device=${this.codename}`);
       }
 
-      if(this.showBuild){
+      if (this.showBuild) {
         let indexToOpen = parseInt(this.getIndex(this.showBuild));
 
-        if(!isNaN(indexToOpen)){
+        if (!isNaN(indexToOpen)) {
           instances.open(indexToOpen)
           document.querySelector(".collapsible-builds .active").scrollIntoView()
         }
