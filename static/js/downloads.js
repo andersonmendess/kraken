@@ -179,6 +179,10 @@ var app = new Vue({
       return this.deviceBuilds.
         map((e, i) => e.filename == filename ? i : null
         ).filter((e) => e != null)
+    },
+    showHomePage: function(){
+      this.codename = null
+      history.pushState({device: null}, '', '/')
     }
   },
   updated() {
