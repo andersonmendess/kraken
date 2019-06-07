@@ -14,7 +14,7 @@ request = urllib.request.urlopen(devicesJSON)
 devices = json.loads(request.read())
 
 for device in devices:
-	xml += "\n<url><loc>" + baseSITE + device['codename'] +"</loc><lastmod>"+date+"</lastmod><priority>0.85</priority></url>"
+	xml += "\n<url><loc>" + baseSITE + '?device=' + device['codename'] +"</loc><lastmod>"+date+"</lastmod><priority>0.85</priority></url>"
 
 xml += "\n</urlset>"
 
