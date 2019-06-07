@@ -215,7 +215,7 @@
               <ul class="collapsible collapsible-builds">
 
                   <template v-for="Build in deviceBuilds">
-                      <li class='buildcoll'>
+                      <li class='buildcoll' @click="setBuild(Build.filename)">
                         <div class="collapsible-header white-text cardColor">
                           <i class="material-icons">system_update</i>
                           <span style="width: 100%">{{ Build.filename }}</span>

@@ -1,46 +1,44 @@
-// Global setup
-const baseURL = "https://raw.githubusercontent.com/KrakenProject/official_devices/master/";
-const devicesURL = baseURL + "devices.json";
-const deviceURL = codename => `${baseURL}builds/${codename}.json`;
-const changelogURL = (build, codename) => `${baseURL}changelog/${codename}/${build.replace('zip', 'txt')}`;
-const downloadURL = (build, codename) => `https://downloads.sourceforge.net/project/krakenproject/${codename}/${build}`
+let url = new URL(window.location.href);
 
-const getToday = () => {
-  let d = new Date();
-  return `${d.getFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`
+const dateUtils = {
+  getToday: () => {
+    let d = new Date();
+    return `${d.getFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`
+  },
+  getTimestamp: () => {
+    let d = new Date();
+    return Math.floor(d.getTime() / 1000)
+  },
+  human: (timestamp) => {
+    let d = new Date(timestamp * 1000)
+    let mm = ('0' + (d.getUTCMonth() + 1)).slice(-2)
+    let dd = ('0' + d.getUTCDate()).slice(-2)
+    return `${d.getFullYear()}/${mm}/${dd}`;
+  }
 }
 
-const getTimestamp = () => {
-  let d = new Date();
-  return Math.floor(d.getTime() / 1000)
+const URLStack = {
+  getBase: () => "https://raw.githubusercontent.com/KrakenProject/official_devices/master/",
+  getDevices: () => URLStack.getBase() + 'devices.json',
+  getDevice: (codename) => `${URLStack.getBase()}builds/${codename}.json`,
+  getChangelog: (build, codename) => `${URLStack.getBase()}changelog/${codename}/${build.replace('zip', 'txt')}`,
+  getDownloadStat: (build, codename) => `https://sourceforge.net/projects/krakenproject/files/${codename}/${build}/stats/json?start_date=2019-04-04&end_date=${dateUtils.getToday()}`,
+  getDownload: (build, codename) => `https://downloads.sourceforge.net/project/krakenproject/${codename}/${build}`,
 }
 
-const downloadsCountURL = (build, codename) =>
-  `https://sourceforge.net/projects/krakenproject/files/${codename}/${build}/stats/json?start_date=2019-04-04&end_date=${getToday()}`;
-
-
-const toogleMenu = () => {
-  var menu = document.getElementsByClassName("menu")[0];
-  menu.style.display = menu.style.display == 'none' ? 'block' : 'none'
+const materializeUtils = {
+  initSidenav: () => {
+    let sidenav = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(sidenav);
+  },
+  initCollapsible: (el = '.collapsible') => {
+    let elems = document.querySelector(el);
+    return M.Collapsible.init(elems);
+  },
+  showAlert: (msg) => {
+    M.toast({ html: msg, displayLength: 6000 })
+  }
 }
-
-const request = (url, isJson = true) => {
-  return fetch(url).then((res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
-}
-
-const humanSize = (bytes) => {
-  var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-  if (bytes == 0) return '0 Byte';
-  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-  return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-};
-
-const humanDate = (timestamp) => {
-  let d = new Date(timestamp * 1000)
-  let mm = ('0' + (d.getUTCMonth() + 1)).slice(-2)
-  let dd = ('0' + d.getUTCDate()).slice(-2)
-  return `${d.getFullYear()}/${mm}/${dd}`;
-};
 
 const SEO = {
   setTitle: (title) => {
@@ -49,12 +47,48 @@ const SEO = {
   },
   setDescription: (description) => {
     document.head.querySelector("meta[name=description]").content = description
+  },
+  setDeviceInfo: (name, codename) => {
+    SEO.setTitle(`${name} (${codename}) | Kraken Download Center`)
+    SEO.setDescription(`Download Kraken for ${name} (${codename}) | Kraken Project`)
+  },
+  setHomeInfo: () => {
+    SEO.setTitle(`Download center | Kraken Project`)
+    SEO.setDescription(`Download Kraken Custom ROM | Kraken Project`)
+  }
+}
+
+const paramUtils = {
+  getDevice: () => url.searchParams.get("device"),
+  getBuild: () => url.searchParams.get("build"),
+  setDevice: (device) => {
+    history.pushState({ device }, '', `?device=${device}`)
+    url.searchParams.set("device", device)
+  },
+  removeDevice: () => {
+    history.pushState({ device: null }, '', '/')
+    url.searchParams.set("device", null)
+  },
+  setBuild: (build) => {
+    history.replaceState({}, '', `?device=${paramUtils.getDevice()}&build=${build}`)
+  },
+  removeBuild: () => {
+    history.replaceState({}, '', `?device=${paramUtils.getDevice()}`)
   }
 }
 
 const genDownloadLink = (codename, filename) => {
-  return `${downloadURL(filename, codename)}?r=&ts=${getTimestamp()}&use_mirror=autoselect`
+  return `${URLStack.getDownload(filename, codename)}?r=&ts=${dateUtils.getTimestamp()}&use_mirror=autoselect`
 }
+
+const request = (url, isJson = true) => fetch(url).then((res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
+
+const humanSize = (bytes) => {
+  let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  if (bytes == 0) return '0 Byte';
+  let i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+  return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
 
 var app = new Vue({
   el: '#app',
@@ -65,35 +99,27 @@ var app = new Vue({
     device: [],
     codename: '',
     search: '',
-    showBuild: null,
+  },
+  created() {
+    this.suported();
   },
   mounted() {
-
-    history.pushState({device: null}, '', '')
+    history.pushState({ device: null }, '', '')
 
     window.onpopstate = (e) => {
       e.state.device ? this.LoadBuilds(e.state.device) : this.codename = null
     };
 
-    this.suported();
+    document.addEventListener('keypress', (event) => {
+      if (event.keyCode == 13) {
+        if (document.querySelector('.search-link') != null) {
+          app.LoadBuilds(document.querySelector('.search-link').attributes['data-device'].value)
+        }
+      }
+    });
 
-    var url = new URL(window.location.href);
-    var device = url.searchParams.get("device");
-    var build = url.searchParams.get("build");
-
-    if (device) {
-      this.LoadBuilds(device);
-      this.showBuild = build
-    }
-
-    // init collapsible
-    let elems = document.querySelector('.collapsible');
-    M.Collapsible.init(elems);
-
-    // init sidenav
-    let sidenav = document.querySelectorAll('.sidenav');
-    M.Sidenav.init(sidenav);
-
+    materializeUtils.initCollapsible()
+    materializeUtils.initSidenav()
   },
   computed: {
     filteredList() {
@@ -101,57 +127,44 @@ var app = new Vue({
         var resByCodename = d.codename.toLowerCase().includes(this.search.toLowerCase())
         var resByName = d.name.toLowerCase().includes(this.search.toLowerCase())
 
-        return !!resByName ? resByName : resByCodename
+        return resByName ? resByName : resByCodename
       })
     }
   },
   methods: {
-    suported: function () {
-      request(devicesURL)
+    suported: async function () {
+      await request(URLStack.getDevices())
         .then(response => {
           response.forEach(element => {
             if (this.brands.indexOf(element.brand) == -1) {
               this.brands.push(element.brand)
             }
-            this.devices.push(element)
-
-          });
-
-          document.addEventListener('keypress', (event) => {
-            if (event.keyCode == 13) {
-              if (document.querySelector('.search-link') != null) {
-                app.LoadBuilds(document.querySelector('.search-link').attributes['data-device'].value)
-              }
-            }
-
-          });
-
+          })
+          this.devices = response
         })
+
+      if (paramUtils.getDevice()) {
+        this.LoadBuilds(paramUtils.getDevice());
+      }
     },
     LoadDevice: function (codename) {
-      request(devicesURL)
-        .then(res => {
+      device = this.devices.filter(device => device.codename === codename)[0]
+      if (device) {
+        this.device = device
+        this.codename = device.codename
+        SEO.setDeviceInfo(device.name, codename)
+      } else {
+        materializeUtils.showAlert(`device '${codename}' not found`)
+      }
 
-          device = res.filter((device) => device.codename == codename)[0]
-
-          if (device) {
-            this.device = device
-            this.codename = device.codename
-            SEO.setTitle(`${this.device.name} (${this.codename}) | Kraken Download Center`)
-            SEO.setDescription(`Download Kraken for ${this.device.name} (${this.codename}) | Kraken Project`)
-          } else {
-            M.toast({ html: `device '${codename}' not found` })
-          }
-
-        })
     },
     LoadBuilds: async function (codename) {
-
       this.LoadDevice(codename)
+
       this.deviceBuilds = [];
 
-      if(history.state.device !== codename){
-        history.pushState({device: codename}, codename, `?device=${codename}`);
+      if (history.state.device !== codename) {
+        if (codename !== paramUtils.getDevice()) paramUtils.setDevice(codename)
       }
 
       if (this.search != '') {
@@ -160,28 +173,30 @@ var app = new Vue({
         this.search = ''
       }
 
-      // init sidenav again
-      let sidenav = document.querySelectorAll('.sidenav');
-      M.Sidenav.init(sidenav);
+      materializeUtils.initSidenav()
 
-      await request(deviceURL(codename))
+      await request(URLStack.getDevice(codename))
         .then(res => this.deviceBuilds = res.response.map((build) => {
           build.size = humanSize(build.size);
-          build.datetime = humanDate(build.datetime);
+          build.datetime = dateUtils.human(build.datetime);
           build.changelog = ""
           build.downloads = 0
           return build
         }).reverse())
 
       this.deviceBuilds.map((build) => {
-        request(changelogURL(build.filename, codename), false).then(
+        request(URLStack.getChangelog(build.filename, codename), false).then(
           (res) => build.changelog = res.includes("404") ? "Changelog data not found" : res
         )
 
-        request(downloadsCountURL(build.filename, codename)).then(
+        request(URLStack.getDownloadStat(build.filename, codename)).then(
           (d) => build.downloads = d.total
         )
       })
+
+      if (paramUtils.getBuild()) {
+        this.openBuild(parseInt(this.getIndex(paramUtils.getBuild())))
+      }
 
     },
     getIndex: function (filename) {
@@ -189,38 +204,27 @@ var app = new Vue({
         map((e, i) => e.filename == filename ? i : null
         ).filter((e) => e != null)
     },
-    showHomePage: function(){
+    showHomePage: function () {
       this.codename = null
-      history.pushState({device: null}, '', '/')
+      SEO.setHomeInfo()
+      paramUtils.removeDevice()
+      materializeUtils.initSidenav()
     },
-    download: function(build,codename){
-      M.toast({ html: `Download Started` })
+    download: function (build, codename) {
+      materializeUtils.showAlert(`Download Started`)
       location.href = genDownloadLink(codename, build)
-    }
+    },
+    setBuild(obj) {
+      let instances = materializeUtils.initCollapsible('.collapsible-builds')
+
+      instances.options.onOpenEnd = () => paramUtils.setBuild(obj)
+      instances.options.onCloseEnd = () => paramUtils.removeBuild()
+    },
+    openBuild(index) {
+      if (!isNaN(index)) {
+        let instances = materializeUtils.initCollapsible('.collapsible-builds')
+        instances.open(index);
+      }
+    },
   },
-  updated() {
-    if (this.codename) {
-      let elems = document.querySelector('.collapsible-builds');
-      let instances = M.Collapsible.init(elems);
-
-      instances.options.onOpenEnd = () => {
-        let build = document.querySelector('.collapsible-builds .active span').textContent
-        history.replaceState({}, '', `?device=${this.codename}&build=${build}`);
-      }
-
-      instances.options.onCloseEnd = () => {
-        history.replaceState({}, '', `?device=${this.codename}`);
-      }
-
-      if (this.showBuild) {
-        let indexToOpen = parseInt(this.getIndex(this.showBuild));
-
-        if (!isNaN(indexToOpen)) {
-          instances.open(indexToOpen)
-          document.querySelector(".collapsible-builds .active").scrollIntoView()
-        }
-
-      }
-    }
-  }
 })

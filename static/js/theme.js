@@ -12,6 +12,10 @@ const colors = {
 	"default": ['#1C1C1C', '#f7f7f7', '#a97cf0', '#212121'] // card, text, accent, bg for default
 }
 
+const toogleMenu = () => {
+	var menu = document.getElementsByClassName("menu")[0];
+	menu.style.display = menu.style.display == 'none' ? 'block' : 'none'
+}
 
 const setAccent = obj => {
 	var color = rbg2Hex(obj.style.backgroundColor);
