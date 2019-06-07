@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="static/css/styles.css">
   <meta name="msapplication-TileColor" content="#A97CF0">
   <meta name="theme-color" content="#A97CF0">
+  <meta name="referrer" content="no-referrer" />
   <script src="static/js/theme.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140487962-1"></script>
@@ -239,7 +240,7 @@
                             </div>
 
                             <div class="buildbuttons">
-                                <a v-bind:href="Build.url" download target="_blank" class="waves-effect waves-teal btn-flat">Download</a>
+                                <button @click='download(Build.filename, device.codename)' class="waves-effect waves-teal btn-flat">Download</button>
                             </div>
 
                         </div>

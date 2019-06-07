@@ -3,10 +3,16 @@ const baseURL = "https://raw.githubusercontent.com/KrakenProject/official_device
 const devicesURL = baseURL + "devices.json";
 const deviceURL = codename => `${baseURL}builds/${codename}.json`;
 const changelogURL = (build, codename) => `${baseURL}changelog/${codename}/${build.replace('zip', 'txt')}`;
+const downloadURL = (build, codename) => `https://downloads.sourceforge.net/project/krakenproject/${codename}/${build}`
 
 const getToday = () => {
   let d = new Date();
   return `${d.getFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`
+}
+
+const getTimestamp = () => {
+  let d = new Date();
+  return Math.floor(d.getTime() / 1000)
 }
 
 const downloadsCountURL = (build, codename) =>
@@ -36,7 +42,6 @@ const humanDate = (timestamp) => {
   return `${d.getFullYear()}/${mm}/${dd}`;
 };
 
-
 const SEO = {
   setTitle: (title) => {
     document.title = title
@@ -45,6 +50,10 @@ const SEO = {
   setDescription: (description) => {
     document.head.querySelector("meta[name=description]").content = description
   }
+}
+
+const genDownloadLink = (codename, filename) => {
+  return `${downloadURL(filename, codename)}?r=&ts=${getTimestamp()}&use_mirror=autoselect`
 }
 
 var app = new Vue({
@@ -183,6 +192,10 @@ var app = new Vue({
     showHomePage: function(){
       this.codename = null
       history.pushState({device: null}, '', '/')
+    },
+    download: function(build,codename){
+      M.toast({ html: `Download Started` })
+      location.href = genDownloadLink(codename, build)
     }
   },
   updated() {
