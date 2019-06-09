@@ -99,6 +99,8 @@ var app = new Vue({
     device: {},
     codename: '',
     search: '',
+    deviceLoading: true,
+    buildLoading: true
   },
   created() {
     this.suported();
@@ -143,6 +145,7 @@ var app = new Vue({
           this.devices = response
         })
         .catch(e => materializeUtils.showAlert('An error occurred. try again later.'))
+        .finally(() => this.deviceLoading = false)
 
       if (paramUtils.getDevice()) {
         this.LoadBuilds(paramUtils.getDevice());
@@ -164,6 +167,7 @@ var app = new Vue({
       this.LoadDevice(codename)
 
       this.builds = [];
+      this.buildLoading = true;
 
       if (history.state.device !== codename) {
         if (codename !== paramUtils.getDevice()) paramUtils.setDevice(codename)
@@ -186,6 +190,7 @@ var app = new Vue({
           return build
         }).reverse())
         .catch(e => materializeUtils.showAlert("Failed to load builds. try again later."))
+        .finally(() => this.buildLoading = false)
 
       this.builds.map((build) => {
         request(URLStack.getChangelog(build.filename, codename), false).then(

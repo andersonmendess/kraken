@@ -59,7 +59,7 @@
           v-bind:data-device='devi.codename'>{{ devi.name }} ({{devi.codename}})</a>
       </div>
       <ul class="collapsible collapsible-accordion">
-        <template v-for="brand in brands">
+        <template v-if='!deviceLoading' v-for="brand in brands">
           <li>
             <div class="collapsible-header">
               <i class="material-icons">phone_android</i>
@@ -78,6 +78,23 @@
             </div>
           </li>
         </template>
+        <!-- SIDEBAR LOADING-->
+        <div class="loadContainer" v-if='deviceLoading'>
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-accent-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END LOADING-->
       </ul>
     </div>
   </ul>
@@ -214,7 +231,7 @@
 
               <ul class="collapsible collapsible-builds">
 
-                  <template v-for="build in builds">
+                  <template v-if="!buildLoading" v-for="build in builds">
                       <li class='buildcoll' @click="setBuild(build.filename)">
                         <div class="collapsible-header white-text cardColor">
                           <i class="material-icons">system_update</i>
@@ -247,6 +264,24 @@
 
                       </li>
                     </template>
+
+                    <!-- BUILD LOADING-->
+                    <div class="loadContainer" v-if='buildLoading'>
+                      <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-accent-only">
+                          <div class="circle-clipper left">
+                            <div class="circle"></div>
+                          </div>
+                          <div class="gap-patch">
+                            <div class="circle"></div>
+                          </div>
+                          <div class="circle-clipper right">
+                            <div class="circle"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END LOADING-->
 
                 </ul>
 
