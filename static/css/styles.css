@@ -331,7 +331,7 @@ tr th {
   font-size: 13px;
   font-family: "Product Sans";
   color: var(--text);
-  margin-top: 2px;
+  margin-bottom: 3px;
 }
 .credits a {
   background-color: transparent !important;
@@ -375,10 +375,10 @@ a, span {
 }
 
 .buildChangelog pre {
-  max-height: 300px;
+  max-height: 230px;
   overflow-y: auto;
   background-color: var(--background);
-  padding: 5px;
+  padding: 8px;
   border-radius: 3px;
 }
 
