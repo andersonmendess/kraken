@@ -20,7 +20,7 @@ const dateUtils = {
 const URLStack = {
   getBase: () => "https://raw.githubusercontent.com/KrakenProject/official_devices/master/",
   getDevices: () => URLStack.getBase() + 'devices.json',
-  getDevice: (codename) => `${URLStack.getBase()}builds/${codename}.json`,
+  getBuilds: (codename) => `${URLStack.getBase()}builds/${codename}.json`,
   getChangelog: (build, codename) => `${URLStack.getBase()}changelog/${codename}/${build.replace('zip', 'txt')}`,
   getDownloadStat: (build, codename) => `https://sourceforge.net/projects/krakenproject/files/${codename}/${build}/stats/json?start_date=2019-04-04&end_date=${dateUtils.getToday()}`,
   getDownload: (build, codename) => `https://downloads.sourceforge.net/project/krakenproject/${codename}/${build}`,
@@ -81,7 +81,7 @@ const genDownloadLink = (codename, filename) => {
   return `${URLStack.getDownload(filename, codename)}?r=&ts=${dateUtils.getTimestamp()}&use_mirror=autoselect`
 }
 
-const request = (url, isJson = true) => fetch(url).then((res) => isJson ? res.json() : res.text()).catch((e) => console.log(e))
+const request = (url, isJson = true) => fetch(url).then((res) => isJson ? res.json() : res.text())
 
 const humanSize = (bytes) => {
   let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
@@ -95,8 +95,8 @@ var app = new Vue({
   data: {
     brands: [],
     devices: [],
-    deviceBuilds: [],
-    device: [],
+    builds: [],
+    device: {},
     codename: '',
     search: '',
   },
@@ -142,6 +142,7 @@ var app = new Vue({
           })
           this.devices = response
         })
+        .catch(e => materializeUtils.showAlert('An error occurred. try again later.'))
 
       if (paramUtils.getDevice()) {
         this.LoadBuilds(paramUtils.getDevice());
@@ -155,13 +156,14 @@ var app = new Vue({
         SEO.setDeviceInfo(device.name, codename)
       } else {
         materializeUtils.showAlert(`device '${codename}' not found`)
+        throw new Error()
       }
 
     },
     LoadBuilds: async function (codename) {
       this.LoadDevice(codename)
 
-      this.deviceBuilds = [];
+      this.builds = [];
 
       if (history.state.device !== codename) {
         if (codename !== paramUtils.getDevice()) paramUtils.setDevice(codename)
@@ -175,16 +177,17 @@ var app = new Vue({
 
       materializeUtils.initSidenav()
 
-      await request(URLStack.getDevice(codename))
-        .then(res => this.deviceBuilds = res.response.map((build) => {
+      await request(URLStack.getBuilds(codename))
+        .then(res => this.builds = res.response.map((build) => {
           build.size = humanSize(build.size);
           build.datetime = dateUtils.human(build.datetime);
           build.changelog = ""
           build.downloads = 0
           return build
         }).reverse())
+        .catch(e => materializeUtils.showAlert("Failed to load builds. try again later."))
 
-      this.deviceBuilds.map((build) => {
+      this.builds.map((build) => {
         request(URLStack.getChangelog(build.filename, codename), false).then(
           (res) => build.changelog = res.includes("404") ? "Changelog data not found" : res
         )
@@ -200,7 +203,7 @@ var app = new Vue({
 
     },
     getIndex: function (filename) {
-      return this.deviceBuilds.
+      return this.builds.
         map((e, i) => e.filename == filename ? i : null
         ).filter((e) => e != null)
     },

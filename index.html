@@ -133,7 +133,7 @@
 
     <h3 class="accent welcome">Kraken Open Tentacles Project</h3>
 
-    <img alt="Kraken Logo" src="https://avatars0.githubusercontent.com/u/49829986?s=400&v=4">
+    <img alt="Kraken Logo" src="https://avatars0.githubusercontent.com/u/49829986?s=375&v=4">
 
     <div class="home-desc">
       <div class="desc square accent">LineageOS based ROM</div>
@@ -208,17 +208,17 @@
       </div>
       <!-- END DEVICE INFO CARD -->
 
-      <!-- TABLE OF BUILDS -->
+      <!-- BUILDS -->
       <div class="row center">
           <div class="col s12 m12">
 
               <ul class="collapsible collapsible-builds">
 
-                  <template v-for="Build in deviceBuilds">
-                      <li class='buildcoll' @click="setBuild(Build.filename)">
+                  <template v-for="build in builds">
+                      <li class='buildcoll' @click="setBuild(build.filename)">
                         <div class="collapsible-header white-text cardColor">
                           <i class="material-icons">system_update</i>
-                          <span style="width: 100%">{{ Build.filename }}</span>
+                          <span style="width: 100%">{{ build.filename }}</span>
                           <i class="material-icons">arrow_drop_down</i>
                         </div>
 
@@ -226,21 +226,21 @@
 
                             <p class="label" >details</p>
                             <div class="buildinfo">
-                                <div class="deviceprop"> <p>Filename: {{Build.filename}}</p></div>
-                                <div class="deviceprop"><p>Date: {{Build.datetime}}</p></div>
-                                <div class="deviceprop"><p>Size: {{Build.size}}</p></div>
-                                <div class="deviceprop"><p>MD5: {{Build.id}}</p></div>
-                                <div class="deviceprop"><p>Version: {{Build.version}}</p></div>
-                                <div class="deviceprop"><p>Downloads: {{Build.downloads}}</p></div>
+                                <div class="deviceprop"> <p>Filename: {{build.filename}}</p></div>
+                                <div class="deviceprop"><p>Date: {{build.datetime}}</p></div>
+                                <div class="deviceprop"><p>Size: {{build.size}}</p></div>
+                                <div class="deviceprop"><p>MD5: {{build.id}}</p></div>
+                                <div class="deviceprop"><p>Version: {{build.version}}</p></div>
+                                <div class="deviceprop"><p>Downloads: {{build.downloads}}</p></div>
                             </div>
 
                             <div class='buildChangelog'>
                               <p class="label">Changelog</p>
-                                <pre>{{Build.changelog}}</pre>
+                                <pre>{{build.changelog}}</pre>
                             </div>
 
                             <div class="buildbuttons">
-                                <button @click='download(Build.filename, device.codename)' class="waves-effect waves-teal btn-flat">Download</button>
+                                <button @click='download(build.filename, device.codename)' class="waves-effect waves-teal btn-flat">Download</button>
                             </div>
 
                         </div>
