@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url><loc>https://krakenproject.github.io/</loc><lastmod>2019-06-06</lastmod><priority>1.00</priority></url>
-<url><loc>https://krakenproject.github.io/?device=shamrock</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=potter</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=sanders</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=dumpling</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=j5lte</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=j5nlte</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=j5ltechn</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=j53gxx</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=beryllium</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=mido</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=whyred</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
-<url><loc>https://krakenproject.github.io/?device=vince</loc><lastmod>2019-06-06</lastmod><priority>0.85</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://krakenproject.github.io/</loc><lastmod>2019-06-08</lastmod><priority>1.00</priority></url>
+<url><loc>https://krakenproject.github.io/?device=shamrock</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=potter</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=sanders</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=dumpling</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=j5lte</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=j5nlte</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=j5ltechn</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=j53gxx</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=beryllium</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=mido</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=whyred</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
+<url><loc>https://krakenproject.github.io/?device=vince</loc><lastmod>2019-06-08</lastmod><priority>0.85</priority></url>
 </urlset>
