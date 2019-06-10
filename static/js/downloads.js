@@ -70,10 +70,10 @@ const paramUtils = {
     url.searchParams.set("device", null)
   },
   setBuild: (build) => {
-    history.replaceState({}, '', `?device=${paramUtils.getDevice()}&build=${build}`)
+    history.replaceState({device: paramUtils.getDevice(), build}, '', `?device=${paramUtils.getDevice()}&build=${build}`)
   },
   removeBuild: () => {
-    history.replaceState({}, '', `?device=${paramUtils.getDevice()}`)
+    history.replaceState({device: paramUtils.getDevice(), build: null}, '', `?device=${paramUtils.getDevice()}`)
   }
 }
 
@@ -109,7 +109,7 @@ var app = new Vue({
     history.pushState({ device: null }, '', '')
 
     window.onpopstate = (e) => {
-      e.state.device ? this.LoadBuilds(e.state.device) : this.codename = null
+      e.state.device ? this.LoadBuilds(e.state.device, e.state.build) : this.codename = null
     };
 
     document.addEventListener('keypress', (event) => {
@@ -148,7 +148,7 @@ var app = new Vue({
         .finally(() => this.deviceLoading = false)
 
       if (paramUtils.getDevice()) {
-        this.LoadBuilds(paramUtils.getDevice());
+        this.LoadBuilds(paramUtils.getDevice(), paramUtils.getBuild());
       }
     },
     LoadDevice: function (codename) {
@@ -163,7 +163,7 @@ var app = new Vue({
       }
 
     },
-    LoadBuilds: async function (codename) {
+    LoadBuilds: async function (codename, openedBuild = null) {
       this.LoadDevice(codename)
 
       this.builds = [];
@@ -202,15 +202,13 @@ var app = new Vue({
         )
       })
 
-      if (paramUtils.getBuild()) {
-        this.openBuild(parseInt(this.getIndex(paramUtils.getBuild())))
+      if (openedBuild) {
+        this.openBuild(this.getIndex(openedBuild))
       }
 
     },
     getIndex: function (filename) {
-      return this.builds.
-        map((e, i) => e.filename == filename ? i : null
-        ).filter((e) => e != null)
+      return this.builds.findIndex(b => b.filename === filename)
     },
     showHomePage: function () {
       this.codename = null
@@ -229,9 +227,8 @@ var app = new Vue({
       instances.options.onCloseEnd = () => paramUtils.removeBuild()
     },
     openBuild(index) {
-      if (!isNaN(index)) {
-        let instances = materializeUtils.initCollapsible('.collapsible-builds')
-        instances.open(index);
+      if (!isNaN(index) && index !== -1) {
+        materializeUtils.initCollapsible('.collapsible-builds').open(index)
       }
     },
   },
