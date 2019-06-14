@@ -21,4 +21,4 @@ xml += "\n</urlset>"
 file = open('sitemap.xml', 'w')
 file.write(xml)
 
-print("SITEMAP GERENATED -> sitemap.xml")
+print("SITEMAP GENERATED -> sitemap.xml")
