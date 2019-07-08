@@ -271,6 +271,10 @@ input:focus {
   border: 1px solid var(--accent);
   border-radius: 3px;
 }
+.rounded {
+  border: 1px solid var(--accent);
+  border-radius: 25px;
+}
 .desc {
   font-size: 19px;
   padding: 10px;
@@ -313,7 +317,7 @@ tr th {
 }
 
 .home-bottom-info {
-  margin-top: 13%;
+  margin-top: 4%;
   max-width: 800px;
   width: 100%;
   display: flex;
