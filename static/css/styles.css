@@ -71,10 +71,6 @@ body {
     margin:0 0 0 0;
 }
 
-.card-action a {
-  color: var(--accent) !important;
-}
-
 .card {
   margin: 0px;
   background-color: var(--background) !important;
@@ -97,7 +93,10 @@ pre{
   word-break:break-all;
   overflow:hidden;
   white-space:pre-line;
-  font-size: 13px;
+  font-size: 14px;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-style: italic
 }
 
 .sidenav-trigger,.sidenav-trigger:hover  {
@@ -189,6 +188,13 @@ i {
   background-color: transparent !important;
 }
 
+.xda-buttons {
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media only screen and (min-width: 1000px) {
     #slide-out {
         transform: translateX(0%);
@@ -215,6 +221,9 @@ i {
     }
     .menu {
       top: 30px;
+    }
+    .xda-buttons {
+      display: block;
     }
 }
 
@@ -401,12 +410,12 @@ a, span {
 }
 
 .buildbuttons {
-  padding-bottom: 10px;
-  padding-left: 10px;
-}
-
-.xda-buttons {
   padding-top: 5px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center
 }
 
 .z-depth-1, .collapsible, .sidenav {
@@ -428,4 +437,15 @@ a, span {
 }
 .preloader-wrapper {
   margin: auto;
+}
+.btn {
+  color: var(--background) !important;
+  background-color: var(--accent) !important;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-right: 5px;
+}
+.btn:hover{
+  background-color: var(--card) !important;
+  box-shadow: none !important;
 }

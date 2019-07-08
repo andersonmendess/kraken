@@ -9,8 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Product+Sans:400,500|Roboto:300,400,500|Roboto+Mono:400,700|Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link rel="stylesheet" href="static/css/styles.css">
   <meta name="msapplication-TileColor" content="#5485d8">
@@ -217,8 +216,8 @@
             </div>
 
             <div v-if="device.xda_thread" class="card-action xda-buttons">
-              <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect waves-teal btn-flat">GitHub Profile</a>
-              <a v-bind:href="device.xda_thread" target="_blank" class="waves-effect waves-teal btn-flat">XDA Thread</a>
+              <a v-bind:href="device.maintainer_url" target="_blank" class="waves-effect btn">GitHub Profile</a>
+              <a v-bind:href="device.xda_thread" target="_blank" class="waves-effect btn">XDA Thread</a>
             </div>
           </div>
         </div>
@@ -257,7 +256,7 @@
                             </div>
 
                             <div class="buildbuttons">
-                                <button @click='download(build.filename, device.codename)' class="waves-effect waves-teal btn-flat">Download</button>
+                                <a @click='download(build.filename, device.codename)' class="waves-effect btn">Download</a>
                             </div>
 
                         </div>
