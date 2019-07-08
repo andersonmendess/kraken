@@ -9,7 +9,7 @@ window.onload = function () {
 const colors = {
 	"#ffffff": ['white', '#161616'], // card, text for white
 	"#000000": ['#090909', '#f7f7f7'], // card, text for black
-	"default": ['#1C1C1C', '#f7f7f7', '#a97cf0', '#212121'] // card, text, accent, bg for default
+	"default": ['#1C1C1C', '#f7f7f7', '#5485d8', '#212121'] // card, text, accent, bg for default
 }
 
 const toogleMenu = () => {
