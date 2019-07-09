@@ -131,7 +131,6 @@ table a {
 }
 
 .menu {
-  height: 280px;
   width: 220px;
   background-color: var(--card);
   position: fixed;
@@ -139,10 +138,15 @@ table a {
   top: 45px;
   margin: 15px;
   margin-bottom: 30px;
-  padding: 4px;
+  padding: 5px;
   text-align: center;
   z-index: 10;
-  border-radius: 2px;
+  border-radius: 3px;
+  box-shadow: 0 0.8px 4px rgba(0,0,0,0.07), 0 0.8px 2px rgba(0,0,0,0.15) !important;
+}
+
+.menu div {
+  clear: both;
 }
 
 .menu ul li{
@@ -154,6 +158,7 @@ table a {
   width: 30px;
   height: 30px;
   border-radius: 2px;
+  box-shadow: 0 0.8px 4px rgba(0,0,0,0.07), 0 0.8px 2px rgba(0,0,0,0.15) !important;
 }
 
 i {
