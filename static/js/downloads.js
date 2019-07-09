@@ -70,10 +70,10 @@ const paramUtils = {
     url.searchParams.set("device", null)
   },
   setBuild: (build) => {
-    history.replaceState({device: paramUtils.getDevice(), build}, '', `?device=${paramUtils.getDevice()}&build=${build}`)
+    history.replaceState({ device: paramUtils.getDevice(), build }, '', `?device=${paramUtils.getDevice()}&build=${build}`)
   },
   removeBuild: () => {
-    history.replaceState({device: paramUtils.getDevice(), build: null}, '', `?device=${paramUtils.getDevice()}`)
+    history.replaceState({ device: paramUtils.getDevice(), build: null }, '', `?device=${paramUtils.getDevice()}`)
   }
 }
 
