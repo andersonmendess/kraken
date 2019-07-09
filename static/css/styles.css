@@ -362,6 +362,7 @@ a, span {
 .collapsible li div {
   background-color: var(--card);
   color: var(--text);
+  border-radius: 3px;
 }
 
 .collapsible-header, .collapsible, .collapsible-body {
@@ -427,7 +428,7 @@ a, span {
 }
 
 .z-depth-1, .sidenav, .buildcoll {
-  border-radius: 4px;
+  border-radius: 3px;
   box-shadow: 0 0.8px 4px rgba(0,0,0,0.07), 0 0.8px 2px rgba(0,0,0,0.15) !important;
 } 
 
@@ -450,6 +451,23 @@ a, span {
   margin-right: 5px;
 }
 .btn:hover{
-  background-color: var(--card) !important;
+  background-color: var(--background) !important;
   box-shadow: none !important;
+}
+
+.red-bg {
+  background-color: #c62828 !important;
+  color: white !important;
+}
+.red-icon {
+  color: #c62828 !important
+}
+
+.alert-box {
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 0 0.8px 4px rgba(0,0,0,0.07), 0 0.8px 2px rgba(0,0,0,0.15) !important;
 }
